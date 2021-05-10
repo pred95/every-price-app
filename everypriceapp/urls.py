@@ -20,22 +20,23 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="Crowdsourcing App for prices",
-      default_version='v1',
-      description="Test description",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="204201@studenti.unimore.it"),
-      license=openapi.License(name="Test License"),
-   ),
-   public=True,
-   permission_classes=(permissions.AllowAny,),
+    openapi.Info(
+        title="Crowdsourcing App for prices",
+        default_version='v1',
+        description="Test description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="204201@studenti.unimore.it"),
+        license=openapi.License(name="Test License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls', namespace='auth')),
-    # path('social_auth/', include('social_auth.urls', namespace='social-auth')),
+    path('social_auth/', include('social_auth.urls', namespace='social-auth')),
     path('offers/', include('offers.urls', namespace='offers')),
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('', schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),
 ]
