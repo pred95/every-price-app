@@ -34,7 +34,7 @@ class ResetPasswordForm extends Component {
         token: token,
       })
       .then(() => {
-        this.props.history.push("/");
+        this.props.history.push("/?message=Password has been reset successfully");
       })
       .catch((err) => {
         alert(err.response.data.password[0]);

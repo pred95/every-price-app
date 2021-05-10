@@ -41,7 +41,10 @@ class AuthModal extends Component {
                 />
               )
             ) : (
-              <SignUpForm handler={this.props.handler} />
+              <SignUpForm
+                handler={this.props.handler}
+                handleSocialLogin={this.props.handleSocialLogin}
+              />
             )}
           </ModalBody>
         </Modal>

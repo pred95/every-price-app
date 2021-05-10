@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Label, FormGroup, Button } from "reactstrap";
 import { TextField } from "@material-ui/core";
+import GoogleLogin from "react-google-login";
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -94,6 +95,13 @@ class SignUpForm extends Component {
           />
         </FormGroup>
         <Button className="btn-block">Submit</Button>
+        <p style={{alignText: "center"}}>or</p>
+        <GoogleLogin
+          className="btn-block"
+          clientId="885483439166-5qaj888eml61rdmrcn6s8fgrdocdp0k0.apps.googleusercontent.com"
+          buttonText="Continue with Google"
+          onSuccess={this.props.handleSocialLogin}
+        />
       </Form>
     );
   }

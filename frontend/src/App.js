@@ -216,6 +216,7 @@ class App extends Component {
             handler={this.handleSignup}
             toggle={this.toggle}
             modal={this.state.showModal}
+            handleSocialLogin={this.handleSocialLogin}
             title="Sign up"
           />
         );
