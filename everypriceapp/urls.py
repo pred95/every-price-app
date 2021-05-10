@@ -36,6 +36,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls', namespace='auth')),
     # path('social_auth/', include('social_auth.urls', namespace='social-auth')),
-    # path('offers/', include('offers.urls', namespace='offers')),
+    path('offers/', include('offers.urls', namespace='offers')),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]

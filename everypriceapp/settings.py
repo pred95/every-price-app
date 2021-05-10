@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     # apps
     'authentication.apps.AuthenticationConfig',
     # 'social_auth.apps.SocialAuthConfig',
-    # 'offers.apps.OffersConfig',
+    'offers.apps.OffersConfig',
 ]
 
 MIDDLEWARE = [
