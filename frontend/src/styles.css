@@ -1,0 +1,79 @@
+body {
+  background-color: #343a40;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+}
+
+h1 {
+  font-size: 250%;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.auth-buttons {
+  color: white;
+  margin-left: auto;
+}
+
+.modal-dialog {
+  color: black;
+}
+
+.photo {
+  width: 90px;
+  height: 70px;
+  margin: 10px;
+}
+
+.detail-field {
+  background-color: white;
+  color: black;
+}
+
+.home-container {
+  align-items: center;
+  justify-content: center;
+  /*overflow-y: scroll;*/
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+.loading {
+  margin: auto;
+  text-align: center;
+  font-size: 200%;
+}
+
+.hidden {
+  display: none;
+}
+
+.new-offer-container {
+  margin: 10px;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.modal-dialog {
+  color: black;
+}
+
+.p {
+  font-size: 90%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-password-form {
+  background: white;
+  color: black;
+  padding: 10px;
+  text-align: center;
+}
