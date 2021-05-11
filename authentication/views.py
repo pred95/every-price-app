@@ -34,6 +34,7 @@ class RegisterAPIView(generics.GenericAPIView):
     #renderer_classes = (UserRenderer, )
 
     def post(self, request):
+        request.data['email'] = request.data['email'].lower()
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -65,7 +66,7 @@ class RegisterAPIView(generics.GenericAPIView):
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
 
-    redirect_url = os.environ.get('FRONTEND_URL')
+    redirect_url = os.environ.get('FRONTEND_URL') + "email-activated/"
 
     token_param_config = openapi.Parameter(
         'token', in_=openapi.IN_QUERY, description='Enter token', type=openapi.TYPE_STRING)

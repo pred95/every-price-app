@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import AuthModal from "./components/AuthModal";
 import Home from "./components/Home";
 import ResetPasswordForm from "./components/ResetPasswordForm";
+import EmailActivated from "./components/EmailActivated";
 
 class App extends Component {
   constructor(props) {
@@ -265,6 +266,9 @@ class App extends Component {
             </Route>
             <Route path="/reset-password">
               <ResetPasswordForm />
+            </Route>
+            <Route path="/email-activated">
+              <EmailActivated />
             </Route>
           </div>
         </Router>
