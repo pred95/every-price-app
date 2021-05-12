@@ -17,6 +17,21 @@ const RegisterComponent = ({
   error,
 }) => {
   const {navigate} = useNavigation();
+  if (error?.error && !loading){
+    const err = error.error
+    Alert.alert(
+      'Error',
+      err,
+      [
+        {
+          text: 'Close',
+          style: 'cancel',
+          onPress: () => clearAuthState()(authDispatch),
+        },
+      ],
+      {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
+    );
+  }
   return (
     <Container>
       <Image
@@ -29,16 +44,6 @@ const RegisterComponent = ({
         <Text style={styles.title}>Welcome to EveryPrice</Text>
         <Text style={styles.subTitle}>Create your account here</Text>
         <View style={styles.form}>
-          {error?.error && (
-            <Message
-              retry
-              danger
-              retryFn={() => {
-                console.log(`222`, 222);
-              }}
-              message={error?.error}
-            />
-          )}
           <Input
             label="First name"
             placeholder="Enter first name"

@@ -17,7 +17,6 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
     clearAuthState()(authDispatch);
     navigate(REGISTER);
   };
-  console.log(`error`, error)
   if (error && !error.error && !loading) {
     Alert.alert(
       'Error',

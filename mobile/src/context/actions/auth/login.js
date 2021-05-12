@@ -23,7 +23,6 @@ export default form => dispatch => {
       email,
     })
     .then(res => {
-      console.log(`res.data`, res.data)
       AsyncStorage.setItem("access_token", res.data.tokens.access)
       AsyncStorage.setItem("refresh_token", res.data.tokens.refresh)
       AsyncStorage.setItem("username", res.data.username)

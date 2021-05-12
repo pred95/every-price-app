@@ -29,7 +29,6 @@ export default form => dispatch => {
       last_name,
     })
     .then(res => {
-      console.log('Success');
       dispatch({type: REGISTER_SUCCESS, payload: res.data});
     })
     .catch(err => {
