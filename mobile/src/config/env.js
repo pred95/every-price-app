@@ -1,7 +1,5 @@
-import {BACKEND_URL} from "@env"
+import {BACKEND_URL} from '@env';
 
-const envVariables = {
-  BACKEND_URL,
-};
+const envVariables = {BACKEND_URL};
 
 export default envVariables;

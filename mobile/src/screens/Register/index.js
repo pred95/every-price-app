@@ -6,7 +6,7 @@ import register, {clearAuthState} from '../../context/actions/auth/register';
 import {GlobalContext} from '../../context/Provider';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {LOGIN} from '../../constants/routeNames';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
 const Register = () => {
   const [form, setForm] = useState({});
@@ -19,17 +19,21 @@ const Register = () => {
 
   useEffect(() => {
     if (data && !error) {
-      Alert.alert("Your account has been registrated!",
-      "We have sent a link to your email. Click it to activate your account!",
-      [{
-        text: "Ok",
-        onPress: () => navigate(LOGIN),
-        style: "cancel"
-      },],
-      {
-        cancelable: true,
-        onDismiss: () => navigate(LOGIN)
-      })
+      Alert.alert(
+        'Your account has been registrated successfully!',
+        'We have sent a link to your email. Click it to activate your account!',
+        [
+          {
+            text: 'Ok',
+            onPress: () => navigate(LOGIN),
+            style: 'cancel',
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => navigate(LOGIN),
+        },
+      );
     }
   }, [data]);
 

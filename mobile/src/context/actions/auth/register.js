@@ -33,7 +33,6 @@ export default form => dispatch => {
       dispatch({type: REGISTER_SUCCESS, payload: res.data});
     })
     .catch(err => {
-      // console.log(`err`, err.response.data);
       dispatch({
         type: REGISTER_FAIL,
         payload: err.response

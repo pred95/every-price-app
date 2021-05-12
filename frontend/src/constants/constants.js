@@ -1,4 +1,4 @@
-export const BACKEND_URL = "http://192.168.1.29:8000/";
+export const BACKEND_URL = "http://192.168.1.18:8000/";
 export const REGIONS = [
   "Abruzzo",
   "Basilicata",

@@ -1,6 +1,6 @@
 export default {
   isLoggedIn: false,
   data: {},
-  error: {},
+  error: null,
   loading: false
 };

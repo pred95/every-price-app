@@ -3,6 +3,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeNavigator from './HomeNavigator';
 import AuthNavigator from './AuthNavigator';
 import { AUTH_NAVIGATOR, HOME_NAVIGATOR } from '../constants/routeNames';
+import { Text } from 'react-native';
 
 const DrawerNavigator = () => {
   const Drawer = createDrawerNavigator();
