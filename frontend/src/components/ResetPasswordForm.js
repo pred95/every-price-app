@@ -43,7 +43,9 @@ class ResetPasswordForm extends Component {
 
   render() {
     return (
-      <div className="col-md-12 center">
+      <div className="reset-password">
+        <h1>EveryPrice</h1>
+        <p className="subtitle">Please set a new password</p>
         <Form
           className="new-password-form"
           onSubmit={(e) => this.handleResetPassword(e, this.state)}

@@ -21,7 +21,11 @@ class AuthModal extends Component {
   render() {
     return (
       <Fragment>
-        <Modal isOpen={this.props.modal} toggle={this.props.toggle}>
+        <Modal
+          isOpen={this.props.modal}
+          toggle={this.props.toggle}
+          onClosed={() => this.setState({ showResetPassword: false })}
+        >
           <ModalHeader toggle={this.props.toggle}>
             {this.state.showResetPassword
               ? "Reset your password"

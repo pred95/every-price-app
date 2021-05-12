@@ -6,6 +6,7 @@ import register, {clearAuthState} from '../../context/actions/auth/register';
 import {GlobalContext} from '../../context/Provider';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {LOGIN} from '../../constants/routeNames';
+import { Alert } from 'react-native';
 
 const Register = () => {
   const [form, setForm] = useState({});
@@ -18,16 +19,26 @@ const Register = () => {
 
   useEffect(() => {
     if (data && !error) {
-      navigate(LOGIN);
+      Alert.alert("Your account has been registrated!",
+      "We have sent a link to your email. Click it to activate your account!",
+      [{
+        text: "Ok",
+        onPress: () => navigate(LOGIN),
+        style: "cancel"
+      },],
+      {
+        cancelable: true,
+        onDismiss: () => navigate(LOGIN)
+      })
     }
   }, [data]);
 
   useFocusEffect(
     React.useCallback(() => {
-      if (data /* || error */) {
+      if (data) {
         clearAuthState()(authDispatch);
       }
-    }, [data/* , error */]),
+    }, [data]),
   );
 
   const onChange = ({name, value}) => {

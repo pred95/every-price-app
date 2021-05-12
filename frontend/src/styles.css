@@ -36,7 +36,6 @@ h1 {
 .home-container {
   align-items: center;
   justify-content: center;
-  /*overflow-y: scroll;*/
   margin: 10px;
   margin-bottom: 20px;
 }
@@ -71,13 +70,24 @@ h1 {
   align-items: center;
 }
 
+.subtitle {
+  font-size: 120%;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .new-password-form {
   background: white;
   color: black;
   padding: 10px;
   text-align: center;
+  width: 30%;
+  margin: auto;
+  border-radius: 10px;
 }
 
-.email-activated{
+.email-activated {
   text-align: center;
 }

@@ -1,0 +1,23 @@
+export const BACKEND_URL = "http://192.168.1.29:8000/";
+export const REGIONS = [
+  "Abruzzo",
+  "Basilicata",
+  "Calabria",
+  "Campania",
+  "Emilia Romagna",
+  "Friuli-Venezia Giulia",
+  "Lazio",
+  "Liguria",
+  "Lombardia",
+  "Marche",
+  "Molise",
+  "Piemonte",
+  "Puglia",
+  "Sardegna",
+  "Sicilia",
+  "Toscana",
+  "Trentino-Alto Adige",
+  "Umbria",
+  "Val d'Aosta",
+  "Veneto",
+];

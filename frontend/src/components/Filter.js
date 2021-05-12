@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { InputGroup, Input, Form } from "reactstrap";
 import { Button } from "@material-ui/core";
+import { REGIONS } from "../constants/constants";
 
 class Filter extends Component {
   render() {
@@ -42,26 +43,9 @@ class Filter extends Component {
               size="sm"
             >
               <option></option>
-              <option>Abruzzo</option>
-              <option>Basilicata</option>
-              <option>Calabria</option>
-              <option>Campania</option>
-              <option>Emilia Romagna</option>
-              <option>Friuli-Venezia Giulia</option>
-              <option>Lazio</option>
-              <option>Liguria</option>
-              <option>Lombardia</option>
-              <option>Marche</option>
-              <option>Molise</option>
-              <option>Piemonte</option>
-              <option>Puglia</option>
-              <option>Sardegna</option>
-              <option>Sicilia</option>
-              <option>Toscana</option>
-              <option>Trentino-Alto Adige</option>
-              <option>Umbria</option>
-              <option>Val d'Aosta</option>
-              <option>Veneto</option>
+              {REGIONS.map((value, index) => {
+                return <option>{value}</option>
+              })}
             </Input>
           </InputGroup>
         )}

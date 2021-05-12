@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  FormText,
-  InputGroup,
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, FormText } from "reactstrap";
 import {
   TextField,
   Input,
   InputAdornment,
   OutlinedInput,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@material-ui/core";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import axios from "axios";
+import { BACKEND_URL, REGIONS } from "../constants/constants";
 
 class NewOfferForm extends Component {
   constructor(props) {
@@ -50,7 +49,7 @@ class NewOfferForm extends Component {
     form_data.append("image", this.state.image, this.state.image.name);
     form_data.append("user", this.props.user_id);
     axios
-      .post("http://localhost:8000/offers/create/", form_data, {
+      .post(BACKEND_URL + "offers/create/", form_data, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: "Bearer " + localStorage.getItem("access_token"),
@@ -61,7 +60,8 @@ class NewOfferForm extends Component {
         this.props.toggle();
       })
       .catch((err) => {
-        alert("Offer already exists");
+        console.log(`err`, err.data);
+        // alert("Offer already exists");
       });
   };
 
@@ -87,7 +87,7 @@ class NewOfferForm extends Component {
           <TextField
             required
             fullWidth
-            label="Required"
+            label="Product"
             variant="outlined"
             size="small"
             type="text"
@@ -101,7 +101,7 @@ class NewOfferForm extends Component {
           <TextField
             required
             fullWidth
-            label="Required"
+            label="Shop"
             variant="outlined"
             size="small"
             type="text"
@@ -115,7 +115,7 @@ class NewOfferForm extends Component {
           <TextField
             required
             fullWidth
-            label="Required"
+            label="City"
             variant="outlined"
             size="small"
             type="text"
@@ -126,34 +126,38 @@ class NewOfferForm extends Component {
         </FormGroup>
         <FormGroup>
           <Label for="region">Region:</Label>
-          <TextField
-            required
-            fullWidth
-            label="Required"
-            variant="outlined"
-            size="small"
-            type="text"
-            name="region"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.region)}
-          />
+          <FormControl required variant="outlined" size="small" fullWidth>
+            <InputLabel>Region</InputLabel>
+            <Select
+              label="Region"
+              name="region"
+              onChange={this.onChange}
+              value={this.defaultIfEmpty(this.state.region)}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {REGIONS.map((value, index) => {
+                return <MenuItem value={value}>{value}</MenuItem>;
+              })}
+            </Select>
+          </FormControl>
         </FormGroup>
         <FormGroup>
           <Label for="price">Price:</Label>
-          <InputGroup>
-            <OutlinedInput
-              required
-              fullWidth
-              size="small"
-              type="number"
-              startAdornment={
-                <InputAdornment position="start">€</InputAdornment>
-              }
-              name="price"
-              onChange={this.onChange}
-              value={this.defaultIfEmptyPrice(this.state.price)}
-            />
-          </InputGroup>
+          <CurrencyTextField
+            variant="outlined"
+            required
+            fullWidth
+            size="small"
+            currencySymbol="€"
+            step="0,1"
+            outputFormat="number"
+            textAlign="left"
+            name="price"
+            onChange={this.onChange}
+            value={this.defaultIfEmptyPrice(this.state.price)}
+          />
         </FormGroup>
         <FormGroup>
           <Label for="image">Photo:</Label>

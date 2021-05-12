@@ -1,6 +1,7 @@
 import axios from "axios";
+import {BACKEND_URL} from '../constants/constants'
 
-const baseURL = "http://192.168.1.29:8000/";
+const baseURL =  BACKEND_URL;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,

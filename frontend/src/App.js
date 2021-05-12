@@ -247,17 +247,17 @@ class App extends Component {
             </Alert>
           </Snackbar>
         ) : null}
-        <Nav
-          loggedIn={this.state.loggedIn}
-          displayModal={this.displayModal}
-          handleLogout={this.handleLogout}
-          username={this.state.username}
-        />
-        {modal}
-        <h1>Welcome to EveryPrice</h1>
         <Router>
           <div>
             <Route exact path="/">
+              <Nav
+                loggedIn={this.state.loggedIn}
+                displayModal={this.displayModal}
+                handleLogout={this.handleLogout}
+                username={this.state.username}
+              />
+              {modal}
+              <h1>Welcome to EveryPrice</h1>
               <Home
                 user_id={this.state.user_id}
                 username={this.state.username}
@@ -268,6 +268,7 @@ class App extends Component {
               <ResetPasswordForm />
             </Route>
             <Route path="/email-activated">
+              <h1>EveryPrice</h1>
               <EmailActivated />
             </Route>
           </div>

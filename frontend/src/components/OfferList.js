@@ -125,7 +125,12 @@ class OfferList extends Component {
                         />
                       </TableCell>
                       {columns.map((column) => {
-                        const value = offer[column.id];
+                        var value = ""
+                        if (column.id === "price") {
+                          value = "€ " + offer[column.id];
+                        } else {
+                          value = offer[column.id];
+                        }
                         return (
                           <TableCell
                             className={classes.cell}
