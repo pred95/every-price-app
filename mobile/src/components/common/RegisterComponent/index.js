@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '../Container';
 import styles from './styles';
@@ -7,6 +7,8 @@ import Input from '../Input';
 import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
 import {useNavigation} from '@react-navigation/native';
 import {LOGIN} from '../../../constants/routeNames';
+import { clearAuthState } from '../../../context/actions/auth/register';
+import { GlobalContext } from '../../../context/Provider';
 
 const RegisterComponent = ({
   onSubmit,
@@ -18,6 +20,9 @@ const RegisterComponent = ({
 }) => {
   const {navigate} = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
+  const {
+    authDispatch,
+  } = useContext(GlobalContext);
   if (error?.error && !loading) {
     const err = error.error;
     Alert.alert(
@@ -119,6 +124,7 @@ const RegisterComponent = ({
             <Text style={styles.infoText}>Already have an account?</Text>
             <TouchableOpacity
               onPress={() => {
+                clearAuthState()(authDispatch)
                 navigate(LOGIN);
               }}>
               <Text style={styles.linkBtn}>Login here!</Text>

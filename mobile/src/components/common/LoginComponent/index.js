@@ -1,37 +1,44 @@
-import React, {useContext, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {Image, Text, TouchableOpacity, View, Alert} from 'react-native';
 import Container from '../Container';
 import styles from './styles';
 import CustomButtom from '../CustomButton';
 import Input from '../Input';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {REGISTER} from '../../../constants/routeNames';
 import {GlobalContext} from '../../../context/Provider';
 import {clearAuthState} from '../../../context/actions/auth/login';
 
 const LoginComponent = ({error, onChange, onSubmit, loading}) => {
   const {navigate} = useNavigation();
-  const {authDispatch, authState} = useContext(GlobalContext);
+  const {
+    authDispatch,
+    authState: {data},
+  } = useContext(GlobalContext);
   const [hidePassword, setHidePassword] = useState(true);
 
   const goToRegister = () => {
     clearAuthState()(authDispatch);
     navigate(REGISTER);
   };
-  if (error && !error.error && !loading) {
-    Alert.alert(
-      'Error',
-      'Invalid credential, try again',
-      [
-        {
-          text: 'Close',
-          style: 'cancel',
-          onPress: () => clearAuthState()(authDispatch),
-        },
-      ],
-      {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
-    );
-  }
+  console.log(`error`, error);
+  useFocusEffect(() => {
+    if (error && !error.error && !loading) {
+      Alert.alert(
+        'Error',
+        'Invalid credential, try again',
+        [
+          {
+            text: 'Close',
+            style: 'cancel',
+            onPress: () => clearAuthState()(authDispatch),
+          },
+        ],
+        {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
+      );
+    }
+  });
+
   if (error?.error && !loading) {
     const err = error.error;
     Alert.alert(
@@ -72,8 +79,11 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
             placeholder="Enter password"
             secureTextEntry={hidePassword}
             icon={
-              <TouchableOpacity onPress={() => {setHidePassword(prev => !prev)}}>
-                <Text>{hidePassword ? "Show" : "Hide"}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setHidePassword(prev => !prev);
+                }}>
+                <Text>{hidePassword ? 'Show' : 'Hide'}</Text>
               </TouchableOpacity>
             }
             iconPosition="right"

@@ -14,6 +14,9 @@ import {FILTER, LOGIN} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import logout from '../../context/actions/auth/logout';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SideMenu = ({navigation, authDispatch}) => {
   const {
@@ -66,14 +69,14 @@ const SideMenu = ({navigation, authDispatch}) => {
   if (isAuthenticated) {
     menuItems = [
       {
-        icon: <Text>T</Text>,
+        icon: <AwesomeIcon size={20} name="filter" />,
         name: 'Filter',
         onPress: () => {
           navigation.navigate(FILTER);
         },
       },
       {
-        icon: <Text>T</Text>,
+        icon: <MaterialIcon name="logout" size={20}/>,
         name: 'Logout',
         onPress: () => {
           handleLogout();
@@ -83,14 +86,14 @@ const SideMenu = ({navigation, authDispatch}) => {
   } else {
     menuItems = [
       {
-        icon: <Text>T</Text>,
+        icon: <AwesomeIcon style={{paddingLeft:5}} size={20} name="filter" />,
         name: 'Filter',
         onPress: () => {
           navigation.navigate(FILTER);
         },
       },
       {
-        icon: <Text>T</Text>,
+        icon: <EntypoIcon size={20} name="login" />,
         name: 'Login',
         onPress: () => {
           navigation.navigate(LOGIN);
@@ -119,7 +122,7 @@ const SideMenu = ({navigation, authDispatch}) => {
                 Welcome, <Text style={{fontStyle: 'italic'}}>guest</Text>!
               </Text>
             )}
-            <View style={{paddingHorizontal: 70}}>
+            <View style={{paddingHorizontal: 60}}>
               {menuItems.map(({name, icon, onPress}) => (
                 <TouchableOpacity
                   onPress={onPress}

@@ -1,8 +1,7 @@
 import React, {useContext} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeNavigator from './HomeNavigator';
-import AuthNavigator from './AuthNavigator';
-import {AUTH_NAVIGATOR, HOME_NAVIGATOR} from '../constants/routeNames';
+import {HOME_NAVIGATOR} from '../constants/routeNames';
 import SideMenu from './SideMenu';
 import {GlobalContext} from '../context/Provider';
 
@@ -21,9 +20,6 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name={HOME_NAVIGATOR}
         component={HomeNavigator}></Drawer.Screen>
-      {/* <Drawer.Screen
-        name={AUTH_NAVIGATOR}
-        component={AuthNavigator}></Drawer.Screen> */}
     </Drawer.Navigator>
   );
 };
