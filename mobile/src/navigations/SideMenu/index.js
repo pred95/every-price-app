@@ -1,13 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Image, SafeAreaView, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Container from '../../components/common/Container';
 import {FILTER, LOGIN} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
+import logout from '../../context/actions/auth/logout';
 
-const SideMenu = ({navigation}) => {
+const SideMenu = ({navigation, authDispatch}) => {
   const {
     authState: {isLoggedIn},
   } = useContext(GlobalContext);
@@ -18,25 +26,44 @@ const SideMenu = ({navigation}) => {
 
   const getUser = async () => {
     try {
-      const user = await AsyncStorage.getItem('@username').then(value => {
-        setUsername(value);
-      });
+      const user = await AsyncStorage.getItem('username');
+
       if (user) {
+        await AsyncStorage.getItem('username').then(value =>
+          setUsername(value),
+        );
         setAuthLoaded(true);
         setIsAuthenticated(true);
       } else {
         setAuthLoaded(true);
-        isAuthenticated(false);
+        setIsAuthenticated(false);
+        setUsername('')
       }
     } catch (error) {}
   };
-
   useEffect(() => {
     getUser();
   }, [isLoggedIn]);
 
+  const handleLogout = () => {
+    navigation.toggleDrawer();
+    Alert.alert(
+      'Logout',
+      'Do you really want to logout?',
+      [
+        {
+          text: 'Yes',
+          style: 'cancel',
+          onPress: () => {
+            logout()(authDispatch);
+          },
+        },
+      ],
+      {cancelable: true, onDismiss: () => {}},
+    );
+  };
   var menuItems = [];
-  if (isLoggedIn || isAuthenticated) {
+  if (isAuthenticated) {
     menuItems = [
       {
         icon: <Text>T</Text>,
@@ -48,7 +75,9 @@ const SideMenu = ({navigation}) => {
       {
         icon: <Text>T</Text>,
         name: 'Logout',
-        onPress: () => {},
+        onPress: () => {
+          handleLogout();
+        },
       },
     ];
   } else {
@@ -81,7 +110,7 @@ const SideMenu = ({navigation}) => {
               source={require('../../assets/images/logo.png')}
               style={styles.logoImage}
             />
-            {isLoggedIn || isAuthenticated ? (
+            {isAuthenticated ? (
               <Text style={styles.welcomeText}>
                 Welcome, <Text style={{fontStyle: 'italic'}}>{username}</Text>
               </Text>

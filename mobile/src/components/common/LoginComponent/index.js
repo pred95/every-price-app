@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Image, Text, TouchableOpacity, View, Alert} from 'react-native';
 import Container from '../Container';
 import styles from './styles';
@@ -12,6 +12,7 @@ import {clearAuthState} from '../../../context/actions/auth/login';
 const LoginComponent = ({error, onChange, onSubmit, loading}) => {
   const {navigate} = useNavigation();
   const {authDispatch, authState} = useContext(GlobalContext);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const goToRegister = () => {
     clearAuthState()(authDispatch);
@@ -31,8 +32,8 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
       {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
     );
   }
-  if (error?.error && !loading){
-    const err = error.error
+  if (error?.error && !loading) {
+    const err = error.error;
     Alert.alert(
       'Error',
       err,
@@ -69,8 +70,12 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
           <Input
             label="Password"
             placeholder="Enter password"
-            secureTextEntry={true}
-            icon={<Text>Show</Text>}
+            secureTextEntry={hidePassword}
+            icon={
+              <TouchableOpacity onPress={() => {setHidePassword(prev => !prev)}}>
+                <Text>{hidePassword ? "Show" : "Hide"}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             onChangeText={value => {
               onChange({name: 'password', value});

@@ -13,7 +13,16 @@ export const clearAuthState = () => dispatch => {
   });
 };
 
+const storeData = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value)
+  } catch (e) {
+    // saving error
+  }
+}
+
 export default form => dispatch => {
+  AsyncStorage.clear()
   dispatch({type: LOGIN_LOADING});
   const password = form.password;
   const email = form.email;
@@ -23,13 +32,13 @@ export default form => dispatch => {
       email,
     })
     .then(res => {
-      AsyncStorage.setItem('@access_token', res.data.tokens.access);
-      AsyncStorage.setItem('@refresh_token', res.data.tokens.refresh);
-      AsyncStorage.setItem('@username', res.data.username);
+      storeData('access_token', res.data.tokens.access);
+      storeData('refresh_token', res.data.tokens.refresh);
+      storeData('username', res.data.username);
       dispatch({type: LOGIN_SUCCESS, payload: res.data});
     })
     .catch(err => {
-      console.log(`err`, err);
+      console.log(`err`, err.response);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response

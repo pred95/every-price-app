@@ -7,21 +7,20 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
 
-  item:{
-      flexDirection: 'row',
-    //   justifyContent: 'center',
-      alignItems: 'center'
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
-  itemText:{
+  itemText: {
     fontSize: 25,
     paddingVertical: 7,
-    paddingLeft: 20
+    paddingLeft: 20,
   },
-  
+
   welcomeText: {
     alignSelf: 'center',
     fontSize: 20,
-    paddingVertical: 20
-  }
+    paddingVertical: 20,
+  },
 });

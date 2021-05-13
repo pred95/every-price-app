@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import LoginComponent from '../../components/common/LoginComponent';
 import {GlobalContext} from '../../context/Provider';
 import login from '../../context/actions/auth/login';
