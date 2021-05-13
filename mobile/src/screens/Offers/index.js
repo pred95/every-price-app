@@ -1,11 +1,11 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useEffect} from 'react';
-import {Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Container from '../../components/common/Container';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import OffersComponent from '../../components/common/OffersComponent';
 
 const Offers = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const {setOptions, toggleDrawer} = useNavigation();
   useEffect(() => {
     setOptions({
@@ -20,9 +20,10 @@ const Offers = () => {
     });
   }, []);
   return (
-    <Container>
-      <Text>Hi from offers</Text>
-    </Container>
+    <OffersComponent
+      modalVisible={modalVisible}
+      setModalVisible={setModalVisible}
+    />
   );
 };
 

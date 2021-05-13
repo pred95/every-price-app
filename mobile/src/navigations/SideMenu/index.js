@@ -40,7 +40,7 @@ const SideMenu = ({navigation, authDispatch}) => {
       } else {
         setAuthLoaded(true);
         setIsAuthenticated(false);
-        setUsername('')
+        setUsername('');
       }
     } catch (error) {}
   };
@@ -61,6 +61,11 @@ const SideMenu = ({navigation, authDispatch}) => {
             logout()(authDispatch);
           },
         },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+          onPress: () => {},
+        },
       ],
       {cancelable: true, onDismiss: () => {}},
     );
@@ -76,7 +81,7 @@ const SideMenu = ({navigation, authDispatch}) => {
         },
       },
       {
-        icon: <MaterialIcon name="logout" size={20}/>,
+        icon: <MaterialIcon name="logout" size={20} />,
         name: 'Logout',
         onPress: () => {
           handleLogout();
@@ -86,7 +91,7 @@ const SideMenu = ({navigation, authDispatch}) => {
   } else {
     menuItems = [
       {
-        icon: <AwesomeIcon style={{paddingLeft:5}} size={20} name="filter" />,
+        icon: <AwesomeIcon style={{paddingLeft: 5}} size={20} name="filter" />,
         name: 'Filter',
         onPress: () => {
           navigation.navigate(FILTER);
@@ -113,6 +118,7 @@ const SideMenu = ({navigation, authDispatch}) => {
               source={require('../../assets/images/logo.png')}
               style={styles.logoImage}
             />
+            <Text style={styles.title}>EveryPrice</Text>
             {isAuthenticated ? (
               <Text style={styles.welcomeText}>
                 Welcome, <Text style={{fontStyle: 'italic'}}>{username}</Text>
