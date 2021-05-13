@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
-import {Image, SafeAreaView, Text, View} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useContext, useEffect, useState} from 'react';
+import {ActivityIndicator, Image, SafeAreaView, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Container from '../../components/common/Container';
 import {FILTER, LOGIN} from '../../constants/routeNames';
@@ -11,8 +12,31 @@ const SideMenu = ({navigation}) => {
     authState: {isLoggedIn},
   } = useContext(GlobalContext);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authLoaded, setAuthLoaded] = useState(false);
+  const [username, setUsername] = useState('');
+
+  const getUser = async () => {
+    try {
+      const user = await AsyncStorage.getItem('@username').then(value => {
+        setUsername(value);
+      });
+      if (user) {
+        setAuthLoaded(true);
+        setIsAuthenticated(true);
+      } else {
+        setAuthLoaded(true);
+        isAuthenticated(false);
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [isLoggedIn]);
+
   var menuItems = [];
-  if (isLoggedIn) {
+  if (isLoggedIn || isAuthenticated) {
     menuItems = [
       {
         icon: <Text>T</Text>,
@@ -24,9 +48,7 @@ const SideMenu = ({navigation}) => {
       {
         icon: <Text>T</Text>,
         name: 'Logout',
-        onPress: () => {
-          
-        },
+        onPress: () => {},
       },
     ];
   } else {
@@ -49,24 +71,42 @@ const SideMenu = ({navigation}) => {
   }
 
   return (
-    <SafeAreaView>
-      <Container>
-        <Image
-          height={70}
-          width={70}
-          source={require('../../assets/images/logo.png')}
-          style={styles.logoImage}
-        />
-        <View style={{paddingHorizontal: 75}}>
-          {menuItems.map(({name, icon, onPress}) => (
-            <TouchableOpacity onPress={onPress} key={name} style={styles.item}>
-              {icon}
-              <Text style={styles.itemText}>{name}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </Container>
-    </SafeAreaView>
+    <>
+      {authLoaded ? (
+        <SafeAreaView>
+          <Container>
+            <Image
+              height={70}
+              width={70}
+              source={require('../../assets/images/logo.png')}
+              style={styles.logoImage}
+            />
+            {isLoggedIn || isAuthenticated ? (
+              <Text style={styles.welcomeText}>
+                Welcome, <Text style={{fontStyle: 'italic'}}>{username}</Text>
+              </Text>
+            ) : (
+              <Text style={styles.welcomeText}>
+                Welcome, <Text style={{fontStyle: 'italic'}}>guest</Text>!
+              </Text>
+            )}
+            <View style={{paddingHorizontal: 70}}>
+              {menuItems.map(({name, icon, onPress}) => (
+                <TouchableOpacity
+                  onPress={onPress}
+                  key={name}
+                  style={styles.item}>
+                  {icon}
+                  <Text style={styles.itemText}>{name}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </Container>
+        </SafeAreaView>
+      ) : (
+        <ActivityIndicator />
+      )}
+    </>
   );
 };
 

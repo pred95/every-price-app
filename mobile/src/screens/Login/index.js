@@ -2,7 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import LoginComponent from '../../components/common/LoginComponent';
 import {GlobalContext} from '../../context/Provider';
 import login from '../../context/actions/auth/login';
-import { Alert } from 'react-native';
+import {useNavigation} from '@react-navigation/core';
+import {OFFER_LIST} from '../../constants/routeNames';
 
 const Login = () => {
   const [form, setForm] = useState({});
@@ -11,9 +12,12 @@ const Login = () => {
     authState: {error, loading},
   } = useContext(GlobalContext);
 
+  const {navigate} = useNavigation();
+
   const onSubmit = () => {
     if (form.email && form.password) {
       login(form)(authDispatch);
+      navigate(OFFER_LIST);
     }
   };
 

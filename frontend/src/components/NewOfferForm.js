@@ -58,7 +58,6 @@ class NewOfferForm extends Component {
         this.props.toggle();
       })
       .catch((err) => {
-        // console.log(`err`, err.data);
         alert("Offer already exists");
       });
   };

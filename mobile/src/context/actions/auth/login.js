@@ -23,12 +23,13 @@ export default form => dispatch => {
       email,
     })
     .then(res => {
-      AsyncStorage.setItem("access_token", res.data.tokens.access)
-      AsyncStorage.setItem("refresh_token", res.data.tokens.refresh)
-      AsyncStorage.setItem("username", res.data.username)
+      AsyncStorage.setItem('@access_token', res.data.tokens.access);
+      AsyncStorage.setItem('@refresh_token', res.data.tokens.refresh);
+      AsyncStorage.setItem('@username', res.data.username);
       dispatch({type: LOGIN_SUCCESS, payload: res.data});
     })
     .catch(err => {
+      console.log(`err`, err);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response
