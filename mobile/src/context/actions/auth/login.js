@@ -35,10 +35,10 @@ export default form => dispatch => {
       storeData('access_token', res.data.tokens.access);
       storeData('refresh_token', res.data.tokens.refresh);
       storeData('username', res.data.username);
+      storeData('id', String(res.data.id));
       dispatch({type: LOGIN_SUCCESS, payload: res.data});
     })
     .catch(err => {
-      console.log(`err`, err.response);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response

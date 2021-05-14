@@ -18,7 +18,6 @@ export default () => (dispatch) => {
         })
     })
     .catch(err => {
-        console.log(`err`, err)
         dispatch({
             type: GET_OFFERS_FAIL,
             payload: err.response ? err.response.data : {error: "Something went wrong, try again"}

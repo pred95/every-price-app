@@ -4,6 +4,7 @@ import {
   CREATE_OFFER,
   FILTER,
   LOGIN,
+  MY_OFFERS,
   OFFER_DETAIL,
   OFFER_LIST,
   REGISTER,
@@ -14,12 +15,14 @@ import CreateOffer from '../screens/CreateOffer';
 import Filter from '../screens/Filter';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
+import MyOffers from '../screens/MyOffers';
 
 const HomeNavigator = () => {
   const HomeStack = createStackNavigator();
   return (
     <HomeStack.Navigator initialRouteName={OFFER_LIST}>
       <HomeStack.Screen name={OFFER_LIST} component={Offers} />
+      <HomeStack.Screen name={MY_OFFERS} component={MyOffers} />
       <HomeStack.Screen name={OFFER_DETAIL} component={OfferDetail} />
       <HomeStack.Screen name={CREATE_OFFER} component={CreateOffer} />
       <HomeStack.Screen name={FILTER} component={Filter} />

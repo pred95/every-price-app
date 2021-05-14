@@ -10,13 +10,14 @@ import {
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Container from '../../components/common/Container';
-import {FILTER, LOGIN} from '../../constants/routeNames';
+import {FILTER, LOGIN, MY_OFFERS} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import logout from '../../context/actions/auth/logout';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const SideMenu = ({navigation, authDispatch}) => {
   const {
@@ -81,7 +82,14 @@ const SideMenu = ({navigation, authDispatch}) => {
         },
       },
       {
-        icon: <MaterialIcon name="logout" size={20} />,
+        icon: <MaterialIcon size={20} name="local-offer" />,
+        name: 'MyOffers',
+        onPress: () => {
+          navigation.navigate(MY_OFFERS);
+        },
+      },
+      {
+        icon: <MaterialCommunityIcon name="logout" size={20} />,
         name: 'Logout',
         onPress: () => {
           handleLogout();
@@ -128,7 +136,7 @@ const SideMenu = ({navigation, authDispatch}) => {
                 Welcome, <Text style={{fontStyle: 'italic'}}>guest</Text>!
               </Text>
             )}
-            <View style={{paddingHorizontal: 60}}>
+            <View style={{paddingHorizontal: 50}}>
               {menuItems.map(({name, icon, onPress}) => (
                 <TouchableOpacity
                   onPress={onPress}

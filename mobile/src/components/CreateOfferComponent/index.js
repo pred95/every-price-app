@@ -8,7 +8,6 @@ import {REGIONS} from '../../constants/regions';
 import {Picker} from '@react-native-picker/picker';
 
 const CreateOfferComponent = () => {
-  console.log(`REGIONS`, REGIONS);
   return (
     <View style={styles.container}>
       <Container>

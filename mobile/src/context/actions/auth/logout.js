@@ -22,7 +22,7 @@ export default () => dispatch => {
       })
       .catch(err => {
         axiosInstance
-          .post(`auth/token/refresh`, {
+          .post(`auth/token/refresh/`, {
             refresh: value,
           })
           .then(res => {
