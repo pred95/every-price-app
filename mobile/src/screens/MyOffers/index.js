@@ -23,7 +23,7 @@ const Offers = () => {
   const ret = AsyncStorage.getItem('id').then(value => {
     setUserId(value);
   });
-  console.log(`data`, data.data);
+  
   const myData = data.data.filter(offer => {
     return String(offer.user) === userId;
   });

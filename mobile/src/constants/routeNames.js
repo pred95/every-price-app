@@ -1,6 +1,7 @@
 export const OFFER_LIST = 'Offers';
 export const MY_OFFERS = 'My offers';
 export const OFFER_DETAIL = 'Offer detail';
+export const FILTERED_OFFERS = 'Filtered offers';
 export const CREATE_OFFER = 'Create new offer';
 export const FILTER = 'Filter';
 export const LOGIN = 'Login';

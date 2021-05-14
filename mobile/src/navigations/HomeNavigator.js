@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {
   CREATE_OFFER,
   FILTER,
+  FILTERED_OFFERS,
   LOGIN,
   MY_OFFERS,
   OFFER_DETAIL,
@@ -16,6 +17,7 @@ import Filter from '../screens/Filter';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import MyOffers from '../screens/MyOffers';
+import FilteredOffers from '../screens/FilteredOffers';
 
 const HomeNavigator = () => {
   const HomeStack = createStackNavigator();
@@ -25,6 +27,7 @@ const HomeNavigator = () => {
       <HomeStack.Screen name={MY_OFFERS} component={MyOffers} />
       <HomeStack.Screen name={OFFER_DETAIL} component={OfferDetail} />
       <HomeStack.Screen name={CREATE_OFFER} component={CreateOffer} />
+      <HomeStack.Screen name={FILTERED_OFFERS} component={FilteredOffers} />
       <HomeStack.Screen name={FILTER} component={Filter} />
       <HomeStack.Screen name={LOGIN} component={Login}></HomeStack.Screen>
       <HomeStack.Screen name={REGISTER} component={Register}></HomeStack.Screen>
