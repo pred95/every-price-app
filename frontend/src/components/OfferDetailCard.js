@@ -16,11 +16,6 @@ const styles = (theme) => ({
 });
 
 class OfferDetailCard extends Component {
-  get_image_name = (img_path) => {
-    var tokens = img_path.split("/");
-    var image_name = tokens[tokens.length - 1];
-    return image_name;
-  };
 
   render() {
     const { classes } = this.props;
@@ -33,7 +28,7 @@ class OfferDetailCard extends Component {
           height="150"
           width="100%"
           objectFit="cover"
-          image={"/images/" + this.get_image_name(this.props.offer.image)}
+          image={this.props.offer.image}
           title={this.props.offer.product + " photo"}
         />
         <CardContent>

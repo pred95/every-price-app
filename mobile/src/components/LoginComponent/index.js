@@ -1,13 +1,13 @@
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Image, Text, TouchableOpacity, View, Alert} from 'react-native';
-import Container from '../Container';
+import Container from '../common/Container';
 import styles from './styles';
-import CustomButtom from '../CustomButton';
-import Input from '../Input';
+import CustomButtom from '../common/CustomButton';
+import Input from '../common/Input';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {REGISTER} from '../../../constants/routeNames';
-import {GlobalContext} from '../../../context/Provider';
-import {clearAuthState} from '../../../context/actions/auth/login';
+import {REGISTER} from '../../constants/routeNames';
+import {GlobalContext} from '../../context/Provider';
+import {clearAuthState} from '../../context/actions/auth/login';
 
 const LoginComponent = ({error, onChange, onSubmit, loading}) => {
   const {navigate} = useNavigation();
@@ -59,7 +59,7 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
       <Image
         height={70}
         width={70}
-        source={require('../../../assets/images/logo.png')}
+        source={require('../../assets/images/logo.png')}
         style={styles.logoImage}
       />
       <View>

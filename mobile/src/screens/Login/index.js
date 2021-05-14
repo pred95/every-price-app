@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import LoginComponent from '../../components/common/LoginComponent';
+import LoginComponent from '../../components/LoginComponent';
 import {GlobalContext} from '../../context/Provider';
 import login from '../../context/actions/auth/login';
 import {useNavigation} from '@react-navigation/core';

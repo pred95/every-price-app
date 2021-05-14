@@ -1,6 +1,6 @@
 export default {
     getOffers:{
-        data: {},
+        data: [],
         error: null,
         loading: false
     },

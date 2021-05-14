@@ -1,12 +1,23 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import OffersComponent from '../../components/common/OffersComponent';
+import OffersComponent from '../../components/OffersComponent';
+import getOffers from '../../context/actions/offers/getOffers';
+import {GlobalContext} from '../../context/Provider';
 
 const Offers = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const {setOptions, toggleDrawer} = useNavigation();
+  const {
+    offersDispatch,
+    offersState: {
+      getOffers: {data, loading},
+    },
+  } = useContext(GlobalContext);
+  useEffect(() => {
+    getOffers()(offersDispatch)
+  }, [])
   useEffect(() => {
     setOptions({
       headerLeft: () => (
@@ -23,6 +34,8 @@ const Offers = () => {
     <OffersComponent
       modalVisible={modalVisible}
       setModalVisible={setModalVisible}
+      data={data.data}
+      loading={loading}
     />
   );
 };

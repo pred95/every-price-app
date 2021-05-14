@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
-import Container from '../Container';
+import Container from '../common/Container';
 import styles from './styles';
-import CustomButtom from '../CustomButton';
-import Input from '../Input';
-import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
+import CustomButtom from '../common/CustomButton';
+import Input from '../common/Input';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 import {useNavigation} from '@react-navigation/native';
-import {LOGIN} from '../../../constants/routeNames';
-import { clearAuthState } from '../../../context/actions/auth/register';
-import { GlobalContext } from '../../../context/Provider';
+import {LOGIN} from '../../constants/routeNames';
+import { clearAuthState } from '../../context/actions/auth/register';
+import { GlobalContext } from '../../context/Provider';
 
 const RegisterComponent = ({
   onSubmit,
@@ -43,7 +43,7 @@ const RegisterComponent = ({
       <Image
         height={70}
         width={70}
-        source={require('../../../assets/images/logo.png')}
+        source={require('../../assets/images/logo.png')}
         style={styles.logoImage}
       />
       <View>

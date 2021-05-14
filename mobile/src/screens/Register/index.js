@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import RegisterComponent from '../../components/common/RegisterComponent';
+import RegisterComponent from '../../components/RegisterComponent';
 import isalnum from '../../utils/isalnum';
 import validateEmail from '../../utils/validateEmail';
 import register, {clearAuthState} from '../../context/actions/auth/register';

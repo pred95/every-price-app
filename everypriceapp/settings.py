@@ -63,11 +63,18 @@ INSTALLED_APPS = [
     # swagger
     'drf_yasg',
 
+    #google-drive-storage
+    'gdstorage',
+
     # apps
     'authentication.apps.AuthenticationConfig',
     'social_auth.apps.SocialAuthConfig',
     'offers.apps.OffersConfig',
 ]
+
+# Gogle Drive Storage Settings
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '/home/andrea/djangoapps/everypriceapp/googlePrivateKey.json'
+GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '' # OPTIONAL
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

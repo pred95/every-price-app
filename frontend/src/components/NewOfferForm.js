@@ -66,22 +66,19 @@ class NewOfferForm extends Component {
           .then((res) => {
             localStorage.setItem("access_token", res.data.access);
           });
-        axios.post(BACKEND_URL + "offers/create/", form_data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        }).then(() => {
-          this.props.resetState();
-          this.props.toggle();
-        }).catch(err => alert("Offer already exists"))
+        axios
+          .post(BACKEND_URL + "offers/create/", form_data, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          })
+          .then(() => {
+            this.props.resetState();
+            this.props.toggle();
+          })
+          .catch((err) => alert("Offer already exists"));
       });
-  };
-
-  get_image_name = (img_path) => {
-    var tokens = img_path.split("/");
-    var image_name = tokens[tokens.length - 1];
-    return image_name;
   };
 
   defaultIfEmpty = (value) => {

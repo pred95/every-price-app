@@ -47,12 +47,6 @@ class OfferList extends Component {
     });
   };
 
-  get_image_name = (img_path) => {
-    var tokens = img_path.split("/");
-    var image_name = tokens[tokens.length - 1];
-    return image_name;
-  };
-
   componentDidMount() {
     window.addEventListener(
       "resize",
@@ -121,7 +115,7 @@ class OfferList extends Component {
                         <img
                           className="photo"
                           alt={offer.product + " photo"}
-                          src={"/images/" + this.get_image_name(offer.image)}
+                          src={offer.image}
                         />
                       </TableCell>
                       {columns.map((column) => {
