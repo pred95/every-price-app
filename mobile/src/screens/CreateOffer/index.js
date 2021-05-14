@@ -1,11 +1,10 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import CreateOfferComponent from '../../components/CreateOfferComponent'
 
 const CreateOffer = () => {
   return (
-    <View>
-      <Text>Hi from create offer</Text>
-    </View>
+    <CreateOfferComponent />
   );
 };
 

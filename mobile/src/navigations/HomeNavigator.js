@@ -1,9 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
+  CREATE_OFFER,
   FILTER,
   LOGIN,
-  OFFER_CREATE,
   OFFER_DETAIL,
   OFFER_LIST,
   REGISTER,
@@ -21,7 +21,7 @@ const HomeNavigator = () => {
     <HomeStack.Navigator initialRouteName={OFFER_LIST}>
       <HomeStack.Screen name={OFFER_LIST} component={Offers} />
       <HomeStack.Screen name={OFFER_DETAIL} component={OfferDetail} />
-      <HomeStack.Screen name={OFFER_CREATE} component={CreateOffer} />
+      <HomeStack.Screen name={CREATE_OFFER} component={CreateOffer} />
       <HomeStack.Screen name={FILTER} component={Filter} />
       <HomeStack.Screen name={LOGIN} component={Login}></HomeStack.Screen>
       <HomeStack.Screen name={REGISTER} component={Register}></HomeStack.Screen>
