@@ -71,6 +71,7 @@ class MyTabs extends Component {
             loggedIn={this.props.loggedIn}
             user_id={this.props.user_id}
             username={this.props.username}
+            tab={"allOffers"}
           />
           {this.state.showError ? (
             <Snackbar
@@ -99,6 +100,7 @@ class MyTabs extends Component {
               loggedIn={this.props.loggedIn}
               user_id={this.props.user_id}
               username={this.props.username}
+              tab={"myOffers"}
             />
           )}
         </SwipeableViews>

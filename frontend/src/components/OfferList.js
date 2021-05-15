@@ -119,7 +119,7 @@ class OfferList extends Component {
                         />
                       </TableCell>
                       {columns.map((column) => {
-                        var value = ""
+                        var value = "";
                         if (column.id === "price") {
                           value = "€ " + offer[column.id];
                         } else {
@@ -142,14 +142,13 @@ class OfferList extends Component {
                           username={this.props.username}
                         />
                         &nbsp;&nbsp;
-                        {this.props.loggedIn &&
-                        offer.user === this.props.user_id ? (
+                        {this.props.tab === "myOffers" && (
                           <ConfirmRemovalModal
                             id={offer.id}
                             resetState={this.props.resetState}
                             loggedIn={this.props.loggedIn}
                           />
-                        ) : null}
+                        )}
                       </TableCell>
                     </TableRow>
                   );
