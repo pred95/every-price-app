@@ -6,6 +6,8 @@ import Input from '../common/Input';
 import CustomButton from '../common/CustomButton';
 import {REGIONS} from '../../constants/regions';
 import {Picker} from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
+import colors from '../../assets/themes/colors';
 
 const CreateOfferComponent = () => {
   return (
@@ -17,14 +19,17 @@ const CreateOfferComponent = () => {
         <View style={styles.pickerContainer}>
           <Text style={styles.pickerLabel}>Region</Text>
           <View style={styles.pickerWrapper}>
-            <View style={styles.picker}>
-              <Picker>
-                {REGIONS.map((value, index) => {
-                  return (
-                    <Picker.Item key={index} label={value} value={value} />
-                  );
-                })}
-              </Picker>
+            <View style={styles.inputContainer}>
+              <RNPickerSelect
+                useNativeAndroidPickerStyle={true}
+                placeholder={{label: 'Select a region', value: null}}
+                onValueChange={value => console.log(`region: `, value)}
+                items={[
+                  {label: 'Abruzzo', value: 'Abruzzo'},
+                  {label: 'Basilicata', value: 'Basilicata'},
+                  {label: 'Calabria', value: 'Calabria'},
+                ]}
+              />
             </View>
           </View>
         </View>
