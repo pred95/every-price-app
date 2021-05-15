@@ -12,10 +12,17 @@ import AppModal from '../common/AppModal';
 import styles from './styles';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { CREATE_OFFER } from '../../constants/routeNames';
+import {CREATE_OFFER, OFFER_LIST} from '../../constants/routeNames';
 import {useNavigation} from '@react-navigation/core';
+import CustomButtom from '../common/CustomButton';
 
-const OffersComponent = ({data, loading, modalVisible, setModalVisible}) => {
+const OffersComponent = ({
+  data,
+  loading,
+  modalVisible,
+  setModalVisible,
+  home,
+}) => {
   const {navigate} = useNavigation();
   const ListEmptyComponent = () => {
     return (
@@ -91,9 +98,22 @@ const OffersComponent = ({data, loading, modalVisible, setModalVisible}) => {
         )}
       </View>
 
-      <TouchableOpacity style={styles.fab} onPress={() => {navigate(CREATE_OFFER)}}>
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => {
+          navigate(CREATE_OFFER);
+        }}>
         <MaterialIcon name="add" color={colors.white} size={30} />
       </TouchableOpacity>
+      {!home && (
+        <CustomButtom
+          primary
+          title="Back to offer list "
+          onPress={() => {
+            navigate(OFFER_LIST);
+          }}
+        />
+      )}
     </>
   );
 };

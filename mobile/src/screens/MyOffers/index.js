@@ -34,6 +34,7 @@ const Offers = () => {
       setModalVisible={setModalVisible}
       data={myData}
       loading={loading}
+      home={false}
     />
   );
 };
