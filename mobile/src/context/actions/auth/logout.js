@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LOGOUT_USER, CLEAR_AUTH_STATE} from '../../../constants/actionTypes';
 import axiosInstance from '../../../helpers/axiosInstance';
+import storeData from '../../../utils/storeData';
+import removeData from '../../../utils/removeData';
 
 export const clearAuthState = () => dispatch => {
   dispatch({
@@ -9,33 +11,35 @@ export const clearAuthState = () => dispatch => {
 };
 
 export default () => dispatch => {
+  var refresh = ''
   AsyncStorage.getItem('refresh_token').then(value => {
+    refresh = value
     axiosInstance
       .post('auth/logout/', {
-        refresh: value,
+        refresh: refresh,
       })
       .then(() => {
-        AsyncStorage.removeItem('access_token');
-        AsyncStorage.removeItem('refresh_token');
-        AsyncStorage.removeItem('username');
+        removeData('access_token');
+        removeData('refresh_token');
+        removeData('username');
         dispatch({type: LOGOUT_USER});
       })
       .catch(err => {
         axiosInstance
           .post(`auth/token/refresh/`, {
-            refresh: value,
+            refresh: refresh,
           })
           .then(res => {
-            AsyncStorage.removeItem('access_token');
-            AsyncStorage.setItem('access_token', res.data.access);
+            removeData('access_token');
+            storeData('access_token', res.data.access);
             axiosInstance
               .post('auth/logout/', {
-                refresh: value,
+                refresh: refresh,
               })
               .then(() => {
-                AsyncStorage.removeItem('access_token');
-                AsyncStorage.removeItem('refresh_token');
-                AsyncStorage.removeItem('username');
+                removeData('access_token');
+                removeData('refresh_token');
+                removeData('username');
                 dispatch({type: LOGOUT_USER});
               });
           });

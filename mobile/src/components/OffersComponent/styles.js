@@ -28,7 +28,7 @@ export default StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingRight: 10,
+    paddingRight: 70,
     alignItems: 'center',
   },
 
@@ -36,6 +36,15 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 7,
     paddingHorizontal: 7,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: 40
+  },
+
+  info: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
 

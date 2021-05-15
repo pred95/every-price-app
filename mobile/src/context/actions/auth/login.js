@@ -6,6 +6,7 @@ import {
   CLEAR_AUTH_STATE,
 } from '../../../constants/actionTypes';
 import axiosInstance from '../../../helpers/axiosInstance';
+import storeData from '../../../utils/storeData';
 
 export const clearAuthState = () => dispatch => {
   dispatch({
@@ -13,16 +14,8 @@ export const clearAuthState = () => dispatch => {
   });
 };
 
-const storeData = async (key, value) => {
-  try {
-    await AsyncStorage.setItem(key, value)
-  } catch (e) {
-    // saving error
-  }
-}
-
 export default form => dispatch => {
-  AsyncStorage.clear()
+  AsyncStorage.clear();
   dispatch({type: LOGIN_LOADING});
   const password = form.password;
   const email = form.email;

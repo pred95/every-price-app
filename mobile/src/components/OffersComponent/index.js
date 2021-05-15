@@ -52,13 +52,16 @@ const OffersComponent = ({
               </Text>
             </View>
           )}
-          <View style={{paddingLeft: 10, paddingRight: 50}}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.product}>{item.product}</Text>
+          <View
+            style={styles.info}>
+            <View style={{paddingLeft: 10}}>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.product}>{item.product}</Text>
+              </View>
+              <Text style={styles.city}>{item.city}</Text>
             </View>
-            <Text style={styles.city}>{item.city}</Text>
+            <Text style={{fontSize: 19}}>€ {item.price}</Text>
           </View>
-          <Text style={{fontSize: 19}}>€ {item.price}</Text>
         </View>
         <View style={styles.buttons}>
           <TouchableOpacity>
@@ -74,7 +77,9 @@ const OffersComponent = ({
                     {
                       text: 'Yes',
                       style: 'cancel',
-                      onPress: () => {Alert.alert('Success', 'Delete offer')},
+                      onPress: () => {
+                        Alert.alert('Success', 'Delete offer');
+                      },
                     },
                     {
                       text: 'Cancel',

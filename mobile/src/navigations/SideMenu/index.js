@@ -23,7 +23,6 @@ const SideMenu = ({navigation, authDispatch}) => {
   const {
     authState: {isLoggedIn},
   } = useContext(GlobalContext);
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authLoaded, setAuthLoaded] = useState(false);
   const [username, setUsername] = useState('');
