@@ -18,7 +18,7 @@ const FilteredOffers = () => {
         setModalVisible={setModalVisible}
         data={data}
         loading={false}
-        home={false}
+        screen={'filtered'}
       />
   );
 };

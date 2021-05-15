@@ -6,12 +6,14 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  Alert,
 } from 'react-native';
 import colors from '../../assets/themes/colors';
 import AppModal from '../common/AppModal';
 import styles from './styles';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {CREATE_OFFER, OFFER_LIST} from '../../constants/routeNames';
 import {useNavigation} from '@react-navigation/core';
 import CustomButtom from '../common/CustomButton';
@@ -21,7 +23,7 @@ const OffersComponent = ({
   loading,
   modalVisible,
   setModalVisible,
-  home,
+  screen,
 }) => {
   const {navigate} = useNavigation();
   const ListEmptyComponent = () => {
@@ -58,9 +60,39 @@ const OffersComponent = ({
           </View>
           <Text style={{fontSize: 19}}>€ {item.price}</Text>
         </View>
-        <TouchableOpacity>
-          <IonIcon name="search-circle-sharp" size={30} color={colors.grey} />
-        </TouchableOpacity>
+        <View style={styles.buttons}>
+          <TouchableOpacity>
+            <IonIcon name="search-circle-sharp" size={35} color={colors.grey} />
+          </TouchableOpacity>
+          {screen === 'myOffers' && (
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert(
+                  'Delete',
+                  'Do you really want to delete this offer?',
+                  [
+                    {
+                      text: 'Yes',
+                      style: 'cancel',
+                      onPress: () => {Alert.alert('Success', 'Delete offer')},
+                    },
+                    {
+                      text: 'Cancel',
+                      style: 'cancel',
+                      onPress: () => {},
+                    },
+                  ],
+                  {cancelable: true, onDismiss: () => {}},
+                )
+              }>
+              <MaterialCommunityIcon
+                name="delete-circle"
+                size={32}
+                color={colors.danger}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
     );
   };
@@ -105,7 +137,7 @@ const OffersComponent = ({
         }}>
         <MaterialIcon name="add" color={colors.white} size={30} />
       </TouchableOpacity>
-      {!home && (
+      {screen !== 'home' && (
         <CustomButtom
           primary
           title="Back to offer list "

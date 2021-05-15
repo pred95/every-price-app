@@ -58,11 +58,16 @@ export default StyleSheet.create({
     backgroundColor: colors.primary,
     width: 50,
     height: 50,
-    position: "absolute",
+    position: 'absolute',
     bottom: 35,
     right: 25,
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  buttons: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
