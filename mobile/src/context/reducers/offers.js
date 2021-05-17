@@ -4,8 +4,12 @@ import {
   GET_OFFERS_LOADING,
   GET_OFFERS_SUCCESS,
   FILTER_OFFERS,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  CREATE_OFFER_LOADING,
+  CREATE_OFFER_SUCCESS,
+  CREATE_OFFER_FAIL,
 } from '../../constants/actionTypes';
+import getOffers from '../actions/offers/getOffers';
 
 const offers = (state, {type, payload}) => {
   switch (type) {
@@ -35,6 +39,7 @@ const offers = (state, {type, payload}) => {
           ...state.getOffers,
           loading: false,
           data: payload,
+          error: null,
         },
       };
     case GET_OFFERS_FAIL:
@@ -42,6 +47,42 @@ const offers = (state, {type, payload}) => {
         ...state,
         getOffers: {
           ...state.getOffers,
+          loading: false,
+          error: payload,
+        },
+      };
+    case CREATE_OFFER_LOADING:
+      return {
+        ...state,
+        createOffer: {
+          ...state.createOffer,
+          loading: true,
+          error: null,
+          data: {}
+        },
+      };
+    case CREATE_OFFER_SUCCESS:
+      return {
+        ...state,
+        createOffer: {
+          ...state.createOffer,
+          loading: false,
+          data: payload,
+          error: null,
+        },
+
+        getOffers: {
+          ...state.getOffers,
+          loading: false,
+          data: [payload, state.getOffers.data],
+          error: null,
+        },
+      };
+    case CREATE_OFFER_FAIL:
+      return {
+        ...state,
+        createOffer: {
+          ...state.createOffer,
           loading: false,
           error: payload,
         },
@@ -54,14 +95,14 @@ const offers = (state, {type, payload}) => {
           data: payload,
         },
       };
-      case CLEAR_FILTER:
-        return {
-          ...state,
-          filterOffers: {
-            ...state.filterOffers,
-            data: [],
-          },
-        };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filterOffers: {
+          ...state.filterOffers,
+          data: [],
+        },
+      };
     default:
       return state;
   }

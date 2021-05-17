@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
-import {Image, Text, TouchableOpacity, View, Alert} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '../common/Container';
 import styles from './styles';
 import CustomButtom from '../common/CustomButton';
 import Input from '../common/Input';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {REGISTER} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
 import {clearAuthState} from '../../context/actions/auth/login';
@@ -21,38 +21,7 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
     clearAuthState()(authDispatch);
     navigate(REGISTER);
   };
-  useFocusEffect(() => {
-    if (error && !error.error && !loading) {
-      Alert.alert(
-        'Error',
-        'Invalid credential, try again',
-        [
-          {
-            text: 'Close',
-            style: 'cancel',
-            onPress: () => clearAuthState()(authDispatch),
-          },
-        ],
-        {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
-      );
-    }
-  });
 
-  if (error?.error && !loading) {
-    const err = error.error;
-    Alert.alert(
-      'Error',
-      err,
-      [
-        {
-          text: 'Close',
-          style: 'cancel',
-          onPress: () => clearAuthState()(authDispatch),
-        },
-      ],
-      {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
-    );
-  }
   return (
     <Container>
       <Image

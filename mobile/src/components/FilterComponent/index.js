@@ -1,15 +1,23 @@
-import {Picker} from '@react-native-picker/picker';
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text} from 'react-native';
 import {REGIONS} from '../../constants/regions';
 import Container from '../common/Container';
 import Input from '../common/Input';
 import styles from './styles';
 import CustomButton from '../common/CustomButton';
+import RNPickerSelect from 'react-native-picker-select';
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import colors from '../../assets/themes/colors';
 
 const FilterComponent = ({onChange, onSubmit}) => {
+  const [region, setRegion] = useState('');
+  var regions = [];
+  REGIONS.map(region => {
+    regions.push({label: region, value: region});
+  });
+
   return (
-    <View style={styles.container}>
+    <View style={styles.formContainer}>
       <Container>
         <Input
           label="Product name"
@@ -25,25 +33,42 @@ const FilterComponent = ({onChange, onSubmit}) => {
             onChange({name: 'city', value});
           }}
         />
-        <View style={styles.pickerContainer}>
-          <Text style={styles.pickerLabel}>Region</Text>
-          <View style={styles.pickerWrapper}>
-            <View style={styles.picker}>
-              <Picker
-                onValueChange={value => {
-                  onChange({name: 'region', value});
-                }}>
-                    <Picker.Item key="nullValue" label="" value="" />
-                {REGIONS.map((value, index) => {
-                  return (
-                    <Picker.Item key={index} label={value} value={value} />
-                  );
-                })}
-              </Picker>
+        <View style={styles.container}>
+          <Text style={styles.label}>Region</Text>
+          <View style={styles.wrapper}>
+            <View style={styles.inputContainer}>
+              <View style={{width: '100%'}}>
+                <RNPickerSelect
+                  style={{
+                    inputAndroid: {
+                      color: 'black',
+                      fontSize: 16,
+                    },
+                    alignItems: 'center',
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  placeholder={{label: 'Select a region', value: null}}
+                  onValueChange={value => {
+                    setRegion(value);
+                    onChange({name: 'region', value: value});
+                  }}
+                  items={regions}
+                  value={region}
+                  Icon={() => {
+                    return (
+                      <AntIcon
+                        name="caretdown"
+                        color={colors.grey}
+                        style={{paddingTop: 12, marginRight: 10}}
+                      />
+                    );
+                  }}
+                />
+              </View>
             </View>
           </View>
         </View>
-        <CustomButton primary title="Filter" onPress={onSubmit}/>
+        <CustomButton primary title="Filter" onPress={onSubmit} />
       </Container>
     </View>
   );

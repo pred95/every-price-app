@@ -4,12 +4,12 @@ export default {
         error: null,
         loading: false
     },
-    createOffers:{
+    createOffer:{
         data: {},
         error: null,
         loading: false
     },
-    deleteOffers:{
+    deleteOffer:{
         data: {},
         error: null,
         loading: false

@@ -2,24 +2,31 @@ import {StyleSheet} from 'react-native';
 import colors from '../../assets/themes/colors';
 
 export default StyleSheet.create({
-  container: {
+  formContainer: {
     flex: 1,
     backgroundColor: colors.white,
   },
 
-  pickerContainer: {
+  container: {
     paddingVertical: 10,
   },
 
-  pickerLabel: {
+  label: {
     fontSize: 16,
   },
 
-  pickerWrapper: {
+  wrapper: {
     height: 42,
     borderWidth: 1,
     borderRadius: 4,
-    paddingHorizontal: 5,
     marginTop: 5,
+    borderColor: colors.grey,
+  },
+
+  inputContainer: {
+    flexDirection: 'row',
+    height: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Text,
   View,
@@ -17,6 +17,8 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import {CREATE_OFFER, OFFER_LIST} from '../../constants/routeNames';
 import {useNavigation} from '@react-navigation/core';
 import CustomButtom from '../common/CustomButton';
+import {GlobalContext} from '../../context/Provider';
+import {clearCreateOfferState} from '../../context/actions/offers/createOffer';
 
 const OffersComponent = ({
   data,
@@ -26,6 +28,11 @@ const OffersComponent = ({
   screen,
 }) => {
   const {navigate} = useNavigation();
+  const {offersDispatch} = useContext(GlobalContext);
+  const goToCreateOffer = () => {
+    clearCreateOfferState()(offersDispatch);
+    navigate(CREATE_OFFER);
+  };
   const ListEmptyComponent = () => {
     return (
       <View>
@@ -52,8 +59,7 @@ const OffersComponent = ({
               </Text>
             </View>
           )}
-          <View
-            style={styles.info}>
+          <View style={styles.info}>
             <View style={{paddingLeft: 10}}>
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.product}>{item.product}</Text>
@@ -126,9 +132,6 @@ const OffersComponent = ({
               ListEmptyComponent={ListEmptyComponent}
               renderItem={renderItem}
               keyExtractor={item => String(item.id)}
-              ListFooterComponent={
-                <View style={{height: 50, backgroundColor: colors.grey}} />
-              }
               ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
           </View>
@@ -138,7 +141,7 @@ const OffersComponent = ({
       <TouchableOpacity
         style={styles.fab}
         onPress={() => {
-          navigate(CREATE_OFFER);
+          goToCreateOffer();
         }}>
         <MaterialIcon name="add" color={colors.white} size={30} />
       </TouchableOpacity>

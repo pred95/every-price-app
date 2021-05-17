@@ -1,21 +1,32 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import Container from '../common/Container';
 import Input from '../common/Input';
 import CustomButton from '../common/CustomButton';
 import {REGIONS} from '../../constants/regions';
 import RNPickerSelect from 'react-native-picker-select';
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import colors from '../../assets/themes/colors';
+import CurrencyInput from 'react-native-currency-input';
 
-const CreateOfferComponent = ({onChangeText, form}) => {
+const CreateOfferComponent = ({
+  error,
+  loading,
+  onChangeText,
+  form,
+  onSubmit,
+}) => {
   const [region, setRegion] = useState('');
+  const [price, setPrice] = useState(0.0);
   var regions = [];
   REGIONS.map(region => {
     regions.push({label: region, value: region});
   });
-  console.log(`regions`, regions);
+
   return (
-    <View style={styles.container}>
+    <View style={styles.formContainer}>
       <Container>
         <Input
           label="Product"
@@ -38,34 +49,84 @@ const CreateOfferComponent = ({onChangeText, form}) => {
             onChangeText({name: 'city', value: value});
           }}
         />
-        <View style={styles.pickerContainer}>
-          <Text style={styles.pickerLabel}>Region</Text>
-          <View style={styles.pickerWrapper}>
+        <View style={styles.container}>
+          <Text style={styles.label}>Region</Text>
+          <View style={styles.wrapper}>
             <View style={styles.inputContainer}>
-              <RNPickerSelect
-                style={{inputAndroid: {color: 'black'}}}
-                useNativeAndroidPickerStyle={true}
-                placeholder={{label: 'Select a region', value: null}}
-                onValueChange={value => {
-                  setRegion(value);
-                  onChangeText({name: 'region', value: value});
+              <View style={{width: '100%'}}>
+                <RNPickerSelect
+                  style={{
+                    inputAndroid: {
+                      color: 'black',
+                      fontSize: 16,
+                    },
+                    alignItems: 'center',
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  placeholder={{label: 'Select a region', value: null}}
+                  onValueChange={value => {
+                    setRegion(value);
+                    onChangeText({name: 'region', value: value});
+                  }}
+                  items={regions}
+                  value={region}
+                  Icon={() => {
+                    return (
+                      <AntIcon
+                        name="caretdown"
+                        color={colors.grey}
+                        style={{paddingTop: 12, marginRight: 10}}
+                      />
+                    );
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.label}>Price</Text>
+          <View style={styles.wrapper}>
+            <View style={styles.inputContainer}>
+              <CurrencyInput
+                value={price}
+                onChangeValue={value => {
+                  setPrice(value);
+                  onChangeText({name: 'price', value: value});
                 }}
-                items={regions}
-                value={region}
+                prefix="€ "
+                precision={2}
+                separator="."
+                style={{width: '100%'}}
               />
             </View>
           </View>
         </View>
-        <Input
-          label="Price"
-          placeholder="Enter price of the product"
-          onChangeText={value => {
-            onChangeText({name: 'price', value: value});
-          }}
-        />
-        <Input label="Image" placeholder="Upload image of the product" />
+        <View style={styles.container}>
+          <Text style={styles.label}>Image</Text>
+          <View style={styles.imageWrapper}>
+            <View style={styles.imageInputContainer}>
+              <Text style={styles.label}>Take a picture</Text>
+              <TouchableOpacity>
+                <MaterialIcon
+                  name="add-a-photo"
+                  size={25}
+                  style={{paddingHorizontal: 5}}
+                />
+              </TouchableOpacity>
+              <Text style={styles.label}>or choose a file from library</Text>
+              <TouchableOpacity>
+                <MaterialIcon
+                  name="photo-library"
+                  size={25}
+                  style={{paddingHorizontal: 5}}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
 
-        <CustomButton primary title="Submit" />
+        <CustomButton primary title="Submit" onPress={onSubmit} />
       </Container>
     </View>
   );
