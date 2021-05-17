@@ -1,8 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/core';
 import React, {useContext, useEffect, useState} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import OffersComponent from '../../components/OffersComponent';
 import getOffers from '../../context/actions/offers/getOffers';
 import {GlobalContext} from '../../context/Provider';

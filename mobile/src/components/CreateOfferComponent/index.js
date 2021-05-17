@@ -10,6 +10,8 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../assets/themes/colors';
 import CurrencyInput from 'react-native-currency-input';
+import CustomButtom from '../common/CustomButton';
+import PhotoPicker from '../common/PhotoPicker';
 
 const CreateOfferComponent = ({
   error,
@@ -17,6 +19,9 @@ const CreateOfferComponent = ({
   onChangeText,
   form,
   onSubmit,
+  sheetRef,
+  openSheet,
+  closeSheet
 }) => {
   const [region, setRegion] = useState('');
   const [price, setPrice] = useState(0.0);
@@ -103,31 +108,24 @@ const CreateOfferComponent = ({
           </View>
         </View>
         <View style={styles.container}>
-          <Text style={styles.label}>Image</Text>
-          <View style={styles.imageWrapper}>
-            <View style={styles.imageInputContainer}>
-              <Text style={styles.label}>Take a picture</Text>
-              <TouchableOpacity>
-                <MaterialIcon
-                  name="add-a-photo"
-                  size={25}
-                  style={{paddingHorizontal: 5}}
-                />
-              </TouchableOpacity>
-              <Text style={styles.label}>or choose a file from library</Text>
-              <TouchableOpacity>
-                <MaterialIcon
-                  name="photo-library"
-                  size={25}
-                  style={{paddingHorizontal: 5}}
-                />
-              </TouchableOpacity>
-            </View>
+          <Text style={styles.label}>Photo</Text>
+          <View style={styles.photoWrapper}>
+            <TouchableOpacity
+              style={styles.photoInputContainer}
+              onPress={openSheet}
+              >
+              <Text
+                style={styles.photoUploadText}>
+                Upload a photo
+              </Text>
+              <MaterialIcon name="add-a-photo" size={25}></MaterialIcon>
+            </TouchableOpacity>
           </View>
         </View>
 
         <CustomButton primary title="Submit" onPress={onSubmit} />
       </Container>
+      <PhotoPicker ref={sheetRef} />
     </View>
   );
 };

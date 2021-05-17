@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import LoginComponent from '../../components/LoginComponent';
 import {GlobalContext} from '../../context/Provider';
 import login, {clearAuthState} from '../../context/actions/auth/login';
-import {useFocusEffect, useNavigation} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/core';
 import {OFFER_LIST} from '../../constants/routeNames';
 import {Alert} from 'react-native';
 

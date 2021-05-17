@@ -25,19 +25,26 @@ export default StyleSheet.create({
 
   inputContainer: {
     flexDirection: 'row',
-    height: "100%",
+    height: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
 
-  imageWrapper: {
-    height: 42,
+  photoWrapper: {
+    height: 25,
     marginTop: 5,
   },
 
-  imageInputContainer: {
+  photoInputContainer: {
     flexDirection: 'row',
-    height: "100%",
+    height: '100%',
     alignItems: 'center',
+  },
+
+  photoUploadText: {
+    color: 'black',
+    paddingLeft: 20,
+    paddingRight: 5,
+    fontSize: 15,
   },
 });

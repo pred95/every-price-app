@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import CreateOfferComponent from '../../components/CreateOfferComponent';
 import createOffer, {
   clearCreateOfferState,
@@ -17,6 +17,9 @@ const CreateOffer = () => {
     },
     authState: {isLoggedIn},
   } = useContext(GlobalContext);
+
+  const sheetRef = useRef(null);
+
   const [form, setForm] = useState({});
   const {navigate} = useNavigation();
 
@@ -58,7 +61,18 @@ const CreateOffer = () => {
 
   const onSubmit = () => {
     createOffer(form, isLoggedIn)(offersDispatch);
- 
+  };
+
+  const closeSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.close();
+    }
+  };
+
+  const openSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.open();
+    }
   };
   return (
     <CreateOfferComponent
@@ -68,6 +82,9 @@ const CreateOffer = () => {
       loading={loading}
       error={error}
       offersDispatch={offersDispatch}
+      sheetRef={sheetRef}
+      openSheet={openSheet}
+      closeSheet={closeSheet}
     />
   );
 };
