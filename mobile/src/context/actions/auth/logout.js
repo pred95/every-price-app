@@ -25,6 +25,7 @@ export default () => dispatch => {
         dispatch({type: LOGOUT_USER});
       })
       .catch(err => {
+        console.log(`refresh`, refresh)
         axiosInstance
           .post(`auth/token/refresh/`, {
             refresh: refresh,

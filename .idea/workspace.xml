@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4be10568-1a1b-411a-b1b6-50128ccb3533" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/_BUCK" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/_BUCK" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/src/debug/java/com/mobile/ReactNativeFlipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/src/debug/java/com/mobile/ReactNativeFlipper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/src/main/java/com/mobile/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/src/main/java/com/mobile/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/src/main/java/com/mobile/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/src/main/java/com/mobile/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/CreateOfferComponent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/CreateOfferComponent/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/common/PhotoPicker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/common/PhotoPicker/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/context/actions/offers/createOffer.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/context/actions/offers/createOffer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/navigations/SideMenu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/navigations/SideMenu/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/CreateOffer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/CreateOffer/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1siDuxj4zJrhjIFa9KIUYxwtL8t" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4be10568-1a1b-411a-b1b6-50128ccb3533" name="Default Changelist" comment="" />
+      <created>1621346744373</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621346744373</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="836" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621347087205">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state x="836" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/78.27.1842.1053@78.27.1842.1053" timestamp="1621347087205" />
+    <state x="898" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1621347263882">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state x="898" y="188" width="1022" height="737" key="SettingsEditor/78.27.1842.1053@78.27.1842.1053" timestamp="1621347263882" />
+  </component>
+</project>

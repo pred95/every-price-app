@@ -132,11 +132,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mobile"
+        applicationId "com.mobile.everyprice"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {

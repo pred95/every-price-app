@@ -1,4 +1,4 @@
-package com.mobile;
+package com.mobile.everyprice;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from 'react-native';
+import axios from 'axios';
+import React, {useState} from 'react';
 import {
   CREATE_OFFER_FAIL,
   CREATE_OFFER_LOADING,
@@ -8,6 +9,8 @@ import {
 import axiosInstance from '../../../helpers/axiosInstance';
 import removeData from '../../../utils/removeData';
 import storeData from '../../../utils/storeData';
+import getData from '../../../utils/getData';
+import envs from '../../../config/env';
 
 export const clearCreateOfferState = () => dispatch => {
   dispatch({
@@ -15,61 +18,93 @@ export const clearCreateOfferState = () => dispatch => {
   });
 };
 
-export default (form, isLoggedIn) => dispatch => {
+export default (form, isLoggedIn, access_token) => dispatch => {
   const requestPayload = {
     product: form.product,
     shop: form.shop,
     city: form.city,
     region: form.region,
     price: form.price,
-    image: null,
+    image: form.image,
   };
   dispatch({
     type: CREATE_OFFER_LOADING,
   });
 
-  axiosInstance
-    .post(`offers/create/`, requestPayload)
-    .then(res => {
-      dispatch({
-        type: CREATE_OFFER_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(err => {
-      if (isLoggedIn) {
-        AsyncStorage.getItem('refresh_token').then(value => {
-          const refresh = value;
-          axiosInstance
-            .post(`auth/token/refresh/`, {
-              refresh: refresh,
-            })
-            .then(res => {
-              removeData('access_token');
-              storeData('access_token', res.data.access);
-              axiosInstance
-                .post(`offers/create/`, requestPayload)
-                .then(res => {
-                  dispatch({type: CREATE_OFFER_SUCCESS, payload: res.data});
-                })
-                .catch(err => {
-                  dispatch({
-                    type: CREATE_OFFER_FAIL,
-                    payload: err.response.data.errors.error
-                      ? {error: 'Offer already exists'}
-                      : {error: 'Please fill in all the fields'},
-                  });
-                });
-            });
-        });
-      } else {
-        console.log(`err`, err.response.data);
+  const form_data = new FormData();
+  form_data.append('product', form.product);
+  form_data.append('shop', form.shop);
+  form_data.append('city', form.city);
+  form_data.append('region', form.region);
+  form_data.append('price', form.price);
+  form_data.append('image', {
+    uri: form.image.path,
+    name: form.image.path.split('/')[form.image.path.split('/').length - 1],
+    type: form.image.mime,
+  });
+
+  AsyncStorage.getItem('access_token').then(value => {
+    const access_token = value;
+    axios
+      .post('http://192.168.1.18:8000/offers/create/', form_data, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          Authorization: 'Bearer ' + access_token,
+        },
+      })
+      .then(res => {
         dispatch({
-          type: CREATE_OFFER_FAIL,
-          payload: err.response.data.errors.detail
-            ? {error: 'You have to log in to create an offer'}
-            : {error: 'Please fill in all the fields'},
+          type: CREATE_OFFER_SUCCESS,
+          payload: res.data,
         });
-      }
-    });
+      })
+      .catch(err => {
+        if (isLoggedIn) {
+          AsyncStorage.getItem('refresh_token').then(value => {
+            const refresh = value;
+            axiosInstance
+              .post(`auth/token/refresh/`, {
+                refresh: refresh,
+              })
+              .then(res => {
+                removeData('access_token');
+                storeData('access_token', res.data.access);
+                AsyncStorage.getItem('access_token').then(value => {
+                  const new_access_token = value;
+                  axios
+                    .post(envs.BACKEND_URL + 'offers/create/', form_data, {
+                      headers: {
+                        'Content-type': 'multipart/form-data',
+                        Authorization: 'Bearer ' + new_access_token,
+                      },
+                    })
+                    .then(res => {
+                      dispatch({type: CREATE_OFFER_SUCCESS, payload: res.data});
+                    })
+                    .catch(err => {
+                      dispatch({
+                        type: CREATE_OFFER_FAIL,
+                        payload: err.response.data.errors.error
+                          ? {error: 'Offer already exists'}
+                          : {error: 'Please fill in all the fields'},
+                      });
+                    });
+                });
+              })
+              .catch(()=> {
+                removeData('refresh_token')
+                removeData('acccess_token')
+                removeData('username')
+              })
+          });
+        } else {
+          dispatch({
+            type: CREATE_OFFER_FAIL,
+            payload: err.response.data.errors.detail
+              ? {error: 'You have to log in to create an offer'}
+              : {error: 'Please fill in all the fields'},
+          });
+        }
+      });
+  });
 };

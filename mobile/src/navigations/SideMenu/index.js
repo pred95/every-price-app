@@ -30,7 +30,6 @@ const SideMenu = ({navigation, authDispatch}) => {
   const getUser = async () => {
     try {
       const user = await AsyncStorage.getItem('username').then(value => {
-        console.log(`value`, value);
         if (value) {
           setUsername(value);
           setAuthLoaded(true);
@@ -41,13 +40,10 @@ const SideMenu = ({navigation, authDispatch}) => {
           setUsername('');
         }
       });
-
     } catch (error) {}
   };
   useEffect(() => {
     getUser();
-    console.log(`isLoggedIn`, isLoggedIn);
-    console.log(`isAuthenticated`, isAuthenticated);
   }, [isLoggedIn]);
 
   const handleLogout = () => {

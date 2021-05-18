@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/core';
 import {OFFER_LIST} from '../../constants/routeNames';
 import {Alert} from 'react-native';
 import getOffers from '../../context/actions/offers/getOffers';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CreateOffer = () => {
   const {
@@ -21,6 +22,7 @@ const CreateOffer = () => {
   const sheetRef = useRef(null);
 
   const [form, setForm] = useState({});
+  const [access_token, setAccessToken] = useState('')
   const {navigate} = useNavigation();
 
   const onChangeText = ({name, value}) => {
@@ -60,7 +62,11 @@ const CreateOffer = () => {
   }, [data]);
 
   const onSubmit = () => {
-    createOffer(form, isLoggedIn)(offersDispatch);
+    // AsyncStorage.getItem('access_token').then(value => {
+    //   setAccessToken(value)
+    // })
+    console.log(`form`, form)
+    createOffer(form, isLoggedIn, access_token)(offersDispatch);
   };
 
   const closeSheet = () => {
@@ -74,6 +80,12 @@ const CreateOffer = () => {
       sheetRef.current.open();
     }
   };
+
+  const onFileSelected = async (image) => {
+    await setForm({...form, ["image"]: image});
+    closeSheet();
+  }
+
   return (
     <CreateOfferComponent
       onChangeText={onChangeText}
@@ -85,6 +97,7 @@ const CreateOffer = () => {
       sheetRef={sheetRef}
       openSheet={openSheet}
       closeSheet={closeSheet}
+      onFileSelected={onFileSelected}
     />
   );
 };

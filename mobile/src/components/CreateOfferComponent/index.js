@@ -21,7 +21,8 @@ const CreateOfferComponent = ({
   onSubmit,
   sheetRef,
   openSheet,
-  closeSheet
+  closeSheet,
+  onFileSelected,
 }) => {
   const [region, setRegion] = useState('');
   const [price, setPrice] = useState(0.0);
@@ -112,12 +113,8 @@ const CreateOfferComponent = ({
           <View style={styles.photoWrapper}>
             <TouchableOpacity
               style={styles.photoInputContainer}
-              onPress={openSheet}
-              >
-              <Text
-                style={styles.photoUploadText}>
-                Upload a photo
-              </Text>
+              onPress={openSheet}>
+              <Text style={styles.photoUploadText}>Upload a photo</Text>
               <MaterialIcon name="add-a-photo" size={25}></MaterialIcon>
             </TouchableOpacity>
           </View>
@@ -125,7 +122,7 @@ const CreateOfferComponent = ({
 
         <CustomButton primary title="Submit" onPress={onSubmit} />
       </Container>
-      <PhotoPicker ref={sheetRef} />
+      <PhotoPicker onFileSelected={onFileSelected} ref={sheetRef} />
     </View>
   );
 };

@@ -1,18 +1,48 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, PermissionsAndroid} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
+import ImagePicker from 'react-native-image-crop-picker';
 
-const PhotoPicker = React.forwardRef(({}, ref) => {
+const PhotoPicker = React.forwardRef(({onFileSelected}, ref) => {
   const options = [
     {
       name: 'Take from Camera',
-      icon: <MaterialIcon name="photo-camera" size={30} onPress={() => {}} />,
+      icon: <MaterialIcon name="photo-camera" size={30} />,
+      onPress: () => {
+        ImagePicker.openCamera({
+          width: 300,
+          height: 300,
+          cropping: true,
+          freeStyleCropEnabled: true,
+        })
+          .then(images => {
+            onFileSelected(images);
+          })
+          .catch(err => {
+            console.log(`err`, err);
+          });
+      },
     },
     {
       name: 'Choose from Gallery',
-      icon: <MaterialIcon name="photo-library" size={30} onPress={() => {}} />,
+      icon: <MaterialIcon name="photo-library" size={30} />,
+
+      onPress: () => {
+        ImagePicker.openPicker({
+          width: 500,
+          height: 500,
+          cropping: true,
+          freeStyleCropEnabled: true,
+        })
+          .then(images => {
+            onFileSelected(images);
+          })
+          .catch(err => {
+            console.log(`err`, err);
+          });
+      },
     },
   ];
   return (
@@ -23,12 +53,15 @@ const PhotoPicker = React.forwardRef(({}, ref) => {
       closeOnDragDown={true}
       customStyles={{
         container: {
-            height: 200
+          height: 200,
         },
       }}>
       <View style={styles.wrapper}>
         {options.map(({name, onPress, icon}) => (
-          <TouchableOpacity style={styles.pickerOptions} key={name}>
+          <TouchableOpacity
+            style={styles.pickerOptions}
+            key={name}
+            onPress={onPress}>
             {icon}
             <Text style={styles.text}>{name}</Text>
           </TouchableOpacity>
