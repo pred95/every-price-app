@@ -120,7 +120,7 @@ const CreateOfferComponent = ({
           </View>
         </View>
 
-        <CustomButton primary title="Submit" onPress={onSubmit} />
+        <CustomButton primary title="Submit" onPress={onSubmit} loading={loading} disabled={loading}/>
       </Container>
       <PhotoPicker onFileSelected={onFileSelected} ref={sheetRef} />
     </View>

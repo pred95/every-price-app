@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import React, {useState} from 'react';
 import {
+  CLEAR_CREATE_OFFER_STATE,
   CREATE_OFFER_FAIL,
   CREATE_OFFER_LOADING,
   CREATE_OFFER_SUCCESS,
@@ -9,16 +9,15 @@ import {
 import axiosInstance from '../../../helpers/axiosInstance';
 import removeData from '../../../utils/removeData';
 import storeData from '../../../utils/storeData';
-import getData from '../../../utils/getData';
 import envs from '../../../config/env';
 
 export const clearCreateOfferState = () => dispatch => {
   dispatch({
-    type: CREATE_OFFER_LOADING,
+    type: CLEAR_CREATE_OFFER_STATE,
   });
 };
 
-export default (form, isLoggedIn, access_token) => dispatch => {
+export default (form, isLoggedIn) => dispatch => {
   const requestPayload = {
     product: form.product,
     shop: form.shop,
@@ -38,9 +37,9 @@ export default (form, isLoggedIn, access_token) => dispatch => {
   form_data.append('region', form.region);
   form_data.append('price', form.price);
   form_data.append('image', {
-    uri: form.image.path,
-    name: form.image.path.split('/')[form.image.path.split('/').length - 1],
-    type: form.image.mime,
+    uri: form.image?.path,
+    name: form.image?.path.split('/')[form.image.path.split('/').length - 1],
+    type: form.image?.mime,
   });
 
   AsyncStorage.getItem('access_token').then(value => {
@@ -91,11 +90,15 @@ export default (form, isLoggedIn, access_token) => dispatch => {
                     });
                 });
               })
-              .catch(()=> {
-                removeData('refresh_token')
-                removeData('acccess_token')
-                removeData('username')
-              })
+              .catch(() => {
+                removeData('refresh_token');
+                removeData('acccess_token');
+                removeData('username');
+                dispatch({
+                  type: CREATE_OFFER_FAIL,
+                  payload: {error: 'Please log in again'},
+                });
+              });
           });
         } else {
           dispatch({

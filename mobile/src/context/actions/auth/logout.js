@@ -25,7 +25,6 @@ export default () => dispatch => {
         dispatch({type: LOGOUT_USER});
       })
       .catch(err => {
-        console.log(`refresh`, refresh)
         axiosInstance
           .post(`auth/token/refresh/`, {
             refresh: refresh,
@@ -43,7 +42,13 @@ export default () => dispatch => {
                 removeData('username');
                 dispatch({type: LOGOUT_USER});
               });
-          });
+          })
+          .catch( ()=> {
+            removeData('access_token');
+            removeData('refresh_token');
+            removeData('username');
+            dispatch({type: LOGOUT_USER})
+          })
       });
   });
 };

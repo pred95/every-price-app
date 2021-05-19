@@ -29,17 +29,19 @@ const SideMenu = ({navigation, authDispatch}) => {
 
   const getUser = async () => {
     try {
-      const user = await AsyncStorage.getItem('username').then(value => {
-        if (value) {
-          setUsername(value);
-          setAuthLoaded(true);
-          setIsAuthenticated(true);
-        } else {
-          setAuthLoaded(true);
-          setIsAuthenticated(false);
-          setUsername('');
-        }
-      });
+      if (isLoggedIn) {
+        const user = await AsyncStorage.getItem('username').then(value => {
+          if (value) {
+            setUsername(value);
+            setAuthLoaded(true);
+            setIsAuthenticated(true);
+          }
+        });
+      } else {
+        setAuthLoaded(true);
+        setIsAuthenticated(false);
+        setUsername('');
+      }
     } catch (error) {}
   };
   useEffect(() => {

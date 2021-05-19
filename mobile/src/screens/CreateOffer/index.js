@@ -22,7 +22,6 @@ const CreateOffer = () => {
   const sheetRef = useRef(null);
 
   const [form, setForm] = useState({});
-  const [access_token, setAccessToken] = useState('')
   const {navigate} = useNavigation();
 
   const onChangeText = ({name, value}) => {
@@ -62,11 +61,7 @@ const CreateOffer = () => {
   }, [data]);
 
   const onSubmit = () => {
-    // AsyncStorage.getItem('access_token').then(value => {
-    //   setAccessToken(value)
-    // })
-    console.log(`form`, form)
-    createOffer(form, isLoggedIn, access_token)(offersDispatch);
+    createOffer(form, isLoggedIn)(offersDispatch);
   };
 
   const closeSheet = () => {

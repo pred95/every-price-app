@@ -8,6 +8,7 @@ import {
   CREATE_OFFER_LOADING,
   CREATE_OFFER_SUCCESS,
   CREATE_OFFER_FAIL,
+  CLEAR_CREATE_OFFER_STATE,
 } from '../../constants/actionTypes';
 import getOffers from '../actions/offers/getOffers';
 
@@ -58,7 +59,17 @@ const offers = (state, {type, payload}) => {
           ...state.createOffer,
           loading: true,
           error: null,
-          data: {}
+          data: {},
+        },
+      };
+    case CLEAR_CREATE_OFFER_STATE:
+      return {
+        ...state,
+        createOffer: {
+          ...state.createOffer,
+          loading: false,
+          error: null,
+          data: {},
         },
       };
     case CREATE_OFFER_SUCCESS:
