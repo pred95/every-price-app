@@ -18,15 +18,9 @@ const Offers = () => {
   const ret = AsyncStorage.getItem('id').then(value => {
     setUserId(value);
   });
-  if (data.data) {
-    var myData = data.data.filter(offer => {
-      return String(offer.user) === userId;
-    });
-  } else {
-    var myData = data.filter(offer => {
-      return String(offer.user) === userId;
-    });
-  }
+  const myData = data.data.filter(offer => {
+    return String(offer.user) === userId;
+  });
 
   return (
     <OffersComponent data={myData} loading={loading} screen={'myOffers'} />

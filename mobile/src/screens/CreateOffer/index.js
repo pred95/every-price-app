@@ -61,7 +61,25 @@ const CreateOffer = () => {
   }, [data]);
 
   const onSubmit = () => {
-    createOffer(form, isLoggedIn)(offersDispatch);
+    if (Object.values(form).includes('')) {
+      Alert.alert(
+        'Error',
+        'Please fill in all the fields',
+        [
+          {
+            text: 'Ok',
+            style: 'cancel',
+            onPress: () => {},
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => {},
+        },
+      );
+    } else {
+      createOffer(form, isLoggedIn)(offersDispatch);
+    }
   };
 
   const closeSheet = () => {
@@ -75,11 +93,10 @@ const CreateOffer = () => {
       sheetRef.current.open();
     }
   };
-
-  const onFileSelected = async (image) => {
-    await setForm({...form, ["image"]: image});
+  const onFileSelected = async image => {
+    await setForm({...form, ['image']: image});
     closeSheet();
-  }
+  };
 
   return (
     <CreateOfferComponent

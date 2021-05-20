@@ -30,14 +30,9 @@ const Offers = () => {
     });
   }, []);
 
-  if(data.data){
-    var offers = data.data
-  }else{
-    var offers = data
-  }
   return (
     <OffersComponent
-      data={offers}
+      data={data.data}
       loading={loading}
       screen={'home'}
     />

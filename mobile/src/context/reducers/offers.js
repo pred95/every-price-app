@@ -121,9 +121,11 @@ const offers = (state, {type, payload}) => {
         getOffers: {
           ...state.getOffers,
           loading: false,
-          data: state.getOffers.data.data.filter((item) => item.id !== payload),
-          error: null
-        }
+          data: {
+            data: state.getOffers.data.data.filter(item => item.id !== payload),
+          },
+          error: null,
+        },
       };
     case DELETE_OFFER_FAIL:
       return {
