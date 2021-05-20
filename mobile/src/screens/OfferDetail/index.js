@@ -1,12 +1,11 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import OfferDetailComponent from '../../components/OfferDetailComponent';
 
 const OfferDetail = () => {
-  return (
-    <View>
-      <Text>Hi from offer detail</Text>
-    </View>
-  );
+  const {params: {item = {}} = {}} = useRoute();
+
+  return <OfferDetailComponent offer={item} />;
 };
 
 export default OfferDetail;

@@ -14,7 +14,7 @@ import styles from './styles';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {CREATE_OFFER, OFFER_LIST} from '../../constants/routeNames';
+import {CREATE_OFFER, OFFER_DETAIL, OFFER_LIST} from '../../constants/routeNames';
 import {useNavigation} from '@react-navigation/core';
 import CustomButtom from '../common/CustomButton';
 import {GlobalContext} from '../../context/Provider';
@@ -70,7 +70,9 @@ const OffersComponent = ({
           </View>
         </View>
         <View style={styles.buttons}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {
+            navigate(OFFER_DETAIL, {item})
+          }}>
             <IonIcon name="search-circle-sharp" size={35} color={colors.grey} />
           </TouchableOpacity>
           {screen === 'myOffers' && (
@@ -137,22 +139,24 @@ const OffersComponent = ({
           </View>
         )}
       </View>
-
-      <TouchableOpacity
-        style={styles.fab}
-        onPress={() => {
-          goToCreateOffer();
-        }}>
-        <MaterialIcon name="add" color={colors.white} size={30} />
-      </TouchableOpacity>
-      {screen !== 'home' && (
-        <CustomButtom
-          primary
-          title="Back to offer list "
+      {screen === 'home' ? (
+        <TouchableOpacity
+          style={styles.fab}
           onPress={() => {
-            navigate(OFFER_LIST);
-          }}
-        />
+            goToCreateOffer();
+          }}>
+          <MaterialIcon name="add" color={colors.white} size={30} />
+        </TouchableOpacity>
+      ) : (
+        <View style={{paddingHorizontal: 30}}>
+          <CustomButtom
+            primary
+            title="Back to offer list "
+            onPress={() => {
+              navigate(OFFER_LIST);
+            }}
+          />
+        </View>
       )}
     </>
   );
