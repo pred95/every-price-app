@@ -5,7 +5,6 @@ import getOffers from '../../context/actions/offers/getOffers';
 import {GlobalContext} from '../../context/Provider';
 
 const Offers = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   const [userId, setUserId] = useState('');
   const {
     offersDispatch,
@@ -14,25 +13,23 @@ const Offers = () => {
     },
   } = useContext(GlobalContext);
   useEffect(() => {
-    getOffers()(offersDispatch);
+    getOffers();
   }, []);
-
   const ret = AsyncStorage.getItem('id').then(value => {
     setUserId(value);
   });
-  
-  const myData = data.data.filter(offer => {
-    return String(offer.user) === userId;
-  });
+  if (data.data) {
+    var myData = data.data.filter(offer => {
+      return String(offer.user) === userId;
+    });
+  } else {
+    var myData = data.filter(offer => {
+      return String(offer.user) === userId;
+    });
+  }
 
   return (
-    <OffersComponent
-      modalVisible={modalVisible}
-      setModalVisible={setModalVisible}
-      data={myData}
-      loading={loading}
-      screen={'myOffers'}
-    />
+    <OffersComponent data={myData} loading={loading} screen={'myOffers'} />
   );
 };
 

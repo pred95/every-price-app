@@ -9,8 +9,10 @@ import {
   CREATE_OFFER_SUCCESS,
   CREATE_OFFER_FAIL,
   CLEAR_CREATE_OFFER_STATE,
+  DELETE_OFFER_LOADING,
+  DELETE_OFFER_SUCCESS,
+  DELETE_OFFER_FAIL,
 } from '../../constants/actionTypes';
-import getOffers from '../actions/offers/getOffers';
 
 const offers = (state, {type, payload}) => {
   switch (type) {
@@ -19,9 +21,9 @@ const offers = (state, {type, payload}) => {
         ...state,
         getOffers: {
           ...state.getOffers,
-          loading: true,
+          loading: false,
           error: null,
-          data: [],
+          data: {},
         },
       };
     case GET_OFFERS_LOADING:
@@ -96,6 +98,41 @@ const offers = (state, {type, payload}) => {
           ...state.createOffer,
           loading: false,
           error: payload,
+        },
+      };
+    case DELETE_OFFER_LOADING:
+      return {
+        ...state,
+        deleteOffer: {
+          ...state.deleteOffer,
+          loading: true,
+          error: null,
+          data: {},
+        },
+      };
+    case DELETE_OFFER_SUCCESS:
+      return {
+        ...state,
+        deleteOffer: {
+          ...state.deleteOffer,
+          loading: false,
+          error: null,
+        },
+        getOffers: {
+          ...state.getOffers,
+          loading: false,
+          data: state.getOffers.data.data.filter((item) => item.id !== payload),
+          error: null
+        }
+      };
+    case DELETE_OFFER_FAIL:
+      return {
+        ...state,
+        deleteOffer: {
+          ...state.deleteOffer,
+          loading: false,
+          error: null,
+          data: {},
         },
       };
     case FILTER_OFFERS:

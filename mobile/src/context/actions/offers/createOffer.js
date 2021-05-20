@@ -18,14 +18,7 @@ export const clearCreateOfferState = () => dispatch => {
 };
 
 export default (form, isLoggedIn) => dispatch => {
-  const requestPayload = {
-    product: form.product,
-    shop: form.shop,
-    city: form.city,
-    region: form.region,
-    price: form.price,
-    image: form.image,
-  };
+
   dispatch({
     type: CREATE_OFFER_LOADING,
   });

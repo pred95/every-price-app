@@ -1,34 +1,29 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import {
   CLEAR_OFFERS_STATE,
-  GET_OFFERS_FAIL,
-  GET_OFFERS_LOADING,
-  GET_OFFERS_SUCCESS,
+  DELETE_OFFER_FAIL,
+  DELETE_OFFER_LOADING,
+  DELETE_OFFER_SUCCESS,
 } from '../../../constants/actionTypes';
 import axiosInstance from '../../../helpers/axiosInstance';
 import removeData from '../../../utils/removeData';
 import storeData from '../../../utils/storeData';
 
-export const clearOffersState = () => dispatch => {
+export default id => dispatch => onSuccess => {
   dispatch({
-    type: CLEAR_OFFERS_STATE,
-  });
-};
-
-export default () => dispatch => {
-  dispatch({
-    type: GET_OFFERS_LOADING,
+    type: DELETE_OFFER_LOADING,
   });
 
-  axiosInstance
-    .get(`offers/`)
-    .then(res => {
+  axiosInstance.delete(`offers/delete/${id}`).catch(err => {
+    console.log(`err`, err.response);
+    if (!err.response) {
       dispatch({
-        type: GET_OFFERS_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(() => {
+        type: DELETE_OFFER_SUCCESS,
+        payload: id,
+      })
+      onSuccess();
+    } else {
       AsyncStorage.getItem('refresh_token').then(value => {
         const refresh = value;
         axiosInstance
@@ -38,20 +33,21 @@ export default () => dispatch => {
           .then(res => {
             removeData('access_token');
             storeData('access_token', res.data.access);
-            axiosInstance
-              .get(`offers/`)
-              .then(res => {
-                dispatch({type: GET_OFFERS_SUCCESS, payload: res.data});
-              })
-              .catch(err => {
+            axiosInstance.delete(`offers/delete/${id}`).catch(err => {
+              if (!err.response) {
+                dispatch({type: DELETE_OFFER_SUCCESS, payload: id});
+                onSuccess();
+              } else {
                 dispatch({
-                  type: GET_OFFERS_FAIL,
+                  type: DELETE_OFFER_FAIL,
                   payload: err.response
                     ? err.response.data
                     : {error: 'Something went wrong, try again'},
                 });
-              });
+              }
+            });
           });
       });
-    });
+    }
+  });
 };

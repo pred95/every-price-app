@@ -1,11 +1,8 @@
-import React, {useContext, useState} from 'react';
-import { View } from 'react-native';
-import CustomButtom from '../../components/common/CustomButton';
+import React, {useContext} from 'react';
 import OffersComponent from '../../components/OffersComponent';
 import {GlobalContext} from '../../context/Provider';
 
 const FilteredOffers = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   const {
     offersState: {
       filterOffers: {data},
@@ -14,8 +11,6 @@ const FilteredOffers = () => {
 
   return (
       <OffersComponent
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
         data={data}
         loading={false}
         screen={'filtered'}

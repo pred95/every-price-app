@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './styles';
 import {ScrollView, Text, View} from 'react-native';
 import ImageComponent from './ImageComponent';
-import Detail from '../common/Detail'
-import axiosInstance from '../../helpers/axiosInstance'
+import Detail from '../common/Detail';
 
-const OfferDetailComponent = ({offer}) => {
-
-  const [username, setUsername] = useState('')
-
-  axiosInstance.get(`auth/get-user/` + offer.user).then(res => {
-    setUsername(res.data.username)
-  })
-
+const OfferDetailComponent = ({offer, username}) => {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
@@ -24,7 +16,7 @@ const OfferDetailComponent = ({offer}) => {
           <Detail label="Region:" value={offer.region} />
           <Detail label="Price:" value={'€ ' + offer.price} />
           <Detail label="Date:" value={offer.date} />
-          <Detail label="Posted by:" value={username} username={true}/>
+          <Detail label="Posted by:" value={username} username={true} />
         </View>
       </View>
     </ScrollView>

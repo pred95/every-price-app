@@ -9,24 +9,24 @@ import {
   Alert,
 } from 'react-native';
 import colors from '../../assets/themes/colors';
-import AppModal from '../common/AppModal';
 import styles from './styles';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {CREATE_OFFER, OFFER_DETAIL, OFFER_LIST} from '../../constants/routeNames';
+import {
+  CREATE_OFFER,
+  OFFER_DETAIL,
+  OFFER_LIST,
+} from '../../constants/routeNames';
 import {useNavigation} from '@react-navigation/core';
 import CustomButtom from '../common/CustomButton';
 import {GlobalContext} from '../../context/Provider';
 import {clearCreateOfferState} from '../../context/actions/offers/createOffer';
+import deleteOffer from '../../context/actions/offers/deleteOffer';
+import getOffers from '../../context/actions/offers/getOffers';
+import {clearOffersState} from '../../context/actions/offers/getOffers';
 
-const OffersComponent = ({
-  data,
-  loading,
-  modalVisible,
-  setModalVisible,
-  screen,
-}) => {
+const OffersComponent = ({data, loading, screen}) => {
   const {navigate} = useNavigation();
   const {offersDispatch} = useContext(GlobalContext);
   const goToCreateOffer = () => {
@@ -70,9 +70,10 @@ const OffersComponent = ({
           </View>
         </View>
         <View style={styles.buttons}>
-          <TouchableOpacity onPress={() => {
-            navigate(OFFER_DETAIL, {item})
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate(OFFER_DETAIL, {item});
+            }}>
             <IonIcon name="search-circle-sharp" size={35} color={colors.grey} />
           </TouchableOpacity>
           {screen === 'myOffers' && (
@@ -86,7 +87,9 @@ const OffersComponent = ({
                       text: 'Yes',
                       style: 'cancel',
                       onPress: () => {
-                        Alert.alert('Success', 'Delete offer');
+                        deleteOffer(item.id)(offersDispatch)(() => {
+                          navigate(OFFER_LIST);
+                        });
                       },
                     },
                     {
@@ -112,16 +115,6 @@ const OffersComponent = ({
   return (
     <>
       <View style={{backgroundColor: colors.white}}>
-        <AppModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-          title="Zucchine"
-          modalBody={
-            <View>
-              <Text>Zucchine detail</Text>
-            </View>
-          }
-        />
         {loading && (
           <View style={styles.activityIndicator}>
             <ActivityIndicator color={colors.primary} size="large" />
