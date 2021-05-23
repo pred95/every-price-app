@@ -21,7 +21,6 @@ const Login = () => {
   const {navigate} = useNavigation();
 
   const isFocused = useIsFocused();
-  console.log(`isFocused`, isFocused)
   useEffect(() => {
     if (error && !error.error && !loading && isFocused) {
       Alert.alert(

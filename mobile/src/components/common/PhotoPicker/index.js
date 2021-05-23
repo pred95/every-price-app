@@ -20,9 +20,7 @@ const PhotoPicker = React.forwardRef(({onFileSelected}, ref) => {
           .then(images => {
             onFileSelected(images);
           })
-          .catch(err => {
-            console.log(`err`, err);
-          });
+          .catch(() => {});
       },
     },
     {
@@ -39,9 +37,7 @@ const PhotoPicker = React.forwardRef(({onFileSelected}, ref) => {
           .then(images => {
             onFileSelected(images);
           })
-          .catch(err => {
-            console.log(`err`, err);
-          });
+          .catch(() => {});
       },
     },
   ];

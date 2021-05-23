@@ -16,7 +16,6 @@ export default id => dispatch => onSuccess => {
   });
 
   axiosInstance.delete(`offers/delete/${id}`).catch(err => {
-    console.log(`err`, err.response);
     if (!err.response) {
       dispatch({
         type: DELETE_OFFER_SUCCESS,

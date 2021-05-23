@@ -27,10 +27,28 @@ import deleteOffer from '../../context/actions/offers/deleteOffer';
 
 const OffersComponent = ({data, loading, screen, refreshing, onRefresh}) => {
   const {navigate} = useNavigation();
-  const {offersDispatch} = useContext(GlobalContext);
+  const {
+    authState: {isLoggedIn},
+    offersDispatch,
+  } = useContext(GlobalContext);
   const goToCreateOffer = () => {
-    clearCreateOfferState()(offersDispatch);
-    navigate(CREATE_OFFER);
+    if (isLoggedIn) {
+      clearCreateOfferState()(offersDispatch);
+      navigate(CREATE_OFFER);
+    } else {
+      Alert.alert(
+        'Error',
+        'You have to login to create an offer',
+        [
+          {
+            text: 'Ok',
+            style: 'cancel',
+            onPress: () => {},
+          },
+        ],
+        {cancelable: true, onDismiss: () => {}},
+      );
+    }
   };
 
   const ListEmptyComponent = () => {
