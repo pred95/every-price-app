@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Image,
   Alert,
+  RefreshControl,
 } from 'react-native';
 import colors from '../../assets/themes/colors';
 import styles from './styles';
@@ -23,16 +24,15 @@ import CustomButtom from '../common/CustomButton';
 import {GlobalContext} from '../../context/Provider';
 import {clearCreateOfferState} from '../../context/actions/offers/createOffer';
 import deleteOffer from '../../context/actions/offers/deleteOffer';
-import getOffers from '../../context/actions/offers/getOffers';
-import {clearOffersState} from '../../context/actions/offers/getOffers';
 
-const OffersComponent = ({data, loading, screen}) => {
+const OffersComponent = ({data, loading, screen, refreshing, onRefresh}) => {
   const {navigate} = useNavigation();
   const {offersDispatch} = useContext(GlobalContext);
   const goToCreateOffer = () => {
     clearCreateOfferState()(offersDispatch);
     navigate(CREATE_OFFER);
   };
+
   const ListEmptyComponent = () => {
     return (
       <View>
@@ -128,6 +128,9 @@ const OffersComponent = ({data, loading, screen}) => {
               renderItem={renderItem}
               keyExtractor={item => String(item.id)}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
             />
           </View>
         )}

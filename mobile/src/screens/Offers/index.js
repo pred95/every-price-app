@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useContext, useEffect} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import OffersComponent from '../../components/OffersComponent';
@@ -30,11 +30,21 @@ const Offers = () => {
     });
   }, []);
 
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    getOffers()(offersDispatch)
+    setRefreshing(false)
+  })
+
   return (
     <OffersComponent
       data={data.data}
       loading={loading}
       screen={'home'}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
     />
   );
 };
