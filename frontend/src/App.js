@@ -41,13 +41,21 @@ class App extends Component {
             .then((res) => {
               localStorage.removeItem("access_token");
               localStorage.setItem("access_token", res.data.access);
+              axiosInstance.get(`auth/current-user/`).then((res) => {
+                this.setState({
+                  user_id: res.data.id,
+                  username: res.data.username,
+                });
+              });
+            })
+            .catch(() => {
+              localStorage.removeItem("access_token");
+              localStorage.removeItem("refresh_token");
+              this.setState({
+                loggedIn: false,
+                username: "",
+              });
             });
-          axiosInstance.get(`auth/current-user/`).then((res) => {
-            this.setState({
-              user_id: res.data.id,
-              username: res.data.username,
-            });
-          });
         });
     }
   }
@@ -126,12 +134,20 @@ class App extends Component {
             })
             .then((res) => {
               localStorage.setItem("access_token", res.data.access);
-            });
-          axiosInstance
-            .post(`auth/logout/`, {
-              refresh: localStorage.getItem("refresh_token"),
+              axiosInstance
+                .post(`auth/logout/`, {
+                  refresh: localStorage.getItem("refresh_token"),
+                })
+                .then(() => {
+                  localStorage.removeItem("access_token");
+                  localStorage.removeItem("refresh_token");
+                  this.setState({
+                    loggedIn: false,
+                    username: "",
+                  });
+                });
             })
-            .then(() => {
+            .catch(() => {
               localStorage.removeItem("access_token");
               localStorage.removeItem("refresh_token");
               this.setState({

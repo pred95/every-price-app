@@ -1,5 +1,3 @@
-import {BACKEND_URL} from '@env';
-
-const envVariables = {BACKEND_URL};
+const envVariables = {BACKEND_URL: 'http://192.168.1.18:8000'};
 
 export default envVariables;

@@ -47,7 +47,7 @@ const SideMenu = ({navigation, authDispatch}) => {
   useEffect(() => {
     getUser();
   }, [isLoggedIn]);
-
+  
   const handleLogout = () => {
     navigation.toggleDrawer();
     Alert.alert(

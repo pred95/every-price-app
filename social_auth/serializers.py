@@ -16,8 +16,8 @@ class GoogleSocialAuthSerializer(serializers.Serializer):
         except:
             raise serializers.ValidationError(
                 'The token is not valid or expired. Please login again')
-
-        if user_data['aud'] != os.environ.get('GOOGLE_CLIENT_ID'):
+                
+        if user_data['aud'] != os.environ.get('GOOGLE_CLIENT_ID') and user_data['aud'] != os.environ.get('GOOGLE_CLIENT_ID_MOBILE') :
             raise AuthenticationFailed('Who are you?')
 
         user_id = user_data['sub']

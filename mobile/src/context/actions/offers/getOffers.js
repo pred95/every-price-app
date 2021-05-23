@@ -28,7 +28,8 @@ export default () => dispatch => {
         payload: res.data,
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(`err`, err)
       AsyncStorage.getItem('refresh_token').then(value => {
         const refresh = value;
         axiosInstance

@@ -2,9 +2,14 @@ import React, {useContext, useEffect, useState} from 'react';
 import LoginComponent from '../../components/LoginComponent';
 import {GlobalContext} from '../../context/Provider';
 import login, {clearAuthState} from '../../context/actions/auth/login';
-import {useNavigation} from '@react-navigation/core';
+import {
+  useFocusEffect,
+  useIsFocused,
+  useNavigation,
+} from '@react-navigation/core';
 import {OFFER_LIST} from '../../constants/routeNames';
 import {Alert} from 'react-native';
+import loginWithGoogle from '../../context/actions/auth/loginWithGoogle';
 
 const Login = () => {
   const [form, setForm] = useState({});
@@ -15,8 +20,10 @@ const Login = () => {
 
   const {navigate} = useNavigation();
 
+  const isFocused = useIsFocused();
+  console.log(`isFocused`, isFocused)
   useEffect(() => {
-    if (error && !error.error && !loading) {
+    if (error && !error.error && !loading && isFocused) {
       Alert.alert(
         'Error',
         'Invalid credential, try again',
@@ -84,6 +91,7 @@ const Login = () => {
       form={form}
       error={error}
       loading={loading}
+      loginWithGoogle={loginWithGoogle}
     />
   );
 };

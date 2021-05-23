@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '../common/Container';
 import styles from './styles';
@@ -8,8 +8,13 @@ import {useNavigation} from '@react-navigation/native';
 import {REGISTER} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
 import {clearAuthState} from '../../context/actions/auth/login';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
-const LoginComponent = ({error, onChange, onSubmit, loading}) => {
+const LoginComponent = ({error, onChange, onSubmit, loading, loginWithGoogle}) => {
   const {navigate} = useNavigation();
   const {
     authDispatch,
@@ -21,6 +26,13 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
     clearAuthState()(authDispatch);
     navigate(REGISTER);
   };
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '885483439166-n40na3het3hrg8q6mm64ilehc4eeht9k.apps.googleusercontent.com',
+    });
+  }, []);
 
   return (
     <Container>
@@ -75,6 +87,16 @@ const LoginComponent = ({error, onChange, onSubmit, loading}) => {
               <Text style={styles.linkBtn}>Register here!</Text>
             </TouchableOpacity>
           </View>
+          <Text style={{textAlign: 'center', paddingVertical: 8, fontSize: 16}}>
+            or
+          </Text>
+          <GoogleSigninButton
+            style={{width: '100%', height: 48}}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={() => {loginWithGoogle()(authDispatch)}}
+            disabled={loading}
+          />
         </View>
       </View>
     </Container>

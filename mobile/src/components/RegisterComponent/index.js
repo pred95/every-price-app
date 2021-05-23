@@ -23,21 +23,21 @@ const RegisterComponent = ({
   const {
     authDispatch,
   } = useContext(GlobalContext);
-  if (error?.error && !loading) {
-    const err = error.error;
-    Alert.alert(
-      'Error',
-      err,
-      [
-        {
-          text: 'Close',
-          style: 'cancel',
-          onPress: () => clearAuthState()(authDispatch),
-        },
-      ],
-      {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
-    );
-  }
+  // if (error?.error && !loading) {
+  //   const err = error.error;
+  //   Alert.alert(
+  //     'Error',
+  //     err,
+  //     [
+  //       {
+  //         text: 'Close',
+  //         style: 'cancel',
+  //         onPress: () => clearAuthState()(authDispatch),
+  //       },
+  //     ],
+  //     {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
+  //   );
+  // }
   return (
     <Container>
       <Image
