@@ -132,9 +132,12 @@ const OffersComponent = ({data, loading, screen, refreshing, onRefresh}) => {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
             />
+            <View style={styles.separator}></View>
+            <View style={{height: 30, backgroundColor: colors.white}}></View>
           </View>
         )}
       </View>
+
       {screen === 'home' ? (
         <TouchableOpacity
           style={styles.fab}
