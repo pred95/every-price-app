@@ -21,5 +21,3 @@ export const REGIONS = [
   "Val d'Aosta",
   "Veneto",
 ];
-
-export const PRIMARY = '#388ce9'

@@ -103,7 +103,7 @@ class DownloadButton extends Component {
             value={this.state.fileType}
             className="mb-2 mr-sm-2 mb-sm-0"
             size="sm"
-            style={{borderColor:"black"}}
+            style={{borderColor: '#9b9b9b'}}
           >
             <option>csv</option>
             <option>json</option>
