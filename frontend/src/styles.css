@@ -1,18 +1,30 @@
 body {
-  background-color: #343a40;
+  background-color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: white;
+  color: black;
 }
 
 h1 {
   font-size: 250%;
   font-weight: bold;
   text-align: center;
-  color: white;
+  color: black;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.logo {
+  width: 150px;
+  height: 100px;
+}
 .auth-buttons {
   color: white;
   margin-left: auto;
@@ -73,7 +85,7 @@ h1 {
 .subtitle {
   font-size: 120%;
   text-align: center;
-  color: white;
+  color: black;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -90,4 +102,27 @@ h1 {
 
 .email-activated {
   text-align: center;
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
+  background-color: #388ce9;
+  color: white;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained:hover {
+  background-color: #1a689b;
+  color: white;
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.Mui-disabled {
+  background-color: #b9b9b9;
+  color: black;
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.remove-btn {
+  background-color: #b10d24;
+  color: white;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.remove-btn:hover {
+  background-color: #7d0b1b;
+  color: white;
 }

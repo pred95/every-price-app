@@ -28,8 +28,8 @@ class NewOfferModal extends Component {
     const button = (
       <Button
         className="float-right"
-        variant="outlined"
-        color="inherit"
+        variant="contained"
+        color="primary"
         onClick={this.checkUser}
       >
         Create a new offer

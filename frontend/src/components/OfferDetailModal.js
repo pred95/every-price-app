@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import axiosInstance from "../axios/axiosInstance";
 import OfferDetailCard from "./OfferDetailCard";
+import {Button} from '@material-ui/core'
 
 class OfferDetailModal extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class OfferDetailModal extends Component {
     var title = "Details";
     return (
       <Fragment>
-        <Button onClick={() => this.toggle()}>Details</Button>
+        <Button variant="contained" color="primary" onClick={() => this.toggle()}>Details</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
           <ModalBody>

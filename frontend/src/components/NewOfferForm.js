@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, FormText } from "reactstrap";
+import { Form, FormGroup, Label, FormText } from "reactstrap";
 import {
   TextField,
   Input,
@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Button,
 } from "@material-ui/core";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import axios from "axios";
@@ -24,6 +25,7 @@ class NewOfferForm extends Component {
       region: "",
       price: 0,
       image: -1,
+      disabled: false,
     };
   }
 
@@ -38,6 +40,9 @@ class NewOfferForm extends Component {
   };
 
   handleSubmit = (e) => {
+    this.setState({
+      disabled: true,
+    });
     e.preventDefault();
     let form_data = new FormData();
     form_data.append("product", this.state.product);
@@ -79,6 +84,9 @@ class NewOfferForm extends Component {
           })
           .catch((err) => alert("Offer already exists"));
       });
+    this.setState({
+      disabled: false,
+    });
   };
 
   defaultIfEmpty = (value) => {
@@ -181,7 +189,14 @@ class NewOfferForm extends Component {
           />
           <FormText color="muted">Upload a photo of the product</FormText>
         </FormGroup>
-        <Button className="btn-block">Send</Button>
+        <Button
+          variant="contained"
+          type="submit"
+          className="btn-block"
+          disabled={this.state.disabled}
+        >
+          {this.state.disabled ? "Sending..." : "Submit"}
+        </Button>
       </Form>
     );
   }

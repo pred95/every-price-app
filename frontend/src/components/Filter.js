@@ -8,9 +8,7 @@ class Filter extends Component {
     return (
       <Form inline>
         <Button
-          classes={{ label: "filter-button" }}
-          variant="outlined"
-          color="inherit"
+          variant="contained"
           size="small"
           onClick={this.props.handler.toggle}
         >
@@ -44,7 +42,7 @@ class Filter extends Component {
             >
               <option></option>
               {REGIONS.map((value, index) => {
-                return <option>{value}</option>
+                return <option>{value}</option>;
               })}
             </Input>
           </InputGroup>

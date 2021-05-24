@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Label, FormGroup, Button } from "reactstrap";
-import { TextField } from "@material-ui/core";
+import { Form, Label, FormGroup } from "reactstrap";
+import { TextField, Button } from "@material-ui/core";
 import GoogleLogin from "react-google-login";
 
 class SignUpForm extends Component {
@@ -12,6 +12,7 @@ class SignUpForm extends Component {
       last_name: "",
       email: "",
       password: "",
+      disabled: false,
     };
   }
 
@@ -27,7 +28,13 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={(e) => this.props.handler(e, this.state)}>
+      <Form
+        onSubmit={(e) => {
+          this.setState({ disabled: true });
+          this.props.handler(e, this.state);
+          this.setState({ disabled: false });
+        }}
+      >
         <FormGroup>
           <Label for="email">Email</Label>
           <TextField
@@ -94,8 +101,15 @@ class SignUpForm extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button className="btn-block">Submit</Button>
-        <p style={{alignText: "center"}}>or</p>
+        <Button
+          variant="contained"
+          type="submit"
+          className="btn-block"
+          disabled={this.state.disabled}
+        >
+          {this.state.disabled ? "Sending..." : "Submit"}
+        </Button>
+        <p style={{ alignText: "center" }}>or</p>
         <GoogleLogin
           className="btn-block"
           clientId="885483439166-5qaj888eml61rdmrcn6s8fgrdocdp0k0.apps.googleusercontent.com"

@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { Modal, ModalHeader, Button, ModalFooter } from "reactstrap";
-import { Snackbar } from "@material-ui/core";
+import { Modal, ModalHeader, ModalFooter } from "reactstrap";
+import { Snackbar, Button } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axiosInstance from "../axios/axiosInstance";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class ConfirmRemovalModal extends Component {
   constructor(props) {
@@ -33,7 +34,12 @@ class ConfirmRemovalModal extends Component {
   render() {
     return (
       <Fragment>
-        <Button color="danger" onClick={() => this.checkUser()}>
+        <Button
+          className="remove-btn"
+          variant="contained"
+          startIcon={<DeleteIcon />}
+          onClick={() => this.checkUser()}
+        >
           Remove
         </Button>
         {this.state.showError ? (
@@ -61,12 +67,17 @@ class ConfirmRemovalModal extends Component {
               Do you really want to remove this offer?
             </ModalHeader>
             <ModalFooter>
-              <Button type="button" onClick={() => this.toggle()}>
-                Cancel
-              </Button>
               <Button
-                type="button"
-                color="primary"
+                size="small"
+                variant="contained"
+                onClick={() => this.toggle()}
+              >
+                No
+              </Button>
+              &nbsp;&nbsp;
+              <Button
+                variant="contained"
+                size="small"
                 onClick={() => this.deleteOffer(this.props.id)}
               >
                 Yes

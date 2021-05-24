@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Label, Button, FormGroup } from "reactstrap";
-import { TextField } from "@material-ui/core";
+import { Form, Label, FormGroup } from "reactstrap";
+import { TextField, Button } from "@material-ui/core";
 import { GoogleLogin } from "react-google-login";
 
 class LoginForm extends Component {
@@ -53,14 +53,14 @@ class LoginForm extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button className="btn-block">Submit</Button>
-        <p>
+        <Button type="submit" className="btn-block" variant="contained">Submit</Button>
+        <div style={{display: "flex", flexDirection: "row", alignItems:"center"}}>
           Forgot your password?
-          <Button color="link" size="sm" onClick={this.props.showResetPassword}>
+          <Button size="small" onClick={this.props.showResetPassword} style={{color: "#3ca5ea", borderBottomColor: "#3ca5ea", borderBottomWidth: 1}}>
             Click here!
           </Button>
-        </p>
-        <p>or</p>
+        </div>
+        <p style={{textAlign: 'center'}}>or</p>
         <GoogleLogin
           className="btn-block"
           clientId="885483439166-5qaj888eml61rdmrcn6s8fgrdocdp0k0.apps.googleusercontent.com"

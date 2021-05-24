@@ -9,7 +9,6 @@ class EmailActivated extends Component {
         <p>Your account has been successfully activated!</p>
         <Button
           variant="contained"
-          color="primary"
           onClick={() => this.props.history.push("/")}
         >
           Go to home!

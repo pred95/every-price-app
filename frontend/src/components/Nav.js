@@ -8,16 +8,14 @@ class Nav extends Component {
         <Typography>Please log in</Typography>
         <span className="auth-buttons">
           <Button
-            variant="outlined"
-            color="inherit"
+            variant="contained"
             onClick={() => this.props.displayModal("login")}
           >
             Login
           </Button>
           &nbsp;&nbsp;
           <Button
-            variant="outlined"
-            color="inherit"
+            variant="contained"
             onClick={() => this.props.displayModal("signup")}
           >
             Register
@@ -35,8 +33,7 @@ class Nav extends Component {
         </Typography>
         <span className="auth-buttons">
           <Button
-            variant="outlined"
-            color="inherit"
+            variant="contained"
             onClick={() => this.props.handleLogout()}
           >
             Logout
@@ -48,7 +45,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <AppBar position="static" style={{ background: "#343A40" }}>
+      <AppBar position="static" style={{ background: "white", color: "black" }}>
         {this.props.loggedIn ? this.loggedInNav() : this.loggedOutNav()}
       </AppBar>
     );

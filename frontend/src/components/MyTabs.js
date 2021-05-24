@@ -3,6 +3,7 @@ import { Tabs, Tab, AppBar, Snackbar } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import OfferList from "./OfferList";
+import { PRIMARY } from "../constants/constants";
 
 class MyTabs extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class MyTabs extends Component {
       <div>
         <AppBar
           position="static"
-          style={{ background: "white", color: "black" }}
+          style={{ background: PRIMARY, color: "white" }}
         >
           <Tabs
             indicatorColor="primary"

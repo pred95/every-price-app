@@ -273,7 +273,15 @@ class App extends Component {
                 username={this.state.username}
               />
               {modal}
-              <h1>Welcome to EveryPrice</h1>
+              <div className="header">
+                <img
+                  className="logo"
+                  src={process.env.PUBLIC_URL + "/images/logo.png"}
+                  alt="logo.png"
+                />
+                <h1>Welcome to EveryPrice</h1>
+              </div>
+
               <Home
                 user_id={this.state.user_id}
                 username={this.state.username}
