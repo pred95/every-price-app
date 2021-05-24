@@ -20,19 +20,6 @@ const columns = [
   { id: "date", label: "Date" },
 ];
 
-const styles = (theme) => ({
-  paper: {
-    width: "100%",
-  },
-  container: {
-    marginTop: "5px",
-    marginBottom: "10px",
-  },
-  cell: {
-    fontSize: "120%",
-  },
-});
-
 class OfferList extends Component {
   constructor(props) {
     super(props);
@@ -64,27 +51,16 @@ class OfferList extends Component {
     const { classes } = this.props;
     const offerData = this.props.offerData;
     return (
-      <Paper className={classes.paper}>
-        <TableContainer
-          className={classes.container}
-          style={{ maxHeight: this.state.maxHeight }}
-        >
+      <Paper>
+        <TableContainer style={{ maxHeight: this.state.maxHeight }}>
           <Table stickyHeader size="small" aria-label="sticky table">
             <TableHead>
               <TableRow key="header">
-                <TableCell
-                  className={classes.cell}
-                  key="photo-head"
-                  align="center"
-                >
+                <TableCell key="photo-head" align="center">
                   Photo
                 </TableCell>
                 {columns.map((column) => (
-                  <TableCell
-                    className={classes.cell}
-                    key={columns.id}
-                    align="center"
-                  >
+                  <TableCell key={columns.id} align="center">
                     {column.label}
                   </TableCell>
                 ))}
@@ -94,23 +70,14 @@ class OfferList extends Component {
             <TableBody>
               {!offerData || offerData.length <= 0 ? (
                 <TableRow key="empty">
-                  <TableCell
-                    className={classes.cell}
-                    key="no-data"
-                    align="center"
-                  >
+                  <TableCell key="no-data" align="center">
                     <b>Ops, no offer here yet.</b>
                   </TableCell>
                 </TableRow>
               ) : (
                 offerData.map((offer) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={offer.id}
-                    >
+                    <TableRow tabIndex={-1} key={offer.id}>
                       <TableCell key="photo" align="center">
                         <img
                           className="photo"
@@ -126,11 +93,7 @@ class OfferList extends Component {
                           value = offer[column.id];
                         }
                         return (
-                          <TableCell
-                            className={classes.cell}
-                            key={column.id}
-                            align="center"
-                          >
+                          <TableCell key={column.id} align="center">
                             {value}
                           </TableCell>
                         );
@@ -162,4 +125,4 @@ class OfferList extends Component {
   }
 }
 
-export default withStyles(styles)(OfferList);
+export default OfferList;

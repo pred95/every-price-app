@@ -6,6 +6,14 @@ class EmailActivated extends Component {
   render() {
     return (
       <div className="email-activated">
+        <div className="header">
+          <img
+            className="logo"
+            src={process.env.PUBLIC_URL + "/images/logo.png"}
+            alt="logo.png"
+          />
+          <h1>EveryPrice</h1>
+        </div>
         <p>Your account has been successfully activated!</p>
         <Button
           variant="contained"

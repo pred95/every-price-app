@@ -292,7 +292,6 @@ class App extends Component {
               <ResetPasswordForm />
             </Route>
             <Route path="/email-activated">
-              <h1>EveryPrice</h1>
               <EmailActivated />
             </Route>
           </div>

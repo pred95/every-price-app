@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Spinner } from "reactstrap";
-import { Grid } from "@material-ui/core";
 import axiosInstance from "../axios/axiosInstance";
 import MyTabs from "./MyTabs";
 import NewOfferModal from "./NewOfferModal";
@@ -122,25 +121,13 @@ class Home extends Component {
               }}
               showFilter={this.state.showFilter}
             />
-            <div className="new-offer-container">
-              <Grid
-                container
-                spacing={2}
-                direction="row"
-                justifycontent="center"
-                alignItems="center"
-              >
-                <Grid item xs={8}>
-                  <DownloadButton offerData={filteredData} />
-                </Grid>
-                <Grid item xs={4}>
-                  <NewOfferModal
-                    resetState={this.resetState}
-                    user_id={this.props.user_id}
-                    loggedIn={this.props.loggedIn}
-                  />
-                </Grid>
-              </Grid>
+            <div className="new-offer-download-container">
+              <DownloadButton offerData={filteredData} />
+              <NewOfferModal
+                resetState={this.resetState}
+                user_id={this.props.user_id}
+                loggedIn={this.props.loggedIn}
+              />
             </div>
           </div>
         </div>

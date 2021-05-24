@@ -1,28 +1,13 @@
 import React, { Component } from "react";
 import { ListGroupItem, ListGroup, Input, Label, Row, Col } from "reactstrap";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
-
-const styles = (theme) => ({
-  card: {
-    width: "100%",
-    margin: "auto",
-  },
-  media: {
-    height: 300,
-    width: "100%",
-    objectFit: "contain",
-  },
-});
 
 class OfferDetailCard extends Component {
-
   render() {
     const { classes } = this.props;
     return (
-      <Card className={classes.card}>
+      <Card>
         <CardMedia
-          className={classes.media}
           component="img"
           alt={this.props.offer.product + " photo"}
           height="150"
@@ -138,4 +123,4 @@ class OfferDetailCard extends Component {
   }
 }
 
-export default withStyles(styles)(OfferDetailCard);
+export default OfferDetailCard;

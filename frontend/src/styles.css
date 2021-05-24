@@ -76,12 +76,6 @@ h1 {
   font-size: 90%;
 }
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .subtitle {
   font-size: 120%;
   text-align: center;
@@ -125,4 +119,40 @@ h1 {
 .MuiButtonBase-root.MuiButton-root.MuiButton-contained.remove-btn:hover {
   background-color: #7d0b1b;
   color: white;
+}
+
+.new-offer-download-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.MuiPaper-root.MuiCard-root.MuiPaper-elevation1.MuiPaper-rounded {
+  width: "100%";
+  margin: "auto";
+}
+
+.MuiCardMedia-root.MuiCardMedia-media.MuiCardMedia-img {
+  height: 300px;
+  width: "80%";
+  object-fit: "contain";
+}
+
+.MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded {
+  width: "100%";
+}
+
+.MuiTableContainer-root {
+  margin-top: "5px";
+  margin-bottom: "10px";
+}
+
+.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter.MuiTableCell-sizeSmall.MuiTableCell-stickyHeader {
+  font-size: large;
+}
+
+.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignCenter.MuiTableCell-sizeSmall{
+  font-size: large;
 }

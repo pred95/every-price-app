@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
-import { Form, Label, Button, FormGroup } from "reactstrap";
-import { TextField } from "@material-ui/core";
+import { Form, Label, FormGroup } from "reactstrap";
+import { TextField, Button } from "@material-ui/core";
 import axiosInstance from "../axios/axiosInstance";
 
 class ResetPasswordForm extends Component {
@@ -34,7 +34,9 @@ class ResetPasswordForm extends Component {
         token: token,
       })
       .then(() => {
-        this.props.history.push("/?message=Password has been reset successfully");
+        this.props.history.push(
+          "/?message=Password has been reset successfully"
+        );
       })
       .catch((err) => {
         alert(err.response.data.password[0]);
@@ -44,7 +46,14 @@ class ResetPasswordForm extends Component {
   render() {
     return (
       <div className="reset-password">
-        <h1>EveryPrice</h1>
+        <div className="header">
+          <img
+            className="logo"
+            src={process.env.PUBLIC_URL + "/images/logo.png"}
+            alt="logo.png"
+          />
+          <h1>EveryPrice</h1>
+        </div>
         <p className="subtitle">Please set a new password</p>
         <Form
           className="new-password-form"
@@ -67,7 +76,7 @@ class ResetPasswordForm extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <Button className="new-password-button">Submit</Button>
+          <Button type="submit" variant="contained">Submit</Button>
         </Form>
       </div>
     );
