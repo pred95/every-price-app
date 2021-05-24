@@ -72,8 +72,9 @@ INSTALLED_APPS = [
     'offers.apps.OffersConfig',
 ]
 
-# Gogle Drive Storage Settings
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '/home/andrea/djangoapps/everypriceapp/googlePrivateKey.json'
+# Google Drive Storage Settings
+# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '/home/andrea/djangoapps/everypriceapp/googlePrivateKey.json'
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
 GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = ''  # OPTIONAL
 
 MIDDLEWARE = [
