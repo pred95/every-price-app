@@ -1,1 +1,0 @@
-web: gunicorn everypriceapp.wsgi --log-file -

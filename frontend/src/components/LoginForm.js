@@ -22,6 +22,10 @@ class LoginForm extends Component {
     });
   };
 
+  failureResponse = (response) => {
+    console.log(`response`, response)
+  }
+
   render() {
     return (
       <Form onSubmit={(e) => this.props.handler(e, this.state)}>
@@ -66,6 +70,7 @@ class LoginForm extends Component {
           clientId="885483439166-5qaj888eml61rdmrcn6s8fgrdocdp0k0.apps.googleusercontent.com"
           buttonText="Continue with Google"
           onSuccess={this.props.handleSocialLogin}
+          onFailure={this.failureResponse}
         />
       </Form>
     );

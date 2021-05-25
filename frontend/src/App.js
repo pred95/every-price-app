@@ -184,10 +184,11 @@ class App extends Component {
 
   handleSocialLogin = (data) => {
     axiosInstance
-      .post(`social_auth/google`, {
+      .post(`social_auth/google/`, {
         auth_token: data.tokenId,
       })
       .then((res) => {
+        console.log(`res`, res)
         localStorage.setItem("access_token", res.data.tokens.access);
         localStorage.setItem("refresh_token", res.data.tokens.refresh);
         this.setState({
