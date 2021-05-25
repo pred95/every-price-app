@@ -38,7 +38,7 @@ export default (form, isLoggedIn) => dispatch => {
   AsyncStorage.getItem('access_token').then(value => {
     const access_token = value;
     axios
-      .post('http://192.168.1.18:8000/offers/create/', form_data, {
+      .post('http://everypriceapp.herokuapp.com/offers/create/', form_data, {
         headers: {
           'Content-type': 'multipart/form-data',
           Authorization: 'Bearer ' + access_token,

@@ -1,3 +1,3 @@
-const envVariables = {BACKEND_URL: 'http://192.168.1.18:8000'};
+const envVariables = {BACKEND_URL: 'http://everypriceapp.herokuapp.com/'};
 
 export default envVariables;
