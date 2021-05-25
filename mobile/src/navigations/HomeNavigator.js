@@ -9,6 +9,7 @@ import {
   OFFER_DETAIL,
   OFFER_LIST,
   REGISTER,
+  REQUEST_RESET_PASSWORD,
 } from '../constants/routeNames';
 import Offers from '../screens/Offers';
 import OfferDetail from '../screens/OfferDetail';
@@ -18,6 +19,7 @@ import Login from '../screens/Login';
 import Register from '../screens/Register';
 import MyOffers from '../screens/MyOffers';
 import FilteredOffers from '../screens/FilteredOffers';
+import RequestResetPassword from '../screens/RequestResetPassword';
 
 const HomeNavigator = () => {
   const HomeStack = createStackNavigator();
@@ -29,8 +31,9 @@ const HomeNavigator = () => {
       <HomeStack.Screen name={CREATE_OFFER} component={CreateOffer} />
       <HomeStack.Screen name={FILTERED_OFFERS} component={FilteredOffers} />
       <HomeStack.Screen name={FILTER} component={Filter} />
-      <HomeStack.Screen name={LOGIN} component={Login}></HomeStack.Screen>
-      <HomeStack.Screen name={REGISTER} component={Register}></HomeStack.Screen>
+      <HomeStack.Screen name={LOGIN} component={Login} />
+      <HomeStack.Screen name={REGISTER} component={Register} />
+      <HomeStack.Screen name={REQUEST_RESET_PASSWORD} component={RequestResetPassword} />
     </HomeStack.Navigator>
   );
 };

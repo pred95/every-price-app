@@ -5,7 +5,7 @@ import styles from './styles';
 import CustomButtom from '../common/CustomButton';
 import Input from '../common/Input';
 import {useNavigation} from '@react-navigation/native';
-import {REGISTER} from '../../constants/routeNames';
+import {REGISTER, REQUEST_RESET_PASSWORD} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
 import {clearAuthState} from '../../context/actions/auth/login';
 import {
@@ -25,6 +25,11 @@ const LoginComponent = ({error, onChange, onSubmit, loading, loginWithGoogle}) =
   const goToRegister = () => {
     clearAuthState()(authDispatch);
     navigate(REGISTER);
+  };
+
+  const goToResetPassword = () => {
+    clearAuthState()(authDispatch);
+    navigate(REQUEST_RESET_PASSWORD);
   };
 
   useEffect(() => {
@@ -85,6 +90,15 @@ const LoginComponent = ({error, onChange, onSubmit, loading, loginWithGoogle}) =
                 goToRegister();
               }}>
               <Text style={styles.linkBtn}>Register here!</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.createSection}>
+            <Text style={styles.infoText}>Forgot your password?</Text>
+            <TouchableOpacity
+              onPress={() => {
+                goToResetPassword();
+              }}>
+              <Text style={styles.linkBtn}>Reset your password here!</Text>
             </TouchableOpacity>
           </View>
           <Text style={{textAlign: 'center', paddingVertical: 8, fontSize: 16}}>

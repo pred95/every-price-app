@@ -8,3 +8,4 @@ export const LOGIN = 'Login';
 export const REGISTER = 'Register';
 export const HOME_NAVIGATOR = 'Home';
 export const AUTH_NAVIGATOR = 'Auth';
+export const REQUEST_RESET_PASSWORD = 'Request reset password';
