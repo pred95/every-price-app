@@ -280,7 +280,7 @@ class App extends Component {
               <div className="header">
                 <img
                   className="logo"
-                  src={process.env.PUBLIC_URL + "/images/logo.png"}
+                  src={process.env.PUBLIC_URL + "/static/logo.png"}
                   alt="logo.png"
                 />
                 <h1>Welcome to EveryPrice</h1>
