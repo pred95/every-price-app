@@ -4,7 +4,6 @@ import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 
 class OfferDetailCard extends Component {
   render() {
-    const { classes } = this.props;
     return (
       <Card>
         <CardMedia

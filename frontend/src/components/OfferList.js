@@ -8,7 +8,6 @@ import {
   TableRow,
   TableCell,
 } from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
 import _debounce from "lodash.debounce";
 import ConfirmRemovalModal from "./ConfirmRemovalModal";
 import OfferDetailModal from "./OfferDetailModal";
@@ -48,7 +47,6 @@ class OfferList extends Component {
   }
 
   render() {
-    const { classes } = this.props;
     const offerData = this.props.offerData;
     return (
       <Paper>
