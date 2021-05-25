@@ -16,7 +16,7 @@ import os
 import datetime
 import django_heroku
 
-django_heroku.settings(locals())
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -198,6 +198,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+django_heroku.settings(locals())
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
