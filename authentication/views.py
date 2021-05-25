@@ -21,6 +21,7 @@ from .utils import Util
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
 import os
+import socket
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -66,7 +67,7 @@ class RegisterAPIView(generics.GenericAPIView):
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
 
-    redirect_url = os.environ.get('FRONTEND_URL') + "email-activated/"
+    redirect_url = socket.gethostbyname(socket.gethostname()) + "/email-activated/"
 
     token_param_config = openapi.Parameter(
         'token', in_=openapi.IN_QUERY, description='Enter token', type=openapi.TYPE_STRING)
@@ -142,7 +143,7 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
             current_site = get_current_site(request=request).domain
             relativeLink = reverse(
                 'auth:password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
-            redirect_url = os.environ.get('FRONTEND_URL') + 'reset-password/'
+            redirect_url = socket.gethostbyname(socket.gethostname()) + '/reset-password/'
             absUrl = 'http://' + current_site + relativeLink
 
             email_body = 'Hi!\n Use link below to reset your password:\n' + \
@@ -165,7 +166,7 @@ class PasswordTokenCheckAPIView(generics.GenericAPIView):
 
     def get(self, request, uidb64, token):
 
-        redirect_url = os.environ.get('FRONTEND_URL') + 'reset-password/'
+        redirect_url = socket.gethostbyname(socket.gethostname()) + '/reset-password/'
 
         try:
             user_id = smart_str(urlsafe_base64_decode(uidb64))
