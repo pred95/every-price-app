@@ -19,8 +19,6 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from .views import index
-
 schema_view = get_schema_view(
     openapi.Info(
         title="EveryPrice API",
@@ -39,7 +37,6 @@ urlpatterns = [
     path('auth/', include('authentication.urls', namespace='auth')),
     path('social_auth/', include('social_auth.urls', namespace='social-auth')),
     path('offers/', include('offers.urls', namespace='offers')),
-    path('', index, name='index'),
-    path('api', schema_view.with_ui('swagger', cache_timeout=0),
+    path('api/', schema_view.with_ui('swagger', cache_timeout=0),
          name='schema-swagger-ui'),
 ]

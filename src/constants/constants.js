@@ -1,5 +1,5 @@
-export const BACKEND_URL = "https://everypriceapp.herokuapp.com/";
-// export const BACKEND_URL = "http://localhost:8000/";
+// export const BACKEND_URL = "https://everypriceapp.herokuapp.com/";
+export const BACKEND_URL = "http://localhost:8000/";
 export const REGIONS = [
   "Abruzzo",
   "Basilicata",
