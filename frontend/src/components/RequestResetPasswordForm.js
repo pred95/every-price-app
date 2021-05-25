@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Label, Button, FormGroup } from "reactstrap";
-import { TextField } from "@material-ui/core";
+import { Form, Label, FormGroup } from "reactstrap";
+import { TextField, Button } from "@material-ui/core";
 
 class RequestResetPasswordForm extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class RequestResetPasswordForm extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button className="btn-block">Submit</Button>
+        <Button className="btn-block" type="submit" variant="contained">Submit</Button>
       </Form>
     );
   }
