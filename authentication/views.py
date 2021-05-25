@@ -21,7 +21,6 @@ from .utils import Util
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
 import os
-import socket
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -67,8 +66,7 @@ class RegisterAPIView(generics.GenericAPIView):
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
 
-    redirect_url = 'http://' + \
-        socket.gethostbyname(socket.gethostname()) + "/email-activated/"
+    redirect_url = os.environ.get('FRONTEND_URL') + "email-activated/"
 
     token_param_config = openapi.Parameter(
         'token', in_=openapi.IN_QUERY, description='Enter token', type=openapi.TYPE_STRING)
@@ -144,8 +142,7 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
             current_site = get_current_site(request=request).domain
             relativeLink = reverse(
                 'auth:password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
-            redirect_url = 'http://' + \
-                socket.gethostbyname(socket.gethostname()) + '/reset-password/'
+            redirect_url = os.environ.get('FRONTEND_URL') + 'reset-password/'
             absUrl = 'http://' + current_site + relativeLink
 
             email_body = 'Hi!\n Use link below to reset your password:\n' + \
@@ -168,8 +165,7 @@ class PasswordTokenCheckAPIView(generics.GenericAPIView):
 
     def get(self, request, uidb64, token):
 
-        redirect_url = 'http://' + \
-            socket.gethostbyname(socket.gethostname()) + '/reset-password/'
+        redirect_url = os.environ.get('FRONTEND_URL') + 'reset-password/'
 
         try:
             user_id = smart_str(urlsafe_base64_decode(uidb64))
@@ -180,12 +176,12 @@ class PasswordTokenCheckAPIView(generics.GenericAPIView):
                 if len(redirect_url) > 3:
                     return CustomRedirect(redirect_url + '?token_valid=False')
                 else:
-                    return CustomRedirect('http://' + socket.gethostbyname(socket.gethostname()) + '?token_valid=False')
+                    return CustomRedirect('http://localhost:3000?token_valid=False')
 
             if redirect_url and len(redirect_url) > 3:
                 return CustomRedirect(redirect_url + '?token_valid=True&?message=Credential valid&?uidb64=' + uidb64 + '&?token=' + token)
             else:
-                return CustomRedirect('http://' + socket.gethostbyname(socket.gethostname()) + '?token_valid=False')
+                return CustomRedirect('http://localhost:3000?token_valid=False')
 
         except DjangoUnicodeDecodeError:
             if not PasswordResetTokenGenerator().check_token(user, token):

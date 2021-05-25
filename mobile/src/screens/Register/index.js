@@ -34,6 +34,7 @@ const Register = () => {
           onDismiss: () => navigate(LOGIN),
         },
       );
+      clearAuthState()(authDispatch);
     }
   }, [data]);
 

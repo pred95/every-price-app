@@ -47,7 +47,7 @@ const SideMenu = ({navigation, authDispatch}) => {
   useEffect(() => {
     getUser();
   }, [isLoggedIn]);
-  
+
   const handleLogout = () => {
     navigation.toggleDrawer();
     Alert.alert(
@@ -59,6 +59,18 @@ const SideMenu = ({navigation, authDispatch}) => {
           style: 'cancel',
           onPress: () => {
             logout()(authDispatch);
+            Alert.alert(
+              'Success',
+              'You have been logged out successfully',
+              [
+                {
+                  text: 'Ok',
+                  style: 'cancel',
+                  onPress: () => {},
+                },
+              ],
+              {cancelable: true, onDismiss: () => {}},
+            );
           },
         },
         {
