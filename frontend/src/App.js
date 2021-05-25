@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(`loggedIn`, this.state.loggedIn)
     if (this.state.loggedIn) {
       axiosInstance
         .get(`auth/current-user/`)

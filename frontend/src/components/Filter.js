@@ -11,6 +11,7 @@ class Filter extends Component {
           variant="contained"
           size="small"
           onClick={this.props.handler.toggle}
+          style={{marginTop: 5}}
         >
           {this.props.text}
         </Button>

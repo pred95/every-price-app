@@ -1,4 +1,5 @@
 export const BACKEND_URL = "http://everypriceapp.herokuapp.com/";
+// export const BACKEND_URL = "http://192.168.1.17:8000/";
 export const REGIONS = [
   "Abruzzo",
   "Basilicata",

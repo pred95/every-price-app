@@ -82,11 +82,11 @@ class NewOfferForm extends Component {
             this.props.resetState();
             this.props.toggle();
           })
-          .catch((err) => alert("Offer already exists"));
+          .catch((err) => {
+            this.setState({ disabled: false });
+            alert("Offer already exists");
+          });
       });
-    this.setState({
-      disabled: false,
-    });
   };
 
   defaultIfEmpty = (value) => {

@@ -33,6 +33,7 @@ class SignUpForm extends Component {
           this.setState({ disabled: true });
           this.props.handler(e, this.state);
           this.setState({ disabled: false });
+
         }}
       >
         <FormGroup>
