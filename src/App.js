@@ -184,7 +184,7 @@ class App extends Component {
 
   handleSocialLogin = (data) => {
     axiosInstance
-      .post(`social_auth/google/`, {
+      .post(`social_auth/google`, {
         auth_token: data.tokenId,
       })
       .then((res) => {
