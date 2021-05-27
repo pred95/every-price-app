@@ -31,8 +31,8 @@ const CreateOfferComponent = ({
     regions.push({label: region, value: region});
   });
 
-  const photoTokens = form.image.path.split('/');
-  const photoName = photoTokens[photoTokens.length - 1];
+  const photoTokens = form.image?.path.split('/');
+
   return (
     <View style={styles.formContainer}>
       <Container>
@@ -119,10 +119,15 @@ const CreateOfferComponent = ({
               <Text style={styles.photoUploadText}>Upload a photo</Text>
               <MaterialIcon name="add-a-photo" size={25}></MaterialIcon>
             </TouchableOpacity>
-            <View style={styles.photoTextWrapper}>
-              <MaterialIcon name="check" size={15} />
-              {form.image && <Text style={styles.photoText}>{photoName}</Text>}
-            </View>
+            {photoTokens && (
+              <View style={styles.photoTextWrapper}>
+                <MaterialIcon name="check" size={15} />
+
+                <Text style={styles.photoText}>
+                  {photoTokens[photoTokens.length - 1]}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
