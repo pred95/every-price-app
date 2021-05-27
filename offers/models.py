@@ -1,7 +1,10 @@
 from django.db import models
 from uuid import uuid4
 import os
+
+from django.db.models.signals import pre_save
 from authentication.models import User
+from django.dispatch import receiver
 from gdstorage.storage import GoogleDriveStorage
 
 gd_storage = GoogleDriveStorage()
@@ -36,3 +39,12 @@ class Offer(models.Model):
 
     def __str__(self):
         return f'{self.product}, {self.price}, @({self.shop}, {self.city}), {self.date}'
+
+@receiver(models.signals.post_delete, sender=Offer)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `Offer` object is deleted.
+    """
+    if instance.image:
+        gd_storage.delete('images/' + str(instance.image))
