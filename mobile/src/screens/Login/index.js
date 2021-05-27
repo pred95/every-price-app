@@ -25,7 +25,7 @@ const Login = () => {
     if (error && !error.error && !loading && isFocused) {
       Alert.alert(
         'Error',
-        'Invalid credential, try again',
+        error?.detail ? error.detail : 'Invalid credential, try again',
         [
           {
             text: 'Close',

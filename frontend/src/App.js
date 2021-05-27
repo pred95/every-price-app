@@ -24,7 +24,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(`loggedIn`, this.state.loggedIn)
     if (this.state.loggedIn) {
       axiosInstance
         .get(`auth/current-user/`)
@@ -188,7 +187,6 @@ class App extends Component {
         auth_token: data.tokenId,
       })
       .then((res) => {
-        console.log(`res`, res)
         localStorage.setItem("access_token", res.data.tokens.access);
         localStorage.setItem("refresh_token", res.data.tokens.refresh);
         this.setState({

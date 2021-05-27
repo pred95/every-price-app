@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   REGISTER_FAIL,
   REGISTER_LOADING,
@@ -13,6 +14,7 @@ export const clearAuthState = () => dispatch => {
 };
 
 export default form => dispatch => {
+  AsyncStorage.clear()
   dispatch({type: REGISTER_LOADING});
   const email = form.email;
   const password = form.password;
@@ -32,6 +34,7 @@ export default form => dispatch => {
       dispatch({type: REGISTER_SUCCESS, payload: res.data});
     })
     .catch(err => {
+      
       dispatch({
         type: REGISTER_FAIL,
         payload: err.response

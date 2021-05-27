@@ -24,7 +24,6 @@ const OfferDetail = () => {
         })
         .catch(err => {
           if (err.response.status === 404) {
-            console.log('in');
             setUsername('Anonymous');
           } else {
             AsyncStorage.getItem('refresh_token').then(value => {

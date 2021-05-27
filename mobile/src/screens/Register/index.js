@@ -7,6 +7,7 @@ import {GlobalContext} from '../../context/Provider';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {LOGIN} from '../../constants/routeNames';
 import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = () => {
   const [form, setForm] = useState({});

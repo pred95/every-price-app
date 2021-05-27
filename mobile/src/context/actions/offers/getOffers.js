@@ -29,7 +29,6 @@ export default () => dispatch => {
       });
     })
     .catch(err => {
-      console.log(`err`, err.response);
       AsyncStorage.getItem('refresh_token').then(value => {
         const refresh = value;
         axiosInstance
@@ -52,10 +51,7 @@ export default () => dispatch => {
                     : {error: 'Something went wrong, try again'},
                 });
               });
-          })
-          .catch(err => {
-            console.log(`err`, err)
-          })
+          });
       });
     });
 };
