@@ -31,6 +31,8 @@ export default StyleSheet.create({
   },
 
   photoWrapper: {
+    // flexDirection: 'row',
+    // alignItems: 'center',
     height: 25,
     marginTop: 5,
   },
@@ -46,5 +48,18 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 5,
     fontSize: 15,
+  },
+
+  photoTextWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 18,
+    paddingTop: 3,
+  },
+
+  photoText: {
+    paddingLeft: 5,
+    fontSize: 15,
+    fontStyle: 'italic',
   },
 });

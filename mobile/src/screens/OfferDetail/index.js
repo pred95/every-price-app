@@ -22,21 +22,26 @@ const OfferDetail = () => {
         .then(res => {
           setUsername(res.data.username);
         })
-        .catch(() => {
-          AsyncStorage.getItem('refresh_token').then(value => {
-            const refresh = value;
-            axiosInstance
-              .post(`auth/token/refresh`, {
-                refresh: refresh,
-              })
-              .then(res => {
-                removeData('access_token');
-                storeData('access_token', res.data.access);
-                axiosInstance.get(`auth/get-user/` + item.user).then(res => {
-                  setUsername(res.data.username);
+        .catch(err => {
+          if (err.response.status === 404) {
+            console.log('in');
+            setUsername('Anonymous');
+          } else {
+            AsyncStorage.getItem('refresh_token').then(value => {
+              const refresh = value;
+              axiosInstance
+                .post(`auth/token/refresh`, {
+                  refresh: refresh,
+                })
+                .then(res => {
+                  removeData('access_token');
+                  storeData('access_token', res.data.access);
+                  axiosInstance.get(`auth/get-user/` + item.user).then(res => {
+                    setUsername(res.data.username);
+                  });
                 });
-              });
-          });
+            });
+          }
         });
     }
   }, [item]);
