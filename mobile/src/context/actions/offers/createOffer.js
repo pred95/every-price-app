@@ -37,7 +37,7 @@ export default (form, isLoggedIn) => dispatch => {
   AsyncStorage.getItem('access_token').then(value => {
     const access_token = value;
     axios
-      .post(env.BACKEND_URL + 'offers/create/', form_data, {
+      .post(envs.BACKEND_URL + 'offers/create/', form_data, {
         headers: {
           'Content-type': 'multipart/form-data',
           Authorization: 'Bearer ' + access_token,

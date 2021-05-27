@@ -2,7 +2,6 @@ from django.db import models
 from uuid import uuid4
 import os
 from authentication.models import User
-from django.dispatch import receiver
 from gdstorage.storage import GoogleDriveStorage
 
 gd_storage = GoogleDriveStorage()
