@@ -70,21 +70,29 @@ class NewOfferForm extends Component {
           })
           .then((res) => {
             localStorage.setItem("access_token", res.data.access);
-          });
-        axios
-          .post(BACKEND_URL + "offers/create/", form_data, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: "Bearer " + localStorage.getItem("access_token"),
-            },
+            axios
+              .post(BACKEND_URL + "offers/create/", form_data, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                  Authorization:
+                    "Bearer " + localStorage.getItem("access_token"),
+                },
+              })
+              .then(() => {
+                this.props.resetState();
+                this.props.toggle();
+              })
+              .catch((err) => {
+                this.setState({ disabled: false });
+                alert("Offer already exists");
+              });
           })
-          .then(() => {
+          .catch(() => {
+            alert("Something went wrong. Please log in again");
+            this.setState({ disabled: false });
             this.props.resetState();
             this.props.toggle();
-          })
-          .catch((err) => {
-            this.setState({ disabled: false });
-            alert("Offer already exists");
+            this.props.setLoggedOut();
           });
       });
   };

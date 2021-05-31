@@ -127,6 +127,7 @@ class Home extends Component {
                 resetState={this.resetState}
                 user_id={this.props.user_id}
                 loggedIn={this.props.loggedIn}
+                setLoggedOut={this.props.setLoggedOut}
               />
             </div>
           </div>

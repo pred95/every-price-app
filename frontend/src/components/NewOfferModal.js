@@ -68,6 +68,7 @@ class NewOfferModal extends Component {
                 offer={this.props.offer}
                 user_id={this.props.user_id}
                 username={this.props.username}
+                setLoggedOut={this.props.setLoggedOut}
               />
             </ModalBody>
           </Modal>

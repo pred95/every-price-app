@@ -23,6 +23,15 @@ class App extends Component {
     };
   }
 
+  setLoggedOut = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    this.setState({
+      loggedIn: false,
+      username: "",
+    });
+  };
+
   componentDidMount() {
     if (this.state.loggedIn) {
       axiosInstance
@@ -49,12 +58,8 @@ class App extends Component {
               });
             })
             .catch(() => {
-              localStorage.removeItem("access_token");
-              localStorage.removeItem("refresh_token");
-              this.setState({
-                loggedIn: false,
-                username: "",
-              });
+              alert("Something went wrong. Please log in again");
+              this.setLoggedOut();
             });
         });
     } else {
@@ -142,21 +147,12 @@ class App extends Component {
                   refresh: localStorage.getItem("refresh_token"),
                 })
                 .then(() => {
-                  localStorage.removeItem("access_token");
-                  localStorage.removeItem("refresh_token");
-                  this.setState({
-                    loggedIn: false,
-                    username: "",
-                  });
+                  this.setLoggedOut();
                 });
             })
             .catch(() => {
-              localStorage.removeItem("access_token");
-              localStorage.removeItem("refresh_token");
-              this.setState({
-                loggedIn: false,
-                username: "",
-              });
+              alert("Something went wrong. Please log in again");
+              this.setLoggedOut();
             });
         });
     }
@@ -289,6 +285,7 @@ class App extends Component {
                 user_id={this.state.user_id}
                 username={this.state.username}
                 loggedIn={this.state.loggedIn}
+                setLoggedOut={this.setLoggedOut}
               />
             </Route>
             <Route path="/reset-password">
