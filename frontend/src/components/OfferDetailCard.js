@@ -1,11 +1,38 @@
 import React, { Component } from "react";
 import { ListGroupItem, ListGroup, Input, Label, Row, Col } from "reactstrap";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
+import _debounce from ".lodash.debounce";
 
 class OfferDetailCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      maxHeight: window.innerHeight / 1.3,
+    };
+  }
+
+  setWindowHeight = () => {
+    this.setState({
+      maxHeight: window.innerHeight / 1.3,
+    });
+  };
+
+  componentDidMount() {
+    window.addEventListener(
+      "resize",
+      _debounce(() => {
+        this.setWindowHeight();
+      }, 250)
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.setWindowHeight());
+  }
+
   render() {
     return (
-      <Card>
+      <Card style={{ maxHeight: this.state.maxHeight, overflowY: "auto" }}>
         <CardMedia
           component="img"
           alt={this.props.offer.product + " photo"}
