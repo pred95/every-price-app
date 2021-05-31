@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ListGroupItem, ListGroup, Input, Label, Row, Col } from "reactstrap";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
-import _debounce from ".lodash.debounce";
+import _debounce from "lodash.debounce";
 
 class OfferDetailCard extends Component {
   constructor(props) {
