@@ -7,13 +7,13 @@ class OfferDetailCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxHeight: window.innerHeight / 1.3,
+      maxHeight: window.innerHeight / 1.25,
     };
   }
 
   setWindowHeight = () => {
     this.setState({
-      maxHeight: window.innerHeight / 1.3,
+      maxHeight: window.innerHeight / 1.25,
     });
   };
 
