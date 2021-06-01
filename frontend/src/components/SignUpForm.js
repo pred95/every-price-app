@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { Form, Label, FormGroup } from "reactstrap";
-import { TextField, Button } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import GoogleLogin from "react-google-login";
 
 class SignUpForm extends Component {
@@ -13,6 +18,7 @@ class SignUpForm extends Component {
       email: "",
       password: "",
       disabled: false,
+      showPassword: false,
     };
   }
 
@@ -33,7 +39,6 @@ class SignUpForm extends Component {
           this.setState({ disabled: true });
           this.props.handler(e, this.state);
           this.setState({ disabled: false });
-
         }}
       >
         <FormGroup>
@@ -96,10 +101,25 @@ class SignUpForm extends Component {
             label="Required"
             variant="outlined"
             size="small"
-            type="password"
+            type={this.state.showPassword ? "text" : "password"}
             name="password"
             value={this.state.password}
             onChange={this.handleChange}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.showPassword}
+                onChange={() => {
+                  this.setState((prev) => ({
+                    showPassword: !prev.showPassword,
+                  }));
+                }}
+                
+              />
+            }
+            label="Show password?"
+            labelPlacement="end"
           />
         </FormGroup>
         <Button

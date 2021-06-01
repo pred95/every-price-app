@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { Form, Label, FormGroup } from "reactstrap";
-import { TextField, Button } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { GoogleLogin } from "react-google-login";
 
 class LoginForm extends Component {
@@ -9,6 +14,7 @@ class LoginForm extends Component {
     this.state = {
       email: "",
       password: "",
+      showPassword: false,
     };
   }
 
@@ -23,8 +29,8 @@ class LoginForm extends Component {
   };
 
   failureResponse = (response) => {
-    console.log(`response`, response)
-  }
+    console.log(`response`, response);
+  };
 
   render() {
     return (
@@ -51,20 +57,49 @@ class LoginForm extends Component {
             label="Required"
             variant="outlined"
             size="small"
-            type="password"
+            type={this.state.showPassword ? "text" : "password"}
             name="password"
             value={this.state.password}
             onChange={this.handleChange}
           />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.showPassword}
+                onChange={() => {
+                  this.setState((prev) => ({
+                    showPassword: !prev.showPassword,
+                  }));
+                }}
+              />
+            }
+            label="Show password?"
+          />
         </FormGroup>
-        <Button type="submit" className="btn-block" variant="contained">Submit</Button>
-        <div style={{display: "flex", flexDirection: "row", alignItems:"center"}}>
+        <Button type="submit" className="btn-block" variant="contained">
+          Submit
+        </Button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           Forgot your password?
-          <Button size="small" onClick={this.props.showResetPassword} style={{color: "#3ca5ea", borderBottomColor: "#3ca5ea", borderBottomWidth: 1}}>
+          <Button
+            size="small"
+            onClick={this.props.showResetPassword}
+            style={{
+              color: "#3ca5ea",
+              borderBottomColor: "#3ca5ea",
+              borderBottomWidth: 1,
+            }}
+          >
             Click here!
           </Button>
         </div>
-        <p style={{textAlign: 'center'}}>or</p>
+        <p style={{ textAlign: "center" }}>or</p>
         <GoogleLogin
           className="btn-block"
           clientId="885483439166-5qaj888eml61rdmrcn6s8fgrdocdp0k0.apps.googleusercontent.com"
