@@ -4,6 +4,14 @@ import { Button } from "@material-ui/core";
 import { REGIONS } from "../constants/constants";
 
 class Filter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      beforeDate: false,
+      afterDate: false,
+    };
+  }
+
   render() {
     return (
       <Form inline>
@@ -11,7 +19,7 @@ class Filter extends Component {
           variant="contained"
           size="small"
           onClick={this.props.handler.toggle}
-          style={{marginTop: 5}}
+          style={{ marginTop: 5 }}
         >
           {this.props.text}
         </Button>
@@ -31,7 +39,7 @@ class Filter extends Component {
               type="text"
               name="filterCity"
               onChange={this.props.handler.filterChange}
-              placeholder="Enter a city"
+              placeholder="Enter a city..."
               bsSize="sm"
             />
             <Input
@@ -46,6 +54,42 @@ class Filter extends Component {
                 return <option>{value}</option>;
               })}
             </Input>
+            <Input
+              className="input mb-2 mr-sm-1 mb-sm-0"
+              type={this.state.beforeDate ? "date" : "text"}
+              name="filterDateBefore"
+              onFocus={() => {
+                this.setState((prev) => ({
+                  beforeDate: !prev.beforeDate,
+                }));
+              }}
+              onBlur={() => {
+                this.setState((prev) => ({
+                  beforeDate: !prev.beforeDate,
+                }));
+              }}
+              onChange={this.props.handler.filterChange}
+              placeholder="Offers before this date"
+              bsSize="sm"
+            />
+            <Input
+              className="input mb-2 mr-sm-1 mb-sm-0"
+              type={this.state.afterDate ? "date" : "text"}
+              onFocus={() => {
+                this.setState((prev) => ({
+                  afterDate: !prev.afterDate,
+                }));
+              }}
+              onBlur={() => {
+                this.setState((prev) => ({
+                  afterDate: !prev.afterDate,
+                }));
+              }}
+              name="filterDateAfter"
+              onChange={this.props.handler.filterChange}
+              placeholder="Offers after this date"
+              bsSize="sm"
+            />
           </InputGroup>
         )}
       </Form>

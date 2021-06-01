@@ -67,7 +67,7 @@ class OfferList extends Component {
             </TableHead>
             <TableBody>
               {!offerData || offerData.length <= 0 ? (
-                <TableRow key="empty">
+                <TableRow key="mpty">
                   <TableCell key="no-data" align="center">
                     <b>Ops, no offer here yet.</b>
                   </TableCell>

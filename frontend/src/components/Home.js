@@ -8,6 +8,7 @@ import DownloadButton from "./DownloadButton";
 
 class Home extends Component {
   constructor(props) {
+    const today = new Date();
     super(props);
     this.state = {
       error: null,
@@ -17,12 +18,20 @@ class Home extends Component {
       filterProduct: "",
       filterCity: "",
       filterRegion: "",
+      filterDateBefore:
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate(),
+      filterDateAfter: "1900-1-1",
       showFilter: false,
     };
   }
   buttonText = "Filter offers?";
 
   resetState = () => {
+    const today = new Date();
     this.setState({
       error: null,
       isLoaded: false,
@@ -31,6 +40,13 @@ class Home extends Component {
       filterProduct: "",
       filterCity: "",
       filterRegion: "",
+      filterDateBefore:
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate(),
+      filterDateAfter: "1900-1-1",
       showFilter: false,
     });
     this.getOffers();
@@ -58,7 +74,23 @@ class Home extends Component {
   }
 
   onFilterChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    const today = new Date();
+    if (e.target.name === "filterDateBefore" && e.target.value === "") {
+      this.setState({
+        filterDateBefore:
+          today.getFullYear() +
+          "-" +
+          (today.getMonth() + 1) +
+          "-" +
+          today.getDate(),
+      });
+    } else if (e.target.name === "filterDateAfter" && e.target.value === "") {
+      this.setState({
+        filterDateAfter: "1900-1-1",
+      });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
   };
 
   toggle = () => {
@@ -74,15 +106,29 @@ class Home extends Component {
   };
 
   resetFilter = () => {
+    const today = new Date();
     this.setState({
       filterProduct: "",
       filterCity: "",
       filterRegion: "",
+      filterDateBefore:
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate(),
+      filterDateAfter: "1900-1-1",
     });
   };
 
   render() {
+    if (this.state.filterDateAfter === "") {
+      this.setState({
+        filterDateAfter: "1900-1-1",
+      });
+    }
     const filteredData = this.state.offerData.filter((offer) => {
+      console.log(`this.state`, this.state);
       return (
         offer.product
           .toLowerCase()
@@ -90,7 +136,9 @@ class Home extends Component {
         offer.city
           .toLowerCase()
           .startsWith(this.state.filterCity.toLowerCase()) === true &&
-        offer.region.startsWith(this.state.filterRegion) === true
+        offer.region.startsWith(this.state.filterRegion) === true &&
+        offer.date > this.state.filterDateAfter &&
+        offer.date < this.state.filterDateBefore
       );
     });
     if (this.state.error) {
