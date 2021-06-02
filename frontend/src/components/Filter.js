@@ -14,12 +14,11 @@ class Filter extends Component {
 
   render() {
     return (
-      <Form inline>
+      <Form inline style={{ marginTop: 5 }}>
         <Button
           variant="contained"
           size="small"
           onClick={this.props.handler.toggle}
-          style={{ marginTop: 5 }}
         >
           {this.props.text}
         </Button>

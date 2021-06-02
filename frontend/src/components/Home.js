@@ -137,8 +137,8 @@ class Home extends Component {
           .toLowerCase()
           .startsWith(this.state.filterCity.toLowerCase()) === true &&
         offer.region.startsWith(this.state.filterRegion) === true &&
-        offer.date > this.state.filterDateAfter &&
-        offer.date < this.state.filterDateBefore
+        offer.date >= this.state.filterDateAfter &&
+        offer.date <= this.state.filterDateBefore
       );
     });
     if (this.state.error) {

@@ -29,4 +29,23 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
+  dateTextPlaceholder: {
+    fontSize: 16,
+    paddingLeft: 10,
+    color: colors.grey,
+    opacity: 0.7
+  },
+
+  dateText: {
+    fontSize: 16,
+    paddingLeft: 10,
+    color: "black"
+  },
+
+  calendarIcon: {
+    paddingRight: 15,
+    paddingBottom: 3,
+    color: colors.grey
+  }
 });

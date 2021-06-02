@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, Touchable, TouchableOpacity} from 'react-native';
 import {REGIONS} from '../../constants/regions';
 import Container from '../common/Container';
 import Input from '../common/Input';
@@ -7,10 +7,17 @@ import styles from './styles';
 import CustomButton from '../common/CustomButton';
 import RNPickerSelect from 'react-native-picker-select';
 import AntIcon from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../assets/themes/colors';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-const FilterComponent = ({onChange, onSubmit}) => {
+const FilterComponent = ({onChange, onSubmit, form}) => {
   const [region, setRegion] = useState('');
+  const [showDateBeforePicker, setShowDateBeforePicker] = useState(false);
+  const [dateBeforeText, setDateBeforeText] = useState('Select a date');
+  const [showDateAfterPicker, setShowDateAfterPicker] = useState(false);
+  const [dateAfterText, setDateAfterText] = useState('Select a date');
+
   var regions = [];
   REGIONS.map(region => {
     regions.push({label: region, value: region});
@@ -64,6 +71,98 @@ const FilterComponent = ({onChange, onSubmit}) => {
                     );
                   }}
                 />
+              </View>
+            </View>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.label}>Offers before this date</Text>
+            <View style={styles.wrapper}>
+              <View style={styles.inputContainer}>
+                <Text
+                  style={
+                    dateBeforeText === 'Select a date'
+                      ? styles.dateTextPlaceholder
+                      : styles.dateText
+                  }>
+                  {dateBeforeText}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowDateBeforePicker(true);
+                  }}>
+                  <MaterialCommunityIcon
+                    name="calendar-month-outline"
+                    size={30}
+                    style={styles.calendarIcon}
+                  />
+                </TouchableOpacity>
+                {showDateBeforePicker && (
+                  <DateTimePicker
+                    value={new Date()}
+                    maximumDate={new Date()}
+                    mode="date"
+                    onChange={(event, value) => {
+                      if (value !== undefined) {
+                        const dateBefore =
+                          value.getFullYear() +
+                          '-' +
+                          ('0' + (value.getMonth() + 1)).slice(-2) +
+                          '-' +
+                          ('0' + value.getDate()).slice(-2);
+                        onChange({name: 'dateBefore', value: dateBefore});
+                        setShowDateBeforePicker(false);
+                        setDateBeforeText(dateBefore);
+                      }
+                      setShowDateBeforePicker(false);
+                    }}
+                  />
+                )}
+              </View>
+            </View>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.label}>Offers after this date</Text>
+            <View style={styles.wrapper}>
+              <View style={styles.inputContainer}>
+                <Text
+                  style={
+                    dateAfterText === 'Select a date'
+                      ? styles.dateTextPlaceholder
+                      : styles.dateText
+                  }>
+                  {dateAfterText}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowDateAfterPicker(true);
+                  }}>
+                  <MaterialCommunityIcon
+                    name="calendar-month-outline"
+                    size={30}
+                    style={styles.calendarIcon}
+                  />
+                </TouchableOpacity>
+                {showDateAfterPicker && (
+                  <DateTimePicker
+                    value={new Date()}
+                    maximumDate={new Date()}
+                    mode="date"
+                    onChange={(event, value) => {
+                      if (value !== undefined) {
+                        const dateAfter =
+                          value.getFullYear() +
+                          '-' +
+                          ('0' + (value.getMonth() + 1)).slice(-2) +
+                          '-' +
+                          ('0' + value.getDate()).slice(-2);
+                        onChange({name: 'dateAfter', value: dateAfter});
+                        setShowDateAfterPicker(false);
+                        setDateAfterText(dateAfter);
+                      }
+                      setShowDateAfterPicker(false);
+                    }}
+                  />
+                )}
               </View>
             </View>
           </View>
