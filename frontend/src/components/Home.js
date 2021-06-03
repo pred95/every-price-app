@@ -5,6 +5,8 @@ import MyTabs from "./MyTabs";
 import NewOfferModal from "./NewOfferModal";
 import Filter from "./Filter";
 import DownloadButton from "./DownloadButton";
+import { Snackbar } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 class Home extends Component {
   constructor(props) {
@@ -26,9 +28,22 @@ class Home extends Component {
         today.getDate(),
       filterDateAfter: "1900-1-1",
       showFilter: false,
+      showError: false,
     };
   }
   buttonText = "Filter offers?";
+
+  openError = () => {
+    this.setState({
+      showError: true,
+    });
+  };
+
+  closeError = () => {
+    this.setState({
+      showError: false,
+    });
+  };
 
   resetState = () => {
     const today = new Date();
@@ -48,6 +63,7 @@ class Home extends Component {
         today.getDate(),
       filterDateAfter: "1900-1-1",
       showFilter: false,
+      showError: false,
     });
     this.getOffers();
   };
@@ -153,12 +169,34 @@ class Home extends Component {
       return (
         <div className="home-container">
           <div className="offer-container">
+            {this.state.showError && (
+              <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={this.state.showError}
+                autoHideDuration={4000}
+                onClose={() => {
+                  this.setState({ showError: false });
+                }}
+              >
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    this.setState({ showError: false });
+                  }}
+                >
+                  <AlertTitle>Error</AlertTitle>
+                  You have to log in to see your offers.
+                </Alert>
+              </Snackbar>
+            )}
             <MyTabs
               resetState={this.resetState}
               loggedIn={this.props.loggedIn}
               username={this.props.username}
               offerData={filteredData}
               setLoggedOut={this.props.setLoggedOut}
+              openError={this.openError}
+              closeError={this.closeError}
             />
             <Filter
               text={this.buttonText}

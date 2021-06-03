@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Tabs, Tab, AppBar, Snackbar } from "@material-ui/core";
+import { Tabs, Tab, AppBar} from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
-import { Alert, AlertTitle } from "@material-ui/lab";
 import OfferList from "./OfferList";
 
 class MyTabs extends Component {
@@ -9,7 +8,6 @@ class MyTabs extends Component {
     super(props);
     this.state = {
       value: 0,
-      showError: false,
     };
   }
 
@@ -20,9 +18,9 @@ class MyTabs extends Component {
       if (this.state.value !== value && this.state.value === 1) {
         this.handleChange(e, value);
       } else if (this.state.value !== value) {
-        this.setState({ showError: true });
+        this.props.openError();
       } else {
-        this.setState({ showError: false });
+        this.props.closeError();
       }
     }
   };
@@ -48,7 +46,7 @@ class MyTabs extends Component {
       <div>
         <AppBar
           position="static"
-          style={{ background: '#388ce9', color: "white" }}
+          style={{ background: "#388ce9", color: "white" }}
         >
           <Tabs
             indicatorColor="primary"
@@ -71,35 +69,14 @@ class MyTabs extends Component {
             loggedIn={this.props.loggedIn}
             tab={"allOffers"}
           />
-          {this.state.showError ? (
-            <Snackbar
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              open={this.state.showError}
-              autoHideDuration={4000}
-              onClose={() => {
-                this.setState({ showError: false });
-              }}
-            >
-              <Alert
-                severity="error"
-                onClose={() => {
-                  this.setState({ showError: false });
-                }}
-              >
-                <AlertTitle>Error</AlertTitle>
-                You have to log in to see your offers.
-              </Alert>
-            </Snackbar>
-          ) : (
-            <OfferList
-              className="my-offers"
-              offerData={myOffers}
-              resetState={this.props.resetState}
-              loggedIn={this.props.loggedIn}
-              tab={"myOffers"}
-              setLoggedOut={this.props.setLoggedOut}
-            />
-          )}
+          <OfferList
+            className="my-offers"
+            offerData={myOffers}
+            resetState={this.props.resetState}
+            loggedIn={this.props.loggedIn}
+            tab={"myOffers"}
+            setLoggedOut={this.props.setLoggedOut}
+          />
         </SwipeableViews>
       </div>
     );
