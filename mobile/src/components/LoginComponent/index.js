@@ -13,8 +13,15 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const LoginComponent = ({error, onChange, onSubmit, loading, loginWithGoogle}) => {
+const LoginComponent = ({
+  error,
+  onChange,
+  onSubmit,
+  loading,
+  loginWithGoogle,
+}) => {
   const {navigate} = useNavigation();
   const {
     authDispatch,
@@ -68,7 +75,10 @@ const LoginComponent = ({error, onChange, onSubmit, loading, loginWithGoogle}) =
                 onPress={() => {
                   setHidePassword(prev => !prev);
                 }}>
-                <Text>{hidePassword ? 'Show' : 'Hide'}</Text>
+                <MaterialCommunityIcon
+                  name={hidePassword ? 'eye' : 'eye-off'}
+                  size={24}
+                />
               </TouchableOpacity>
             }
             iconPosition="right"
@@ -108,7 +118,9 @@ const LoginComponent = ({error, onChange, onSubmit, loading, loginWithGoogle}) =
             style={{width: '100%', height: 48}}
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Dark}
-            onPress={() => {loginWithGoogle()(authDispatch)}}
+            onPress={() => {
+              loginWithGoogle()(authDispatch);
+            }}
             disabled={loading}
           />
         </View>

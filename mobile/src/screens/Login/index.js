@@ -55,7 +55,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (data && Object.keys(data).length === 4) {
+    if (data && Object.keys(data).length === 3) {
       navigate(OFFER_LIST);
     }
   }, [data]);

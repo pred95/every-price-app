@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '../common/Container';
 import styles from './styles';
 import CustomButtom from '../common/CustomButton';
@@ -7,8 +7,9 @@ import Input from '../common/Input';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 import {useNavigation} from '@react-navigation/native';
 import {LOGIN} from '../../constants/routeNames';
-import { clearAuthState } from '../../context/actions/auth/register';
-import { GlobalContext } from '../../context/Provider';
+import {clearAuthState} from '../../context/actions/auth/register';
+import {GlobalContext} from '../../context/Provider';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const RegisterComponent = ({
   onSubmit,
@@ -20,24 +21,7 @@ const RegisterComponent = ({
 }) => {
   const {navigate} = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
-  const {
-    authDispatch,
-  } = useContext(GlobalContext);
-  // if (error?.error && !loading) {
-  //   const err = error.error;
-  //   Alert.alert(
-  //     'Error',
-  //     err,
-  //     [
-  //       {
-  //         text: 'Close',
-  //         style: 'cancel',
-  //         onPress: () => clearAuthState()(authDispatch),
-  //       },
-  //     ],
-  //     {cancelable: true, onDismiss: () => clearAuthState()(authDispatch)},
-  //   );
-  // }
+  const {authDispatch} = useContext(GlobalContext);
   return (
     <Container>
       <Image
@@ -99,7 +83,10 @@ const RegisterComponent = ({
                 onPress={() => {
                   setHidePassword(prev => !prev);
                 }}>
-                <Text>{hidePassword ? 'Show' : 'Hide'}</Text>
+                <MaterialCommunityIcon
+                  name={hidePassword ? 'eye' : 'eye-off'}
+                  size={24}
+                />
               </TouchableOpacity>
             }
             iconPosition="right"
@@ -124,7 +111,7 @@ const RegisterComponent = ({
             <Text style={styles.infoText}>Already have an account?</Text>
             <TouchableOpacity
               onPress={() => {
-                clearAuthState()(authDispatch)
+                clearAuthState()(authDispatch);
                 navigate(LOGIN);
               }}>
               <Text style={styles.linkBtn}>Login here!</Text>
