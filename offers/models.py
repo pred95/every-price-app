@@ -31,7 +31,7 @@ class Offer(models.Model):
         "Price (€)", max_digits=6, decimal_places=2, null=False, blank=False)
     date = models.DateField(auto_now_add=True, null=False, blank=False)
     image = models.ImageField(upload_to=path_and_rename, storage=gd_storage, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.CharField("User", max_length=100, null=False, blank=False, default="Anonymous")
 
     class Meta:
         unique_together = (('product', 'shop', 'city', 'date'),)

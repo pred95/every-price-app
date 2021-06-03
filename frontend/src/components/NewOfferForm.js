@@ -51,7 +51,8 @@ class NewOfferForm extends Component {
     form_data.append("region", this.state.region);
     form_data.append("price", this.state.price);
     form_data.append("image", this.state.image, this.state.image.name);
-    form_data.append("user", this.props.user_id);
+    form_data.append("user", this.props.username + "");
+    console.log(`form_data`, form_data.get('user'))
     axios
       .post(BACKEND_URL + "offers/create/", form_data, {
         headers: {

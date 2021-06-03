@@ -138,7 +138,7 @@ class OfferDetailCard extends Component {
                   Posted by:
                 </Label>
                 <Col sm={6}>
-                  <em>{this.props.username}</em>
+                  <em>{this.props.offer.user}</em>
                 </Col>
               </Row>
             </ListGroupItem>

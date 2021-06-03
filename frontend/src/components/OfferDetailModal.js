@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import axiosInstance from "../axios/axiosInstance";
 import OfferDetailCard from "./OfferDetailCard";
 import {Button} from '@material-ui/core'
 
@@ -9,23 +8,13 @@ class OfferDetailModal extends Component {
     super(props);
     this.state = {
       modal: false,
-      username: "",
     };
   }
-
-  get_username = () => {
-    axiosInstance.get(`/auth/get-user/` + this.props.offer.user).then((res) => {
-      this.setState({
-        username: res.data.username,
-      });
-    });
-  };
 
   toggle = () => {
     this.setState((previous) => ({
       modal: !previous.modal,
     }));
-    this.get_username();
   };
 
   render() {
@@ -38,7 +27,6 @@ class OfferDetailModal extends Component {
           <ModalBody>
             <OfferDetailCard
               offer={this.props.offer}
-              username={this.state.username}
             />
           </ModalBody>
         </Modal>

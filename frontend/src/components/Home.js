@@ -128,7 +128,6 @@ class Home extends Component {
       });
     }
     const filteredData = this.state.offerData.filter((offer) => {
-      console.log(`this.state`, this.state);
       return (
         offer.product
           .toLowerCase()
@@ -157,7 +156,6 @@ class Home extends Component {
             <MyTabs
               resetState={this.resetState}
               loggedIn={this.props.loggedIn}
-              user_id={this.props.user_id}
               username={this.props.username}
               offerData={filteredData}
             />
@@ -173,7 +171,7 @@ class Home extends Component {
               <DownloadButton offerData={filteredData} />
               <NewOfferModal
                 resetState={this.resetState}
-                user_id={this.props.user_id}
+                username={this.props.username}
                 loggedIn={this.props.loggedIn}
                 setLoggedOut={this.props.setLoggedOut}
               />

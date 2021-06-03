@@ -66,6 +66,16 @@ class OfferModelTest(TestCase):
         decimal_places = offer._meta.get_field('price').decimal_places
         self.assertEqual(decimal_places, 2)
 
+    def test_user_label(self):
+        offer = Offer.objects.get(id=1)
+        field_label = offer._meta.get_field('user').verbose_name
+        self.assertEqual(field_label, 'User')
+
+    def test_user_max_length(self):
+        offer = Offer.objects.get(id=1)
+        max_length = offer._meta.get_field('user').max_length
+        self.assertEqual(max_length, 100)
+
     def test_object_name_is_product_comma_price_comma_at_shop_comma_city_comma_date(self):
         offer = Offer.objects.get(id=1)
         expected_object_name = f'{offer.product}, {offer.price}, @({offer.shop}, {offer.city}), {offer.date}'

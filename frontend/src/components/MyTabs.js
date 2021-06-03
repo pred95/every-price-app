@@ -41,7 +41,7 @@ class MyTabs extends Component {
     var myOffers = [];
     if (this.props.loggedIn) {
       myOffers = this.props.offerData.filter((offer) => {
-        return offer.user === this.props.user_id;
+        return offer.user === this.props.username;
       });
     }
     return (
@@ -69,8 +69,6 @@ class MyTabs extends Component {
             offerData={this.props.offerData}
             resetState={this.props.resetState}
             loggedIn={this.props.loggedIn}
-            user_id={this.props.user_id}
-            username={this.props.username}
             tab={"allOffers"}
           />
           {this.state.showError ? (
@@ -98,8 +96,6 @@ class MyTabs extends Component {
               offerData={myOffers}
               resetState={this.props.resetState}
               loggedIn={this.props.loggedIn}
-              user_id={this.props.user_id}
-              username={this.props.username}
               tab={"myOffers"}
             />
           )}

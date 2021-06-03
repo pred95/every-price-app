@@ -24,9 +24,6 @@ class CreateOfferAPIView(CreateAPIView):
     renderer_classes = (OfferRenderer, )
     permission_classes = [permissions.IsAuthenticated]
 
-    def perform_create(self, serializer):
-        return serializer.save(user=self.request.user)
-
 
 class OfferDetailAPIView(RetrieveAPIView):
     serializer_class = OfferSerializer

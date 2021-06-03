@@ -66,7 +66,6 @@ class NewOfferModal extends Component {
                 resetState={this.props.resetState}
                 toggle={this.toggle}
                 offer={this.props.offer}
-                user_id={this.props.user_id}
                 username={this.props.username}
                 setLoggedOut={this.props.setLoggedOut}
               />

@@ -100,7 +100,6 @@ class OfferList extends Component {
                         <OfferDetailModal
                           offer={offer}
                           resetState={this.props.resetState}
-                          username={this.props.username}
                         />
                         &nbsp;&nbsp;
                         {this.props.tab === "myOffers" && (

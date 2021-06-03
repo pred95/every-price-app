@@ -16,7 +16,6 @@ class App extends Component {
       displayedModal: "",
       showModal: false,
       loggedIn: localStorage.getItem("access_token") ? true : false,
-      user_id: 0,
       username: "",
       showBar: false,
       message: "",
@@ -38,7 +37,6 @@ class App extends Component {
         .get(`auth/current-user/`)
         .then((res) => {
           this.setState({
-            user_id: res.data.id,
             username: res.data.username,
           });
         })
@@ -52,7 +50,6 @@ class App extends Component {
               localStorage.setItem("access_token", res.data.access);
               axiosInstance.get(`auth/current-user/`).then((res) => {
                 this.setState({
-                  user_id: res.data.id,
                   username: res.data.username,
                 });
               });
@@ -82,7 +79,6 @@ class App extends Component {
           loggedIn: true,
           displayedModal: "",
           username: res.data.username,
-          user_id: res.data.id,
         });
         this.toggle();
       })
@@ -189,7 +185,6 @@ class App extends Component {
           loggedIn: true,
           displayedModal: "",
           username: res.data.username,
-          user_id: res.data.id,
         });
         this.toggle();
       })
@@ -282,7 +277,6 @@ class App extends Component {
               </div>
 
               <Home
-                user_id={this.state.user_id}
                 username={this.state.username}
                 loggedIn={this.state.loggedIn}
                 setLoggedOut={this.setLoggedOut}
