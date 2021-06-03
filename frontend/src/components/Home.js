@@ -158,6 +158,7 @@ class Home extends Component {
               loggedIn={this.props.loggedIn}
               username={this.props.username}
               offerData={filteredData}
+              setLoggedOut={this.props.setLoggedOut}
             />
             <Filter
               text={this.buttonText}

@@ -97,6 +97,7 @@ class MyTabs extends Component {
               resetState={this.props.resetState}
               loggedIn={this.props.loggedIn}
               tab={"myOffers"}
+              setLoggedOut={this.props.setLoggedOut}
             />
           )}
         </SwipeableViews>

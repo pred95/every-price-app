@@ -28,6 +28,23 @@ class ConfirmRemovalModal extends Component {
     axiosInstance.delete(`offers/delete/` + id).then(() => {
       this.props.resetState();
       this.toggle();
+    }).catch((err) => {
+      axiosInstance.post(`auth/token/refresh`, {
+        refresh: localStorage.getItem("refresh_token"),
+      })
+      .then((res) => {
+        localStorage.setItem("access_token", res.data.access)
+        axiosInstance.delete(`offers/delete/` + id)
+        .then(() => {
+          this.props.resetState();
+          this.toggle();
+        })
+      })
+      .catch(() => {
+        alert("Something went wrong. Please log in again")
+        this.props.resetState();
+        this.props.setLoggedOut();
+      })
     });
   };
 

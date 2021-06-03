@@ -107,6 +107,7 @@ class OfferList extends Component {
                             id={offer.id}
                             resetState={this.props.resetState}
                             loggedIn={this.props.loggedIn}
+                            setLoggedOut={this.props.setLoggedOut}
                           />
                         )}
                       </TableCell>
