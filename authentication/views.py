@@ -114,14 +114,6 @@ class CurrentUserAPIView(generics.GenericAPIView):
 
         return Response(data, status=status.HTTP_200_OK)
 
-
-class GetUserAPIView(generics.RetrieveAPIView):
-    serializer_class = UserSerializer
-
-    queryset = User.objects.all()
-    lookup_field = 'id'
-
-
 class RequestPasswordResetEmail(generics.GenericAPIView):
     serializer_class = RequestPasswordResetEmailSerializer
 
