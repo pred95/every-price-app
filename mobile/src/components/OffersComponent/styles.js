@@ -28,7 +28,7 @@ export default StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingRight: 70,
+    paddingRight: 74,
     alignItems: 'center',
   },
 

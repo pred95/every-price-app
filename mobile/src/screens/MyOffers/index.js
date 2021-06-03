@@ -5,7 +5,7 @@ import getOffers from '../../context/actions/offers/getOffers';
 import {GlobalContext} from '../../context/Provider';
 
 const Offers = () => {
-  const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('');
   const {
     offersDispatch,
     offersState: {
@@ -15,11 +15,11 @@ const Offers = () => {
   useEffect(() => {
     getOffers();
   }, []);
-  const ret = AsyncStorage.getItem('id').then(value => {
-    setUserId(value);
+  const ret = AsyncStorage.getItem('username').then(value => {
+    setUsername(value);
   });
   const myData = data.data.filter(offer => {
-    return String(offer.user) === userId;
+    return String(offer.user) === username;
   });
 
   return (

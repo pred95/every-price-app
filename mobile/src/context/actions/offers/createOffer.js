@@ -33,6 +33,9 @@ export default (form, isLoggedIn) => dispatch => {
     name: form.image?.path.split('/')[form.image.path.split('/').length - 1],
     type: form.image?.mime,
   });
+  AsyncStorage.getItem('username').then((value) => {
+    form_data.append('user', value)
+  })
 
   AsyncStorage.getItem('access_token').then(value => {
     const access_token = value;

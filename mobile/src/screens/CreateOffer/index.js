@@ -61,7 +61,7 @@ const CreateOffer = () => {
   }, [data]);
 
   const onSubmit = () => {
-    if (Object.values(form).includes('')) {
+    if (Object.values(form).includes('') || Object.keys(form).length !== 6) {
       Alert.alert(
         'Error',
         'Please fill in all the fields',

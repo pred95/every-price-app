@@ -4,7 +4,7 @@ import {ScrollView, Text, View} from 'react-native';
 import ImageComponent from './ImageComponent';
 import Detail from '../common/Detail';
 
-const OfferDetailComponent = ({offer, username}) => {
+const OfferDetailComponent = ({offer}) => {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
@@ -16,7 +16,7 @@ const OfferDetailComponent = ({offer, username}) => {
           <Detail label="Region:" value={offer.region} />
           <Detail label="Price:" value={'€ ' + offer.price} />
           <Detail label="Date:" value={offer.date} />
-          <Detail label="Posted by:" value={username} username={true} />
+          <Detail label="Posted by:" value={offer.user} username/>
         </View>
       </View>
     </ScrollView>

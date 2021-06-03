@@ -16,6 +16,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   CREATE_OFFER,
+  MY_OFFERS,
   OFFER_DETAIL,
   OFFER_LIST,
 } from '../../constants/routeNames';
@@ -106,7 +107,7 @@ const OffersComponent = ({data, loading, screen, refreshing, onRefresh}) => {
                       style: 'cancel',
                       onPress: () => {
                         deleteOffer(item.id)(offersDispatch)(() => {
-                          navigate(OFFER_LIST);
+                          navigate(MY_OFFERS);
                         });
                       },
                     },
