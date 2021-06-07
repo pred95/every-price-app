@@ -24,23 +24,28 @@ class ResetPasswordForm extends Component {
 
   handleResetPassword = (e, data) => {
     e.preventDefault();
-    const params = window.location.href.split("/")[4].split("&?");
-    const uidb64 = params[2].split("=")[1];
-    const token = params[3].split("=")[1];
-    axiosInstance
-      .patch(`auth/password-reset-complete/`, {
-        password: data.password,
-        uidb64: uidb64,
-        token: token,
-      })
-      .then(() => {
-        this.props.history.push(
-          "/?message=Password has been reset successfully"
-        );
-      })
-      .catch((err) => {
-        alert(err.response.data.password[0]);
-      });
+    try {
+      const params = window.location.href.split("/")[4].split("&?");
+      const uidb64 = params[2].split("=")[1];
+      const token = params[3].split("=")[1];
+      axiosInstance
+        .patch(`auth/password-reset-complete/`, {
+          password: data.password,
+          uidb64: uidb64,
+          token: token,
+        })
+        .then(() => {
+          this.props.history.push(
+            "/?message=Password has been reset successfully"
+          );
+        })
+        .catch((err) => {
+          alert(err.response.data.password[0]);
+        });
+    } catch {
+      alert("You have to request a reset of your password");
+      this.props.history.push("/");
+    }
   };
 
   render() {
@@ -76,7 +81,9 @@ class ResetPasswordForm extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <Button type="submit" variant="contained">Submit</Button>
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
         </Form>
       </div>
     );
