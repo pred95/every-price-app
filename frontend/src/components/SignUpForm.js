@@ -115,7 +115,6 @@ class SignUpForm extends Component {
                     showPassword: !prev.showPassword,
                   }));
                 }}
-                
               />
             }
             label="Show password?"
@@ -130,7 +129,7 @@ class SignUpForm extends Component {
         >
           {this.state.disabled ? "Sending..." : "Submit"}
         </Button>
-        <p style={{ alignText: "center" }}>or</p>
+        <p style={{ textAlign: "center", paddingTop: 10 }}>or</p>
         <GoogleLogin
           className="btn-block"
           clientId="885483439166-5qaj888eml61rdmrcn6s8fgrdocdp0k0.apps.googleusercontent.com"
