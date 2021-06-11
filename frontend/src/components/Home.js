@@ -69,20 +69,42 @@ class Home extends Component {
   };
 
   getOffers = () => {
-    axiosInstance.get(`offers/`).then(
-      (res) => {
+    axiosInstance
+      .get(`offers/`)
+      .then((res) => {
         this.setState({
           isLoaded: true,
           offerData: res.data.data,
         });
-      },
-      (error) => {
-        this.setState({
-          isLoaded: true,
-          error,
-        });
-      }
-    );
+      })
+      .catch(() => {
+        axiosInstance
+          .post(`auth/token/refresh/`, {
+            refresh: localStorage.getItem("refresh_token"),
+          })
+          .then((res) => {
+            localStorage.removeItem("access_token");
+            localStorage.setItem("access_token", res.data.access);
+            axiosInstance
+              .get(`offers/`)
+              .then((res) => {
+                this.setState({
+                  isLoaded: true,
+                  offerData: res.data.data,
+                });
+              })
+              .catch((error) => {
+                this.setState({
+                  isLoaded: true,
+                  error,
+                });
+              });
+          })
+          .catch(() => {
+            alert("Something went wrong. Please log in again");
+            this.props.setLoggedOut();
+          });
+      });
   };
 
   componentDidMount() {
