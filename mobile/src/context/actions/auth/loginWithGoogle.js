@@ -9,10 +9,11 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
 } from '../../../constants/actionTypes';
+import { OFFER_LIST } from '../../../constants/routeNames';
 import axiosInstance from '../../../helpers/axiosInstance';
 import storeData from '../../../utils/storeData';
 
-export default () => dispatch => {
+export default () => dispatch => navigate => {
   AsyncStorage.clear();
   try {
     dispatch({type: LOGIN_LOADING});
@@ -27,6 +28,7 @@ export default () => dispatch => {
           storeData('refresh_token', res.data.tokens.refresh);
           storeData('username', res.data.username);
           dispatch({type: LOGIN_SUCCESS, payload: res.data});
+          navigate(OFFER_LIST)
         })
         .catch(err => {
           dispatch({

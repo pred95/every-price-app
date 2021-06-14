@@ -5,7 +5,7 @@ class Nav extends Component {
   loggedOutNav = () => {
     return (
       <Toolbar>
-        <Typography>Please log in</Typography>
+        <Typography>Welcome, <em>guest</em>!</Typography>
         <span className="auth-buttons">
           <Button
             variant="contained"

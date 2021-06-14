@@ -3,7 +3,6 @@ import LoginComponent from '../../components/LoginComponent';
 import {GlobalContext} from '../../context/Provider';
 import login, {clearAuthState} from '../../context/actions/auth/login';
 import {
-  useFocusEffect,
   useIsFocused,
   useNavigation,
 } from '@react-navigation/core';

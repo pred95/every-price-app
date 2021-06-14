@@ -119,7 +119,7 @@ const LoginComponent = ({
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Dark}
             onPress={() => {
-              loginWithGoogle()(authDispatch);
+              loginWithGoogle()(authDispatch)(navigate);
             }}
             disabled={loading}
           />
