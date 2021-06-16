@@ -114,6 +114,9 @@ class App extends Component {
         if (error.response.data.error !== undefined) {
           alert(error.response.data.error[0]);
         }
+        else{
+          alert("User already exists")
+        }
       });
   };
 
