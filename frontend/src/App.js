@@ -110,12 +110,15 @@ class App extends Component {
           alert(
             "Password error: " + error.response.data.password[0].toLowerCase()
           );
-        }
-        if (error.response.data.error !== undefined) {
+        } else if (error.response.data.error !== undefined) {
           alert(error.response.data.error[0]);
-        }
-        else{
-          alert("User already exists")
+        } else if (error.response.data.username !== undefined) {
+          alert(error.response.data.username[0].charAt(0).toUpperCase() + error.response.data.username[0].slice(1));
+        } else if (error.response.data.email !== undefined) {
+          alert(error.response.data.email[0].charAt(0).toUpperCase() + error.response.data.email[0].slice(1));
+        } else {
+          console.log(`error.response.data`, error.response.data);
+          alert("Something went wrong. Please try again");
         }
       });
   };
